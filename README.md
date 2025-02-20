@@ -18,5 +18,9 @@ using either + or - followed by a space --> create a list
 
 ### Linking pages & files
 - By using double brackets [[README]] "[[]]"
-- Using *alias* [[README | beginning]]
-- 
+- Using *alias* [[README | beginning]] 
+	*by using linking then followed by "|name"*
+
+### Tables
+Module names | Speed
+--- | --
