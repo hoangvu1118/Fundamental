@@ -22,5 +22,15 @@ using either + or - followed by a space --> create a list
 	*by using linking then followed by "|name"*
 
 ### Tables
-Module names | Speed
---- | --
+| Module names | Speed    |
+| ------------ | -------- |
+| ESP32        | 256 mb/s |
+
+### Quotes 
+> I just want to test this out
+
+### Code block 
+Using this  `some code`
+```python
+print("Hello World")
+```
