@@ -1,0 +1,9 @@
+- Array & Hashing
+- Two pointers
+- Sliding Window
+- Linked List
+- Binary Search
+- Trees
+- Tries 
+- Backtracking
+- Heap/Queue
