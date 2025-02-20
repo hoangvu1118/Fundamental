@@ -6,5 +6,17 @@
 * ==something== : highlight it by using ( == something == )
 
 ### Lists 
+#list
 using either + or - followed by a space --> create a list 
-### NUm
+### Number list
+1. this is first
+2. second
+3. ....
+### Check list
+- [ ] First create a list like above #list  
+- [ ] Then type [ ] with a space inside
+
+### Linking pages & files
+- By using double brackets [[README]] "[[]]"
+- Using *alias* [[README | beginning]]
+- 
