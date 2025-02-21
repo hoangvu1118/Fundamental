@@ -27,6 +27,7 @@ int main() {
 }
 ```
 
+## Method 2
 __Use as Lambda__
 #LargestNumber
 ```C++
@@ -36,7 +37,7 @@ string largestNumber(vector<int>& nums) {
             bank.push_back(to_string(str));
         }
 
-        std::sort(begin(bank), end(bank), [](string &a, string &b){
+        std::sort(begin(bank), end(bank), [](string &a, string &b){ // Lambda
 
             return a+b > b+a;});
 
