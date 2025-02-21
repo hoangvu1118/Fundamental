@@ -4,7 +4,7 @@
 * It returns a bool value 
 	* True / False
 #### Method 1
-**==Use as a Function==**
+**Use as a Function**
 ```C++
 #include <iostream>
 #include <vector>
@@ -25,9 +25,8 @@ int main() {
     return 0;
 }
 ```
-### Method 2
+#### Method 2
 __Use as Lambda__
-
 ```C++
 string largestNumber(vector<int>& nums) {
         std::vector<std::string> bank;
