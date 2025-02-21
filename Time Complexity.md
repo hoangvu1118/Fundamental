@@ -15,7 +15,6 @@ for (int i = 1; i <= n; i++) {
 }
 ```
 --> O(m * n)
-
 #### Recursion
 + Time complexity depends on the number of times the function is called
 ```C++
@@ -35,3 +34,7 @@ f(n) causes n function calls, time for each is O(1) ==> accumulate to O(n)
 Generate up to ==O(2^n)== since each function call 2 other functions
 
 ##  Complexity Classes
+![[Pasted image 20250221182456.png]]
++ O(1) The running time of a ==constant-time== algorithm does not depend on the input size.
++ O(logn) **A ==logarithmic algorithm**== often halves the input size at each step. Log2n equals the number of times n must be divided by 2 to get 1.
++ 
