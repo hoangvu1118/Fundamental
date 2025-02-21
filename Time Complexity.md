@@ -47,3 +47,6 @@ Generate up to ==O(2^n)== since each function call 2 other functions
 	Time complixity of the program: O(n^2)
 	=> It will take (10^5)^2 = 10^10 operations ~ at least 10 seconds -> ineffient
 	
+Reference: 
+![[Pasted image 20250221183952.png]]
+
