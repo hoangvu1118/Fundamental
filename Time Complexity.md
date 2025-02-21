@@ -41,4 +41,9 @@ Generate up to ==O(2^n)== since each function call 2 other functions
 + O(n) ***==A linear algorithm==*** goes through the input a constant number of times. This is often the best possible time complexity,
 + O(nlogn) This time complexity often indicates that the ==**algorithm sorts the input**==, because the time complexity of efficient sorting algorithms is O(nlogn). Another possibility is that the algorithm uses a data structure where each operation takes O(logn) time
 + ![[Pasted image 20250221183335.png]]
-
+### Estimating Efficiency
+	Example: Time Limit: 1 second
+	Input Size : n = 10^5 
+	Time complixity of the program: O(n^2)
+	=> It will take (10^5)^2 = 10^10 operations ~ at least 10 seconds -> ineffient
+	
