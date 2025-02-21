@@ -37,4 +37,8 @@ Generate up to ==O(2^n)== since each function call 2 other functions
 ![[Pasted image 20250221182456.png]]
 + O(1) The running time of a ==constant-time== algorithm does not depend on the input size.
 + O(logn) **A ==logarithmic algorithm**== often halves the input size at each step. Log2n equals the number of times n must be divided by 2 to get 1.
-+ 
++ O( square root of n) ***==A square root algorithm==*** is slower than O(logn) but faster than O(n). A special property of square roots is that square root of n lies, in some sense, in the middle of the input.
++ O(n) ***==A linear algorithm==*** goes through the input a constant number of times. This is often the best possible time complexity,
++ O(nlogn) This time complexity often indicates that the ==**algorithm sorts the input**==, because the time complexity of efficient sorting algorithms is O(nlogn). Another possibility is that the algorithm uses a data structure where each operation takes O(logn) time
++ ![[Pasted image 20250221183335.png]]
+
