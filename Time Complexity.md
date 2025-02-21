@@ -26,4 +26,12 @@ void f(int n) {
 ```
 f(n) causes n function calls, time for each is O(1) ==> accumulate to O(n)
  ==However== 
- 
+ ```C++
+ void g(int n) { 
+	 if (n == 1) return; 
+	 g(n-1); 
+	 g(n-1); }
+```
+Generate up to ==O(2^n)== since each function call 2 other functions
+
+##  Complexity Classes
