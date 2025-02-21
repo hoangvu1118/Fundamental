@@ -1,10 +1,9 @@
 ## Custom Comparator
+#LargestNumber
 > Often used with sorting algorithms, priority queues, or ordered containers like std::set, std::map
-
 * It returns a bool value 
 	* True / False
-
-### Method 1
+#### Method 1
 **==Use as a Function==**
 ```C++
 #include <iostream>
@@ -26,10 +25,9 @@ int main() {
     return 0;
 }
 ```
-
-## Method 2
+### Method 2
 __Use as Lambda__
-#LargestNumber
+
 ```C++
 string largestNumber(vector<int>& nums) {
         std::vector<std::string> bank;
