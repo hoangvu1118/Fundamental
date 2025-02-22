@@ -125,4 +125,14 @@ int main() {
 	    (1,2) < (2,2)  → true   (no swap)
 
 ## Comparison functions
-- As
+- As to decide<font color="#ff0000"> in which way</font> we want to sort the subjects
+- This give an external comparison function to the sort function as a callback function
+``` C++
+bool comp(string a, string b) { 
+	if (a.size() != b.size()) return a.size() < b.size(); // length
+	return a < b;  // alphabetical order
+}
+sort(v.begin(), v.end(), comp);
+```
+-> This will then <font color="#00b050">sort the string by length</font> first then by <font color="#00b050">alphabetical order</font>.
+
