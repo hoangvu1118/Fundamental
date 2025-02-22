@@ -45,6 +45,10 @@ Both act as two iterators ( which is similar to a pointer but it is in the conta
 - Former returns a pointer to the value of the first number who is at ==LEAST== the TARGET
 - Latter returns a pointer to first element whose value is ==larger== than the TARGET
 
-```C+
+```C++
+v.begin() // return a pointer to the first element of the array
+auto it = v.begin();      //Doable - Dereference : *it 
+                          //       - Memory address: &(*it)
 
+v.end() // return a pointer to *one past the last element (which is invalid to dereference). Which mean after the last element 
 ```
