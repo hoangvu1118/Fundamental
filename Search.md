@@ -35,7 +35,16 @@ if (array[k] == x) {
 }
 ```
 ##### Additional C++ functions
+<font color="#ff0000">The container has to be SORTED</font>
  ```C++
+ std::vector<int> v = {10, 20, 30, 40, 50};
  auto lb = std::lower_bound(v.begin(), v.end(), target); // lowerbound
  auto ub = std::upper_bound(v.begin(), v.end(), target); // upperbound
+```
+Both act as two iterators ( which is similar to a pointer but it is in the container | vector, array, etc.)
+- Former returns a pointer to the value of the first number who is at ==LEAST== the TARGET
+- Latter returns a pointer to first element whose value is ==larger== than the TARGET
+
+```C+
+
 ```
