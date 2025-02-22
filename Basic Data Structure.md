@@ -1,4 +1,4 @@
-### Dynamic Arrays 
+### ==Dynamic Arrays== 
 #vector #array
 * Size can be changed 
 ```C++
@@ -29,7 +29,7 @@ vector<int> v(10); // size 10, initial value 0
 vector<int> v(10,5); // size 10, initial value 5
 ```
 
-## String
+## ==String==
 #string
 ```C++
 string a = "hatti"; 
@@ -41,7 +41,7 @@ string c = b.substr(3,4); // starts at index 3 --> then spread to the next 4 cha
 cout << c << "\n"; // tiva
 ```
 
-## Set structures
+## ==Set structures==
 #set 
 - Basic operations: Insertion, Search, Removal
 	- set : O(logn) time --> based on balanced binary tree
@@ -81,4 +81,20 @@ cout << s.count(5) << "\n"; // 0
 // below is how to remove ONLY 1 instance from the set
 s.erase(s.find(5)); 
 cout << s.count(5) << "\n"; // 2
+```
+
+## ==Map Structure==
+* Similar to #set which have 2 implementations
+* map : O(logn)
+* unordered_map: O(1)
+```C++
+map<string, int> m; 
+m["monkey"] = 4; 
+m["banana"] = 3; 
+m["harpsichord"] = 9; 
+cout << m["banana"] << "\n"; // 3
+```
+If value of a key is requested but MAP does not contain that --> automatically add a new key-value pair, set to 0
+```C++
+cout << m["aybabtu"] << "\n"; // 0
 ```
