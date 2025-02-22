@@ -131,9 +131,9 @@ for (auto x : m) {
 }
 ```
 
-## Deque 
+## ==Deque== 
 * Just how it works not including code implementation yet
-- It is dynamic array whose size can be changed at both ends
+<font color="#ff0000">- It is dynamic array whose size can be changed at both ends</font>
 - Similar to vector with: push_back & pop_back
 	- Additionally: push_front & pop_front
 
@@ -146,6 +146,21 @@ d.push_front(3); // [3,5,2]  insert at head/ front
 d.pop_back(); // [3,5] delete end
 d.pop_front(); // [5]
 ```
-
-## Queue
-- FIFO ( First in - First out)
+Still, both adding and removing elements take O(1) time on average at both ends.
+## ==Queue==
+- <font color="#ff0000">FIFO ( First in - First out)</font> 
+- Provide two O(1) operations: + Adding to the end of queue
+	                       + Removing the front of the queue
+- Only possible to access first and last element
+<u>Differences from Deque </u>
++ Queue can only be added at the END
++ removed at the front whereas deque can do both operations at both sides of the array
+```C++
+queue<int> q; 
+q.push(3); 
+q.push(2); 
+q.push(5); 
+cout << q.front(); // 3 
+q.pop(); 
+cout << q.front(); // 2 after remove 3 from the front
+```
