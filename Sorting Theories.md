@@ -128,6 +128,7 @@ int main() {
 	    (1,2) < (2,2)  → true   (no swap)
 
 ## Comparison functions
+#comparison
 - As to decide<font color="#ff0000"> in which way</font> we want to sort the subjects
 - This give an external comparison function to the sort function as a callback function
 ``` C++

@@ -5,6 +5,7 @@
 	* True / False
 #### Method 1
 **Use as a Function**
+#comparison 
 ```C++
 #include <iostream>
 #include <vector>
@@ -27,6 +28,7 @@ int main() {
 ```
 #### Method 2
 __Use as Lambda__
+#
 ```C++
 string largestNumber(vector<int>& nums) {
         std::vector<std::string> bank;
