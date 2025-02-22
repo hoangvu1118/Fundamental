@@ -35,4 +35,7 @@ if (array[k] == x) {
 }
 ```
 ##### Additional C++ functions
- 
+ ```C++
+ auto lb = std::lower_bound(v.begin(), v.end(), target); // lowerbound
+ auto ub = std::upper_bound(v.begin(), v.end(), target); // upperbound
+```
