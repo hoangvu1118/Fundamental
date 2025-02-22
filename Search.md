@@ -75,8 +75,13 @@ auto r = equal_range(array, array+n, x); cout << r.second-r.first << "\n";
 ```C++
 int x =-1; 
 for (int b = z; b >= 1; b /= 2) { 
-	while (!ok(x+b)) x += b; 
-	} 
-	int k = x+1;
+	while(!ok(x+b)) 
+		x += b; // this will terminate right after the smallest is found 
+				// (b will not be added up)
+} 
+int k = x+1;
 ```
-ok(x) returns true if x >= 
+ok(x) returns true if x >= k and false if x < k   ( /\ ) just like this, the top is k
+That means we can find the smallest value as soon as the ok(x) turns true
+##### Find the maximum value
+* Similarly *
