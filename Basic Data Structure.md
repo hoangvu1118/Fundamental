@@ -46,3 +46,39 @@ cout << c << "\n"; // tiva
 - Basic operations: Insertion, Search, Removal
 	- set : O(logn) time --> based on balanced binary tree
 	- unordered_set: O(1) time --> uses hashing
+	- Store unique element so "Count" will result either 1 or 0
+```C++
+set<int> s; 
+s.insert(3);                         // Add a number into the set
+s.insert(2);
+cout << s.count(3) << "\n"; // 1       Number of occurrance
+cout << s.count(4) << "\n"; // 0
+s.erase(3);                         // erase the element from the set
+s.insert(4); 
+cout << s.count(3) << "\n"; // 0 
+cout << s.count(4) << "\n"; // 1
+```
+Iterate through a set
+```C++
+set<int> s = {2,5,6,8}; 
+cout << s.size() << "\n"; // 4 
+for (auto x : s) { 
+	cout << x << "\n"; 
+}
+```
+<font color="#ff0000">To contain multiple instances of a number --> multiset</font>
+```C++
+multiset<int> s; 
+s.insert(5); 
+s.insert(5);
+s.insert(5); 
+cout << s.count(5) << "\n"; // 3
+
+// When using erase in multiset --> erase all of that number
+s.erase(5); 
+cout << s.count(5) << "\n"; // 0
+
+// below is how to remove ONLY 1 instance from the set
+s.erase(s.find(5)); 
+cout << s.count(5) << "\n"; // 2
+```
