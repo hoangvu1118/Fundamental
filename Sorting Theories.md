@@ -84,4 +84,26 @@ v.push_back({2,1,3});
 sort(v.begin(), v.end()); // (1,5,3), (2,1,3) and (2,1,4)
 ```
 <span style="color:rgb(0, 176, 80)"></span>
+## User-defined Struct 
+```C++
+#include <iostream>
+#include <vector>
+#include <algorithm> // For std::sort
+struct P {
+    int x, y;
+    bool operator<(const P &p) const { 
+        if (x != p.x) return x < p.x;
+        return y < p.y;
+    }
+};
+int main() {
+    std::vector<P> points = {{3, 4}, {1, 2}, {3, 1}, {2, 2}};
+    std::sort(points.begin(), points.end()); // Uses your operator<
 
+    for (const auto &p : points) {
+        std::cout << "(" << p.x << ", " << p.y << ") ";
+        // (1, 2) (2, 2) (3, 1) (3, 4)
+    }
+    return 0;
+}
+```
