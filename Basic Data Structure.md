@@ -172,4 +172,11 @@ cout << q.front(); // 2 after remove 3 from the front
 	* and removing an element from the top. 
 - Only possible to access the top element of a stack
 ```C++
+stack<int> s; 
+s.push(3); 
+s.push(2); 
+s.push(5); 
+cout << s.top(); // 5 
+s.pop();  
+cout << s.top(); // 2 can only see 2 when we remove 5 
 ```
