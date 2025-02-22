@@ -1,4 +1,5 @@
 ### Dynamic Arrays 
+#vector #array
 * Size can be changed 
 ```C++
 // Add elements
@@ -16,5 +17,17 @@ for (auto x : v) { // Shorter way to iterate through a vector
 	cout << x << "\n"; 
 }
 
-// Acces
+// Accessing last element
+cout << v.back() << "\n"; // 2
+v.pop_back(); // remove the last element
 ```
+**How to initialize a vector** 
+```C++
+vector<int> v = {2,4,2,5,1};
+
+vector<int> v(10); // size 10, initial value 0 
+vector<int> v(10,5); // size 10, initial value 5
+```
+
+## String
+#string
