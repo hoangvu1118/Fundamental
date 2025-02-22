@@ -62,3 +62,11 @@ string s = "monkey";
 sort(s.begin(), s.end()); // sort based on the alphabet
 // "ekmnoy"
 ```
+
+### Comparison Operator
+* a ***comparison operator*** is defined for the data type of the elements to be sorted
+#### Pair
+*  sorted primarily according to their ==**first elements (first)**==. However, if the first elements of two pairs are ***equal***, they are sorted according to their ==second elements (second)==
+```C++
+
+```
