@@ -132,3 +132,20 @@ for (auto x : m) {
 ```
 
 ## Deque 
+* Just how it works not including code implementation yet
+- It is dynamic array whose size can be changed at both ends
+- Similar to vector with: push_back & pop_back
+	- Additionally: push_front & pop_front
+
+> Deque is slower than vector SINCE internal implementation is more complex
+```C++
+deque<int> d; 
+d.push_back(5); // [5]  insert at tail/ rear
+d.push_back(2); // [5,2]  insert at tail /rear
+d.push_front(3); // [3,5,2]  insert at head/ front
+d.pop_back(); // [3,5] delete end
+d.pop_front(); // [5]
+```
+
+## Queue
+- FIFO ( First in - First out)
