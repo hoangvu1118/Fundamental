@@ -67,6 +67,19 @@ sort(s.begin(), s.end()); // sort based on the alphabet
 * a ***comparison operator*** is defined for the data type of the elements to be sorted
 #### Pair
 *  sorted primarily according to their ==**first elements (first)**==. However, if the first elements of two pairs are ***equal***, they are sorted according to their ==second elements (second)==
+```C++ 
+vector<pair<int,int>> v; // PAIR
+v.push_back({1,5}); 
+v.push_back({2,3}); 
+v.push_back({1,2}); 
+sort(v.begin(), v.end()) // (1,2), (1,5) and (2,3).
+```
+### Tuple 
+* In a similar way, tuples (tuple) are sorted primarily by the *first element*, secondarily by the **second element**, etc.2
 ```C++
-
+vector<tuple<int,int,int> v; 
+v.push_back({2,1,4}); 
+v.push_back({1,5,3}); 
+v.push_back({2,1,3}); 
+sort(v.begin(), v.end()); // (1,5,3), (2,1,3) and (2,1,4)
 ```
