@@ -52,3 +52,31 @@ auto it = v.begin();      //Doable - Dereference : *it
 
 v.end() // return a pointer to *one past the last element (which is invalid to dereference). Which mean after the last element 
 ```
+Since iterators only return value of the element 
+--> To get the index 
+```C++
+int index = lb - v.begin();  // Gives distance from first element
+```
+Count number of elements whose value is TARGET
+```C++
+auto a = lower_bound(array, array+n, x); 
+auto b = upper_bound(array, array+n, x); 
+cout << b-a << "\n";
+```
+or 
+```C++
+auto r = equal_range(array, array+n, x); cout << r.second-r.first << "\n";
+```
+<font color="#ff0000">AGAIN, THE ARRAY MUST BE SORTED</font>
+
+#### APPLICATION OF BINARY SEARCH 
+#binarySearch 
+##### Find the smallest solution
+```C++
+int x =-1; 
+for (int b = z; b >= 1; b /= 2) { 
+	while (!ok(x+b)) x += b; 
+	} 
+	int k = x+1;
+```
+ok(x) returns true if x >= 
