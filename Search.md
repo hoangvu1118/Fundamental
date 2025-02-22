@@ -1,4 +1,5 @@
 ## **<font color="#ff0000">Binary Search</font>**
+#binarySearch #binary
 #### <u>Method 1 </u>
 - Intuitive thought: Resembles looking for a word in a dictionary
 	- each step halves the size of active region by half
@@ -33,3 +34,5 @@ if (array[k] == x) {
 	// x found at index k }
 }
 ```
+##### Additional C++ functions
+ 

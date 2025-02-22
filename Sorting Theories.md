@@ -19,6 +19,7 @@
 Each Recursion require O(logn) levels + Time processing each level takes O(n) time = O(nlogn)
 
 ## Sorting lower bound (quickest time to sort an array)
+#decisionTree
 #### Most efficient way : O(nlogn) time
 *Consider the decision tree* ![[Pasted image 20250222111938.png]]
 Each node has at most 2 children --> at each stage x and y have to be compared 
@@ -66,6 +67,7 @@ sort(s.begin(), s.end()); // sort based on the alphabet
 ### Comparison Operator
 * a ***comparison operator*** is defined for the data type of the elements to be sorted
 #### Pair
+#pair #DataStructure
 *  sorted primarily according to their ==**first elements (first)**==. However, if the first elements of two pairs are ***equal***, they are sorted according to their ==second elements (second)==
 ```C++ 
 vector<pair<int,int>> v; // PAIR
@@ -75,6 +77,7 @@ v.push_back({1,2});
 sort(v.begin(), v.end()) // (1,2), (1,5) and (2,3).
 ```
 ### Tuple 
+#tuple
 * In a similar way, tuples (tuple) are sorted primarily by the *first element*, secondarily by the **second element**, etc.2
 ```C++
 vector<tuple<int,int,int> v; 
