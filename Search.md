@@ -84,4 +84,16 @@ int k = x+1;
 ok(x) returns true if x >= k and false if x < k   ( /\ ) just like this, the top is k
 That means we can find the smallest value as soon as the ok(x) turns true
 ##### Find the maximum value
-* Similarly *
+* Similarly, we can find the value which first increase then decrease
+* Find position k such that 
+	* f(x) < f(x+1) when x < k
+	* f(x) > f(x+1) when x >= k
+
+```C++
+int x =-1; 
+for (int b = z; b >= 1; b /= 2) { 
+	while (f(x+b) < f(x+b+1))  // similar to above solution 
+		x += b; 
+} 
+int k = x+1;
+```
