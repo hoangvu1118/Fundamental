@@ -31,3 +31,18 @@ vector<int> v(10,5); // size 10, initial value 5
 
 ## String
 #string
+```C++
+string a = "hatti"; 
+string b = a+a; // String can be combined using "+" | only if it is STRING
+cout << b << "\n"; // hattihatti 
+b[5] = ’v’; 
+cout << b << "\n"; // hattivatti 
+string c = b.substr(3,4); // starts at index 3 --> then spread to the next 4 chars
+cout << c << "\n"; // tiva
+```
+
+## Set structures
+#set 
+- Basic operations: Insertion, Search, Removal
+	- set : O(logn) time --> based on balanced binary tree
+	- unordered_set: O(1) time --> uses hashing
