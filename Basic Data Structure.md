@@ -84,6 +84,7 @@ cout << s.count(5) << "\n"; // 2
 ```
 
 ## ==Map Structure==
+#map 
 * Similar to #set which have 2 implementations
 * map : O(logn)
 * unordered_map: O(1)
@@ -96,5 +97,16 @@ cout << m["banana"] << "\n"; // 3
 ```
 If value of a key is requested but MAP does not contain that --> automatically add a new key-value pair, set to 0
 ```C++
+map<string, int> m; 
 cout << m["aybabtu"] << "\n"; // 0
+```
+To check if a key ==EXISTS== in a map
+``` C++
+if (m.count("aybabtu")) { 
+	// key exists 
+}
+// Print all the key-value pair in the map
+for (auto x : m) { 
+	cout << x.first << " " << x.second << "\n"; 
+}
 ```
