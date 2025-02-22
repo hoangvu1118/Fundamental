@@ -85,7 +85,24 @@ cout << s.count(5) << "\n"; // 2
 ```
 #### Set iterator
 Create a pointer that points to the smallest element in the set
-	**
+```C++
+set<int>::iterator it = s.begin()
+// OR
+auto it = s.begin()
+cout << *it; // dereference to get the value 
+
+// Move iterators like pointers
+for (auto it = s.begin(); it != s.end(); it++) { // increase the index it++
+	cout << *it << "\n"; // printing in increasing order
+} // the same for reverse order
+```
+#search
+```C++
+auto it = s.find(x); // find(x) returns an iterator pointing to element (x)
+if (it == s.end()) { 
+	// x is not found 
+}
+```
 ## ==Map Structure==
 #map 
 * Similar to #set which have 2 implementations
