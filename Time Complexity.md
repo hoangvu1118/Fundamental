@@ -50,3 +50,10 @@ Generate up to ==O(2^n)== since each function call 2 other functions
 Reference: 
 ![[Pasted image 20250221183952.png]]
 
+### Find maximum subarray 
+Method to solve : It is either the number at the location K or the sum of previous number adding up
++ Subarray only contains element at position K
++ Subarray consists of a subarray that ends at position K - 1, followed by the element at K
+```C++
+
+```
