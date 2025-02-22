@@ -107,3 +107,22 @@ int main() {
     return 0;
 }
 ```
+- The sort function use a combination of QuickSort, HeapSort, and InsertionSort
+- It then picks two elements and calls "operator<" to decide which one go first
+- The comparison follows these steps: 
+	- If `x` is different, compare `x` values.
+	- If `x` is the same, compare `y` values.
+	
+**Compare `(3,4)` and `(1,2)`**
+- Calls `operator<({3,4}, {1,2})`
+- Since `3 > 1`, return `false` → **(1,2) should come first**
+
+> Visual of calls:
+	 std::sort() → Calls operator< multiple times:
+	    (3,4) < (1,2)  → false  (swap)
+	    (3,4) < (3,1)  → false  (swap)
+	    (3,1) < (2,2)  → false  (swap)
+	    (1,2) < (2,2)  → true   (no swap)
+
+## Comparison functions
+- As
