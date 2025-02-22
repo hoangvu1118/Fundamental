@@ -28,7 +28,7 @@ int main() {
 ```
 #### Method 2
 __Use as Lambda__
-#
+#lambda
 ```C++
 string largestNumber(vector<int>& nums) {
         std::vector<std::string> bank;

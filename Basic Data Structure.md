@@ -66,6 +66,7 @@ for (auto x : s) {
 	cout << x << "\n"; 
 }
 ```
+
 <font color="#ff0000">To contain multiple instances of a number --> multiset</font>
 ```C++
 multiset<int> s; 
@@ -82,7 +83,9 @@ cout << s.count(5) << "\n"; // 0
 s.erase(s.find(5)); 
 cout << s.count(5) << "\n"; // 2
 ```
-
+#### Set iterator
+Create a pointer that points to the smallest element in the set
+	**
 ## ==Map Structure==
 #map 
 * Similar to #set which have 2 implementations
