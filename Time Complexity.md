@@ -55,5 +55,16 @@ Method to solve : It is either the number at the location K or the sum of previo
 + Subarray only contains element at position K
 + Subarray consists of a subarray that ends at position K - 1, followed by the element at K
 ```C++
-
+int main() {
+    // Write C++ code here
+    int arr[] = {-1, 2, 4, -3, 5, 2, -5, 2};
+    int len = sizeof(arr) / sizeof(arr[0]);
+    int best = 0, sum = 0;
+    for(int k = 0; k < len; k++){
+        sum = std::max(arr[k], sum + arr[k]);
+        best = std::max(best, sum);
+    }
+    std::cout << best;
+    return 0;
+}
 ```
