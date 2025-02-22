@@ -36,3 +36,29 @@ This yields
 - This will store the number of occurrence of each number then use it as indexes
 		The array [ 1, 3, 6, 9 , 9, 3, 5, 9] corresponds to 
 	- ![[Pasted image 20250222112853.png]]
+
+## Built-in Sorting Function in C++
+#### Vectors: 
+```C++ 
+// By default --> increasing order
+vector v = {4,2,5,3,5,8,3}; 
+sort(v.begin(),v.end());
+// [2,3,3,4,5,5,8]
+```
+``` C++
+// Reverse Order
+sort(v.rbegin(),v.rend());
+// [8,5,5,4,3,3,2]
+```
+#### Array
+```C++
+int n = 7; // array size 
+int a[] = {4,2,5,3,5,8,3}; 
+sort(a,a+n); // sort from begin to the end of the array
+```
+#### String
+``` C++
+string s = "monkey"; 
+sort(s.begin(), s.end()); // sort based on the alphabet
+// "ekmnoy"
+```
