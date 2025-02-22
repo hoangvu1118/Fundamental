@@ -99,7 +99,7 @@ for (auto it = s.begin(); it != s.end(); it++) { // increase the index it++
 #search
 ```C++
 auto it = s.find(x); // find(x) returns an iterator pointing to element (x)
-if (it == s.end()) { 
+if (it == s.end()) { // if not found --> iterator will be end
 	// x is not found 
 }
 ```
