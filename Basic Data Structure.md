@@ -239,6 +239,7 @@ cout << s.top(); // 2 can only see 2 when we remove 5
 ```
 
 ## ==Pair== 
+#pair 
 - Different from map
 	- Only hold 1 key-pair value 
 	- no ordering of elements
@@ -318,4 +319,22 @@ int main() {
     cout << get<0>(geek) << " " << get<1>(geek);
     cout << " " << get<2>(geek) << endl;
 	// b 10 20.5
+
+	// To get size
+	tuple<char, int, float> geek(20, 'g', 17.5);
+	cout << "The size of tuple is: ";
+    cout << tuple_size<decltype(geek)>::value; // 3
+
+	//Swapping tup1 values with tup2
+    tup1.swap(tup2);
+    // Use of tie() without ignore        Three of 'em are similar to PAIR
+    tie(i_val, ch_val, f_val) = tup1;
+    // ignores char value
+    tie(i_val, ignore, f_val) = tup1;
+
+
+	// Concatenate tuples 
+	// Concatenating 2 tuples to return a new tuple
+    auto tup3 = tuple_cat(tup1, tup2);
+	cout << tuple_size<decltype(tup3)>::value; // 6
 ```
