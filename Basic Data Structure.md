@@ -167,6 +167,7 @@ cout << q.front(); // 2 after remove 3 from the front
 ## Priority Queue
 
 ## Stack
+LAST IN FIRST OUT (LIFO)
 * provides two O(1) time operations: 
 	* adding an element to the top,
 	* and removing an element from the top. 
