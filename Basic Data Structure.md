@@ -253,6 +253,7 @@ PAIR1.second = 'G'; // second part of the pair
 cout << PAIR1.first << " ";   // 100
 cout << PAIR1.second << endl; // 'G'
 // OR
+pair<int, char> g2;
 g2 = make_pair(1, 'a');
 
 // Swap contents of one pair with the other pair
