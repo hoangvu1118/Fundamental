@@ -248,12 +248,13 @@ cout << s.top(); // 2 can only see 2 when we remove 5
 // defining a pair
 pair<int, char> PAIR1;
 PAIR1.first = 100;
-    // second part of the pair
-PAIR1.second = 'G';
+PAIR1.second = 'G'; // second part of the pair
+cout << PAIR1.first << " ";   // 100
+cout << PAIR1.second << endl; // 'G'
+// OR
+g2 = make_pair(1, 'a');
 
-    cout << PAIR1.first << " ";
-    cout << PAIR1.second << endl;
-
-    return 0;
+// Swap contents of one pair with the other pair
+pair1.swap(pair2) ; // MUST be of same type
 ```
 	
