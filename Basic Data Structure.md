@@ -196,6 +196,11 @@ priority_queue<int, vector<int>, greater<int> > gquiz(arr, arr + 6);
 ###### Note: 
 Slight differences between pq.emplace() & pq.push()
 
+| Method    | Use case                                                                           |     |
+| --------- | ---------------------------------------------------------------------------------- | --- |
+| push()    | When u already have an object and just need to insert it                           |     |
+| emplace() | When you want to construct the object in place and avoid unnecessary copies/moves. |     |
+
 ## ==Stack==
 LAST IN FIRST OUT (LIFO)
 * provides two O(1) time operations: 
