@@ -164,9 +164,9 @@ cout << q.front(); // 3
 q.pop(); 
 cout << q.front(); // 2 after remove 3 from the front
 ```
-## Priority Queue
+## ==Priority Queue==
 
-## Stack
+## ==Stack==
 LAST IN FIRST OUT (LIFO)
 * provides two O(1) time operations: 
 	* adding an element to the top,
