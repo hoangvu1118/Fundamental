@@ -179,14 +179,20 @@ q.push(7);
 q.push(2); 
 cout << "Priority Queue: ";
 while (!pq.empty()) {
-	cout << pq.top() << ' '; // 
-    pq.pop();
+	cout << pq.top() << ' '; // 7 5 3 2 
+    pq.pop(); // remove top everytime it printout
 }
 q.push(6); 
 cout << q.top() << "\n"; // 6 
 q.pop()
 ```
-
+To sort in in increasing order --> the queue has to be declared as following
+```C++
+priority_queue <int, vector<int>, greater<int>> gq;
+// if want to declare the same size as an array
+int arr[6] = { 10, 2, 4, 8, 6, 9 };
+priority_queue<int, vector<int>, greater<int> > gquiz(arr, arr + 6);
+```
 ## ==Stack==
 LAST IN FIRST OUT (LIFO)
 * provides two O(1) time operations: 
