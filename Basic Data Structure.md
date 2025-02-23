@@ -257,4 +257,6 @@ g2 = make_pair(1, 'a');
 // Swap contents of one pair with the other pair
 pair1.swap(pair2) ; // MUST be of same type
 ```
-	
+##### Method
++ tie() : create a tuple reference to its arguments
+	+ To unpack the tuple values into separate variables
