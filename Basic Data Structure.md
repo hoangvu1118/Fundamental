@@ -193,6 +193,9 @@ priority_queue <int, vector<int>, greater<int>> gq;
 int arr[6] = { 10, 2, 4, 8, 6, 9 };
 priority_queue<int, vector<int>, greater<int> > gquiz(arr, arr + 6);
 ```
+###### Note: 
+Slight differences between pq.emplace() & pq.push()
+
 ## ==Stack==
 LAST IN FIRST OUT (LIFO)
 * provides two O(1) time operations: 
