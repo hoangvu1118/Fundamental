@@ -237,3 +237,23 @@ cout << s.top(); // 5
 s.pop();  
 cout << s.top(); // 2 can only see 2 when we remove 5 
 ```
+
+### Pair 
+- Different from map
+	- Only hold 1 key-pair value 
+	- no ordering of elements
+	- returning two values from a function
+```C++
+// The pair container is defined in <utility> header.
+// defining a pair
+pair<int, char> PAIR1;
+PAIR1.first = 100;
+    // second part of the pair
+PAIR1.second = 'G';
+
+    cout << PAIR1.first << " ";
+    cout << PAIR1.second << endl;
+
+    return 0;
+```
+	
