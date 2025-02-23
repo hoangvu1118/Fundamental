@@ -238,7 +238,7 @@ s.pop();
 cout << s.top(); // 2 can only see 2 when we remove 5 
 ```
 
-### Pair 
+## ==Pair== 
 - Different from map
 	- Only hold 1 key-pair value 
 	- no ordering of elements
@@ -290,3 +290,4 @@ tie(x,ignore) = pair3;
 tie(y, z) = pair3.second; // this will refer y and z to second value of pair3
 cout << x << " " << y << " " << z << "\n"; // 3 4 a
 ```
+## ==Tuple==
