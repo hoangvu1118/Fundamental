@@ -200,7 +200,28 @@ Slight differences between pq.emplace() & pq.push()
 | --------- | ---------------------------------------------------------------------------------- | --- |
 | push()    | When u already have an object and just need to insert it                           |     |
 | emplace() | When you want to construct the object in place and avoid unnecessary copies/moves. |     |
+```C++
+#include <queue>
+#include <vector>
+#include <iostream>
+struct Point {
+    int x, y;
+    Point(int a, int b) : x(a), y(b) { std::cout << "Point constructed\n"; }
+};
+int main() {
+    std::priority_queue<Point, std::vector<Point>, std::greater<Point>> pq;
 
+    pq.push(Point(1, 2)); // Creates a temporary object, then moves it in
+    pq.emplace(3, 4);     // Constructs directly inside the priority queue
+    return 0;
+}
+// example of extra copies/moves
+std::priority_queue<int> pq;
+int x = 5;
+pq.push(x);   // Pushes a copy of x
+pq.push(10);  // Pushes 10 directly
+
+```
 ## ==Stack==
 LAST IN FIRST OUT (LIFO)
 * provides two O(1) time operations: 
