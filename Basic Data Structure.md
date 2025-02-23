@@ -169,7 +169,24 @@ cout << q.front(); // 2 after remove 3 from the front
 - This is a ***container adapter*** whose first element is either GREATEST or SMALLEST of all elements in the queue, and elements are in non-increasing or non-decreasing order.
 - By default, top element is always the GREATEST by default. 
 	- Built on top of Heap Data Structure
-	
+- Basically, when we push a new element into priority queue, it will sorted in either order.
+```C++
+//Greatest
+priority_queue<int> q; 
+q.push(3); 
+q.push(5); 
+q.push(7); 
+q.push(2); 
+cout << "Priority Queue: ";
+while (!pq.empty()) {
+	cout << pq.top() << ' '; // 
+    pq.pop();
+}
+q.push(6); 
+cout << q.top() << "\n"; // 6 
+q.pop()
+```
+
 ## ==Stack==
 LAST IN FIRST OUT (LIFO)
 * provides two O(1) time operations: 
