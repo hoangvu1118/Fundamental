@@ -260,3 +260,33 @@ pair1.swap(pair2) ; // MUST be of same type
 ##### Method
 + tie() : create a tuple reference to its arguments
 	+ To unpack the tuple values into separate variables
+```C++
+int main()
+{
+    pair<int, int> pair1 = { 1, 2 };
+    int a, b;
+    tie(a, b) = pair1;
+    cout << a << " " << b << "\n"; // 1, 2
+
+    pair<int, int> pair2 = { 3, 4 };
+    tie(a, ignore) = pair2;
+    cout << a << " " << b << "\n"; // 3, 2
+```
+The use of tie is to refer the desired variables(a, b) to hold the value inside the pair1 which is 1, 2
+However, with **"ignore"** keyword --> this will neglect the existence of the value at that position
+--> Ex: tie(a, ignore) so now b will not available for unpack 
+	--> it will then still hold value of 2 instead of 4
+
+***In case of pair of pairs***
+<u>Unpacking needs to be explicitly handled</u>
+```C++
+pair<int, pair<int, char> > pair3 = { 3, { 4, 'a' } };
+int x, y;
+char z;
+// tie(x,y,z) = pair3; Gives compilation error
+// tie(x, tie(y,z)) = pair3; Gives compilation error
+// Each pair needs to be explicitly handled
+tie(x,ignore) = pair3;
+tie(y, z) = pair3.second; // this will refer y and z to second value of pair3
+cout << x << " " << y << " " << z << "\n"; // 3 4 a
+```
