@@ -104,4 +104,36 @@ int k = x+1;
 	* Downside: Time requirement
 		* Solution: Greedy algorithm
 				-  Dynamic programming
+#### Generating Subset
+#backtracking #subset
+* Using recursion, decision tree --> as it goes
+	* Choose whether to include a number or not 
+```C++
+void generateSub(int k, vector<int>& nums, vector<vector<int>>& result, vector<int>& subset ){
+        // Base condition to add all of the subset
+        if(k >= nums.size()){
+            result.push_back(subset);
+            return;
+        } 
+        // Choose to include a number  
+        subset.push_back(nums[k]);
+        // Recursively include number to a subset
+        generateSub(k+1, nums ,result, subset);
 
+		// Choose to not include(empty bracket)
+        subset.pop_back();
+        while (k + 1 < nums.size() && nums[k] == nums[k + 1]) {
+            k++; // additional step for duplicate elements
+        }
+        //Recursively include number to a subset (for those that are not included before)
+        generateSub(k+1,nums, result, subset);
+    }
+
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        std::vector<vector<int>> result;
+        std::vector<int> subset;
+        sort(nums.begin(), nums.end());
+        generateSub(0, nums, result, subset);
+        return result;
+    }
+```
