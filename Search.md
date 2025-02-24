@@ -102,4 +102,6 @@ int k = x+1;
 * General method that can be used to solved almost any algorithm problem.
 	* Idea : generate all possible solution and choose the most optimal one using brute force ( or count number of solutions)
 	* Downside: Time requirement
-		* So
+		* Solution: Greedy algorithm
+				-  Dynamic programming
+
