@@ -1,4 +1,4 @@
-## **<font color="#ff0000">Binary Search</font>**
+# ==Binary Search==
 #binarySearch #binary
 #### <u>Method 1 </u>
 - Intuitive thought: Resembles looking for a word in a dictionary
@@ -97,3 +97,5 @@ for (int b = z; b >= 1; b /= 2) {
 } 
 int k = x+1;
 ```
+
+# ==Complete Search==
