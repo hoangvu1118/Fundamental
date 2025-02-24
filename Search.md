@@ -105,7 +105,7 @@ int k = x+1;
 		* Solution: Greedy algorithm
 				-  Dynamic programming
 #### Generating Subset
-#backtracking #subset
+#backtracking #subset #decisionTree 
 * Using recursion, decision tree --> as it goes
 	* Choose whether to include a number or not 
 ```C++
