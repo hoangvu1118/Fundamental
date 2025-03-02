@@ -173,5 +173,23 @@ Backtracking :                DFS: exploring all of the solution
 Branch and Bound:        BFS : Go through level to cross-out invalid solution 
 #Queen #backtracking 
 ```C++
-
+void search(vector<char> diag1, vector<char> diag2, vector<char> col,    vector<string> rowStr, vector<vector<string>> result, int y, int n){
+	if(y == n){
+		result.push_back(rowStr);
+		return;
+	}
+	for(int x = 0; x < n; x++){
+		if(col[x] == 'Q' || diag1 == 'Q' || diag2 == 'Q') continue;
+		col[x] = dia1[]
+	}
+}
+vector<vector<string>> solveQueen(int n){
+	vector<char> diag1(2*n-1, '.');
+	vector<char> diag2(2*n-1, '.');
+	vector<char> col(n, '.');
+	vector<string> rowStr(n, '.');
+	vector<vector<string>> result;
+	search(diag1, diag2, col, rowStr, result, 0, n);
+	return result;
+}
 ```
