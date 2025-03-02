@@ -179,11 +179,16 @@ void search(vector<char> diag1, vector<char> diag2, vector<char> col,    vector<
 		return;
 	}
 	for(int x = 0; x < n; x++){
-		if(col[x] == 'Q' || diag1 == 'Q' || diag2 == 'Q') continue;
-		col[x] = dia1[]
+		if(col[x] == 'Q' || diag1[x + y] == 'Q' || diag2[x - y + n - 1] == 'Q') 
+				continue;
+		col[x] = diag1[x+y] = diag2[x - y + n - 1] = 'Q';
+		rowStr[y][x] = 'Q';
+		search(diag1, diag2, col, rowStr, result, y + 1, n);
+		col[x] = diag1[x + y] = diag2[x - y + n - 1] = '.';
+		rowStr[y][x] = 'Q';
 	}
 }
-vector<vector<string>> solveQueen(int n){
+vector<vector<string>> solveNQueens(int n){
 	vector<char> diag1(2*n-1, '.');
 	vector<char> diag2(2*n-1, '.');
 	vector<char> col(n, '.');
