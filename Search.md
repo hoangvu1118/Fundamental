@@ -172,7 +172,7 @@ void generateSub(int k, vector<int>& nums, vector<vector<int>>& result, vector<i
 Backtracking :                DFS: exploring all of the solution
 Branch and Bound:        BFS : Go through level to cross-out invalid solution 
 #Queen #backtracking 
-- Since we are placi
+- Since we are placing queen individually --> go from Q1 down to Q9 via state space tree
 ```C++
 void search(vector<char>& diag1, vector<char>& diag2, vector<char>& col,    vector<string>& rowStr, vector<vector<string>>& result, int y, int n){
 	if(y == n){ // y represent each Queen from Q1 to Qn
@@ -187,15 +187,24 @@ void search(vector<char>& diag1, vector<char>& diag2, vector<char>& col,    vect
 		col[x] = diag1[x+y] = diag2[x - y + n - 1] = 'Q'; // Place the queen to the condition
 		rowStr[y][x] = 'Q'; // add to the board --> y is a row // x is column
 		search(diag1, diag2, col, rowStr, result, y + 1, n); // increase the row (which also mean go to the next queen and place it)
+	
+	// Backtracking --> start to find for more solution by deleting old queen
+	// This will trigger when the function base condition is met and executed
 		col[x] = diag1[x + y] = diag2[x - y + n - 1] = '.';
-		rowStr[y][x] = 'Q';
+		rowStr[y][x] = '.';
 	}
 }
 vector<vector<string>> solveNQueens(int n){
-	vector<char> diag1(2*n-1, '.');
+//Creating bound condition
+	vector<char> diag1(2*n-1, '.'); // 2 * n - 1 represent position on diagonal and put it into only 1 array 
+	// the whole diagonal will be represent in one row 
+	// 0 1 2 3
+	// 1 2 3 4
+	// 2 3 4 5
+	// 3 4 5 6
 	vector<char> diag2(2*n-1, '.');
 	vector<char> col(n, '.');
-	vector<string> rowStr(n, string(n,'.'));
+	vector<string> rowStr(n, string(n,'.')); // creating a board each board has a row to place queen
 	vector<vector<string>> result;
 	search(diag1, diag2, col, rowStr, result, 0, n);
 	return result;
