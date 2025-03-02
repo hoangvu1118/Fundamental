@@ -97,7 +97,7 @@ for (int b = z; b >= 1; b /= 2) {
 } 
 int k = x+1;
 ```
-
+By allowing x to start at "-1", we'll make sure that the desired number will always be found as X always stayed behind first valid value --> not skip in some edge cases![[Pasted image 20250302085640.png]]
 # ==Complete Search==
 * General method that can be used to solved almost any algorithm problem.
 	* Idea : generate all possible solution and choose the most optimal one using brute force ( or count number of solutions)
