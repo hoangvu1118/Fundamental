@@ -57,7 +57,7 @@ Since iterators only return value of the element
 ```C++
 int index = lb - v.begin();  // Gives distance from first element
 ```
-Count number of elements whose value is TARGET
+Count number of elements whose value is TARGET : x
 ```C++
 auto a = lower_bound(array, array+n, x); 
 auto b = upper_bound(array, array+n, x); 
