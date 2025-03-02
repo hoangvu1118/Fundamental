@@ -137,3 +137,27 @@ void generateSub(int k, vector<int>& nums, vector<vector<int>>& result, vector<i
         return result;
     }
 ```
+#### Generating Permutation 
+```C++
+    void findAll(vector<int>& nums, vector<int>& permutation, vector<vector<int>>& result, vector<bool>& usedNum){
+        if(nums.size() == permutation.size()){ // base case if a permu == size
+            result.push_back(permutation); // --> add a new permu and return
+            return;
+        }
+        for(int i = 0; i < nums.size(); i++){
+            if(usedNum[i]) continue; // since array contains INT so 
+            usedNum[i] = true;       // Create a bool array to store T/F
+            permutation.push_back(nums[i]);
+            findAll(nums, permutation, result, usedNum); // recursively add new                                              number to form a new permutation
+            permutation.pop_back(); // remove it and convert it to false
+            usedNum[i] = false; // so it'll be available on the next iteration
+        } // 1 2 3 --> 1 --> 1 3 --> 1 3 2
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<int> permutation;
+        vector<vector<int>> result;
+        vector<bool> usedNum(nums.size(), false);
+        findAll(nums,permutation, result, usedNum);
+        return result;
+    }
+```
