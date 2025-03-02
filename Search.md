@@ -166,4 +166,8 @@ void generateSub(int k, vector<int>& nums, vector<vector<int>>& result, vector<i
 - It is an algorithm to calculate all of the possible solution, Hence it's not designed for optimization problem | This is similar to Brute-Force
 - BOUNDING-FUNCTION : a condition that kill a NODE in a tree 
 	- Take permutation as an example but : Boy1, Boy2, Girl1
-		- The condition: girl cannt s
+		- The condition: girl cannot sit in the middle
+		- Write a base statement --> that end/abort the node(permutation) if the above requirement is violated
+	- This is called ***==BRANCH AND BOUND==***
+Backtracking :                DFS: exploring all of the solution
+Branch and Bound:        BFS : Go through level to cross-out invalid solution 
