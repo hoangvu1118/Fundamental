@@ -114,6 +114,11 @@ m["monkey"] = 4;
 m["banana"] = 3; 
 m["harpsichord"] = 9; 
 cout << m["banana"] << "\n"; // 3
+// Inializing std::map using initializer list
+map<int, char> m = {{1, 'a'},
+                    {3, 'b'},
+                    {2, 'c'}};
+
 ```
 If value of a key is requested but MAP does not contain that --> automatically add a new key-value pair, set to 0
 ```C++
