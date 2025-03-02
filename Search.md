@@ -171,3 +171,7 @@ void generateSub(int k, vector<int>& nums, vector<vector<int>>& result, vector<i
 	- This is called ***==BRANCH AND BOUND==***
 Backtracking :                DFS: exploring all of the solution
 Branch and Bound:        BFS : Go through level to cross-out invalid solution 
+#Queen #backtracking 
+```C++
+
+```
