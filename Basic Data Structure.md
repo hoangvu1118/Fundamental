@@ -242,7 +242,26 @@ cout << s.top(); // 5
 s.pop();  
 cout << s.top(); // 2 can only see 2 when we remove 5 
 ```
-
+Example of Stack to calculate 
+```C++
+stack<int> stk;
+    int evalRPN(vector<string>& tokens) {
+        for(const string c : tokens){
+            if(c == "+"){
+                int a = stk.top(); stk.pop();
+                int b = stk.top(); stk.pop();
+                stk.push(a + b);
+            }
+            else if(c == "-"){
+                int a = stk.top(); stk.pop();
+                int b = stk.top(); stk.pop();
+                stk.push(b - a);
+            }
+         ...
+        }
+        return stk.top();
+    }
+```
 ## ==Pair== 
 #pair 
 - Different from map
