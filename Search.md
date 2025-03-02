@@ -163,5 +163,7 @@ void generateSub(int k, vector<int>& nums, vector<vector<int>>& result, vector<i
 ```
 
 # ==Back-Tracking==
-- It is an algorithm to calculate all of the possible solution, Hence it's not designed for optimization | This is similar to Brute-Force
-- 
+- It is an algorithm to calculate all of the possible solution, Hence it's not designed for optimization problem | This is similar to Brute-Force
+- BOUNDING-FUNCTION : a condition that kill a NODE in a tree 
+	- Take permutation as an example but : Boy1, Boy2, Girl1
+		- The condition: girl cannt s
