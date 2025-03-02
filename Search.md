@@ -163,3 +163,5 @@ void generateSub(int k, vector<int>& nums, vector<vector<int>>& result, vector<i
 ```
 
 # ==Back-Tracking==
+- It is an algorithm to calculate all of the possible solution, Hence it's not designed for optimization | This is similar to Brute-Force
+- 
