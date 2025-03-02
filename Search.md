@@ -81,7 +81,7 @@ for (int b = z; b >= 1; b /= 2) {
 } 
 int k = x+1;
 ```
-ok(x) returns true if x >= k and false if x < k   ( /\ ) just like this, the top is k
+ok(x) returns true if x >= k and false if x < k   " \ . / "  just like this, the top is k
 That means we can find the smallest value as soon as the ok(x) turns true
 ##### Find the maximum value
 * Similarly, we can find the value which first increase then decrease
