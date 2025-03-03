@@ -60,8 +60,9 @@ Note : Slight Difference
 int * e[5]; // E is a 1D array of size 5 of pointers to ints | 1
 int (*f)[5]; // F is a pointer to a 1D array of size 5 of ints | 2
 ```
-To be clear :  1. It is an array of 5 pointers, each element of e is pointing to an INT
-Need to allocate seperately
+To be clear :  
+	1 - It is an array of 5 pointers, each element of e is pointing to an INT
+Need to allocate separately
 ```C
 #include <iostream>
 int main() {
@@ -70,5 +71,14 @@ int main() {
     std::cout << *arr[0] << std::endl;  // Output: 10
     std::cout << *arr[4] << std::endl;  // Output: 50
     return 0;
+}
+```
+
+	2 - It is a pointer to an array of 5 integers | like any other normal array
+```C
+int main() { 
+int arr[5] = {1, 2, 3, 4, 5}; 
+int (*ptr)[5] = &arr; // Pointer to an array of 5 ints 
+std::cout << (*ptr)[0] << std::endl; // Output: 1
 }
 ```
