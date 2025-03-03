@@ -59,11 +59,11 @@ A statement is valid <==> When it goes to the ==final state== at the end of the 
 ![[Pasted image 20250303100912.png]] 
   **Formal Languages: Review**
 ![[Pasted image 20250303101738.png]]
-Language exponentiation: L = {0, 1} 
+Language exponentiation: L = {0, 1}  : It is form of **repeated language concatenation**
 L$^2$ = L * L = {0, 1} * {0, 1}
     = {00, 01, 10, 11}
-**Small fix** --> L$^0$ = {$\lambda$ | $\epsilon$ } not e
-
+**Small fix** --> L$^0$ = {$\lambda$ | ε } not e
+Empty String : **e, ε, λ or even Λ**
 ### Why Study Automata & Formal Language ?
 - FL and Automata :
 	- present theoretical aspects of CompSci
@@ -72,7 +72,8 @@ L$^2$ = L * L = {0, 1} * {0, 1}
 	- decide if a string is in language or not
 
 Alan Turing ( 1912 - 1954 ) Father of Modern CompSci
---> Turing machine : abstract computer
+English mathematician
+--> Turing machine : abstract machines
 
 ## Fundamentals
 ### Language: 
@@ -85,13 +86,14 @@ This is a ==finite, non-empty== set of symbols.
 A string or word is a ==finite== sequence of symbols chosen from $\sum$
 Notion: **Empty string** is $\lambda$ or (lamn-dah)
 ![[Pasted image 20250303111437.png]]
-+ Length of a string w --> "|w|" = number of non lambda characters in the string
++ Length of a string w --> "|w|" = number of (non-lambda) characters in the string
 + e.g: w = 010100 --> |w| = 6
 	+ w = $\lambda$         --> |w| = 0
 
 - **Properties**:
 	- Any string of consecutive symbols in some w is SUBSTRING of w
 		- E.g: w = a1a2a3b1b2b3 then a1a2a3 & a3b1b2 are substrings of w
+		- There are total of 22 substring from length 1 to length 6
 - **Prefix**: 
 	- The consecutive symbols at the head of the string
 		- E.g,: w = uv, then u is the prefix of w 
@@ -137,10 +139,34 @@ However
 + The reverse of a language $L^R$ is the set of all string reversals:
 	+ $L^R$ = {$w^R$ : w belongs to L}
 + The concatenation of two languages L1 and L2 denoted by $L_{1}L_{2}$ :
-	+ $L_{1}L_{2}$  = {xy : x belongs to L1, y belongs to L2}
+	+ $L_{1}L_{2}$  = {xy : x $\epsilon$ L1, y $\epsilon$  L2}
 + $L^n$ as L concatenated with itself n times 
 	+ L = {$a^nb^n$ | n >= 0} then $L^2$ = {$a^nb^na^mb^m$ | n>=0, m >= 0}
 	+ $L^0$ = $\phi$ = {$\lambda$}
 	+ $L^1$ = L
 ![[Pasted image 20250303115454.png]]
 
+```Text
+Summary:
+- Formal language theory: 
+	- alphabet is set of finite, NON-empty set of Symbols
+	- language is set of sentences (string)
+	- sentence is string of alphabet : 1 sentence = 1 string
+- Automata :
+	- It is an abstract model : not realistic running model 
+	- A mathematical model which is able to regconize pattern, processing input based of predefined rules (set of instructions)
+
+- Formal Language: 
+	- string that is constructed by a set of rules (grammar / components / article)
+	- string has multiple operations/ traits
+		- prefix/suffix elements will be the same --> it is the order that matter
+		- reverse : set of symbols in reverse order
+		- power: string obtained by repeating n times
+		- Sigma(n) : set of all string of lengths n
+		- Sigma(*) : set of strings include lambda, zero and other symbols
+			- always contain lambda
+		- Sigma(+) : set of strings that exclude lambda
+	- Sigma is finite by ASSUMPTION , + & * are infinite 
+	- However, when apply on computer --> all infinite
+- Language is a subset of ALPHABET(sigma*)
+```
