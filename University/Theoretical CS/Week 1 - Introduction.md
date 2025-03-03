@@ -107,5 +107,40 @@ Notion: **Empty string** is $\lambda$ or (lamn-dah)
 	- wv is a *concatenation* of two string w and v:
 		- E.g: w = a1a2a3...aN,  v = b1b2b3....bN --> wv = a1a2a3...aNb1b2b3....bN
 		- $\lambda$ * w = w * $\lambda$ = w
-	- 
+	- Length of wv : |w * v| = |w| + |v|
++ **Reverse**
+	+ It is obtained by writing symbols in reverse order and denoted by w$^R$
+		+ E.g: w = a1a2a3...aN --> a$^R$ = aN...a3a2a1
+
+- **Power** of a string (w$^n$):
+	- w$^n$ : string obtained by repeating string "w" n times
+		- --> w$^n$ = w.w.w...w . w (n times)
+	- ==Special Case:== w$^0$ = $\lambda$ for all w
+![[Pasted image 20250303113838.png]]
+ For example:
+	- Z = {0, 1, 2}
+	--> $\sum^3$ = {012, 000, 111, 222, 120, ...}
+	 --> $\sum^*$ = {$\lambda$ , 0 ,1, 2, 01, 02, 12, 00, 011, ... }
+	 --> $\sum^+$ = {0, 1, 2, 01, .....}
+
+Sigma (+) & ( * ) : always **INFINITE** since there is no LIMIT on length of the string
+However 
+## Language
+##### Definition: 
+- A language **L** is defined generally as a SUBSET of $\sum^*$ 
+- a String in a language L is called **sentence** of L
+![[Pasted image 20250303114605.png]]
+ $a^n$ $b^n$ is lambda when n = 0 
+#### Operations
++ Complement of a language L: 
+	+ $\neg{L}$ = $\sum^*$  - L
++ The reverse of a language $L^R$ is the set of all string reversals:
+	+ $L^R$ = {$w^R$ : w belongs to L}
++ The concatenation of two languages L1 and L2 denoted by $L_{1}L_{2}$ :
+	+ $L_{1}L_{2}$  = {xy : x belongs to L1, y belongs to L2}
++ $L^n$ as L concatenated with itself n times 
+	+ L = {$a^nb^n$ | n >= 0} then $L^2$ = {$a^nb^na^mb^m$ | n>=0, m >= 0}
+	+ $L^0$ = $\phi$ = {$\lambda$}
+	+ $L^1$ = L
+![[Pasted image 20250303115454.png]]
 
