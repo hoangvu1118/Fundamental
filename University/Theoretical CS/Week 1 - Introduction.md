@@ -49,3 +49,17 @@ In the example : S1 has 2 ring --> It is the start and the end of the program.
 A statement is valid <==> When it goes to the ==final step== at the end of the cycle.
 ==Intuitive== : it checks number of even 0s --> so odd 0s will not end up in the final state
 
+## Formal Language
+- FL is a string of words under ==specific rules / regular grammar==
+- **Applications**: computer language, programming language, compiler..
+- For example : below, there are **3 rules** to construct the sentence "The chef cooks the soup"
+- S = NP + VP
+- NP = D + N
+- VP = V + NP
+![[Pasted image 20250303100912.png]] 
+  **Formal Languages: Review**
+![[Pasted image 20250303101738.png]]
+Language exponentiation: L = {0, 1} 
+L$^2$ = L * L = {0, 1} * {0, 1}
+    = {00, 01, 10, 11}
+**Small fix** --> L$^0$ = {lamb-dah | epsilon} not e
