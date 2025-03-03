@@ -75,7 +75,37 @@ Alan Turing ( 1912 - 1954 ) Father of Modern CompSci
 --> Turing machine : abstract computer
 
 ## Fundamentals
-#### Language: 
+### Language: 
 A language is a collection of sentences of ==*finite length*== all constructed from a finite alphabet of symbols
+### Alphabet
+This is a ==finite, non-empty== set of symbols.
+![[Pasted image 20250303110723.png]]
 
+### String 
+A string or word is a ==finite== sequence of symbols chosen from $\sum$
+Notion: **Empty string** is $\lambda$ or (lamn-dah)
+![[Pasted image 20250303111437.png]]
++ Length of a string w --> "|w|" = number of non lambda characters in the string
++ e.g: w = 010100 --> |w| = 6
+	+ w = $\lambda$         --> |w| = 0
+
+- **Properties**:
+	- Any string of consecutive symbols in some w is SUBSTRING of w
+		- E.g: w = a1a2a3b1b2b3 then a1a2a3 & a3b1b2 are substrings of w
+- **Prefix**: 
+	- The consecutive symbols at the head of the string
+		- E.g,: w = uv, then u is the prefix of w 
+			- --> uv is the prefix of w since after uv, the string still contains $\lambda$ (empty)
+		- $\lambda$ can still a prefix of another $\lambda$
+- **Suffix**:
+	- Consecutive symbols at the tail of the string
+		- E.g: w = uv, v is a suffix of w ~~ similar to prefix
+![[Pasted image 20250303112706.png]]
+==|Prefix| = |Suffix|==
+
+- **Operators**:
+	- wv is a *concatenation* of two string w and v:
+		- E.g: w = a1a2a3...aN,  v = b1b2b3....bN --> wv = a1a2a3...aNb1b2b3....bN
+		- $\lambda$ * w = w * $\lambda$ = w
+	- 
 
