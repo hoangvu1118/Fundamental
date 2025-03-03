@@ -63,3 +63,19 @@ Language exponentiation: L = {0, 1}
 L$^2$ = L * L = {0, 1} * {0, 1}
     = {00, 01, 10, 11}
 **Small fix** --> L$^0$ = {lamb-dah | epsilon} not e
+
+### Why Study Automata & Formal Language ?
+- FL and Automata :
+	- present theoretical aspects of CompSci
+	- define infinite languages in finite way
+	- construct algorithm
+	- decide if a string is in language or not
+
+Alan Turing ( 1912 - 1954 ) Father of Modern CompSci
+--> Turing machine : abstract computer
+
+## Fundamentals
+#### Language: 
+A language is a collection of sentences of ==*finite length*== all constructed from a finite alphabet of symbols
+
+
