@@ -17,4 +17,11 @@ Theoretical Computer Science : TCS
 - Applications : apply in programming languages, specifying 1 language via FL
 - TCS : can help to create and specify (syntax) a programming language.
 - --> Programming languages : python, cpp, java, etc.
+Note : state machine : Web
+		model       : automata
 
+#### Automata Theory : Abstract Machines
+- Study a model for computing process with various resources
+- It is ==computable==
+- Application: parsing algorithms -> translate algorithm
+- --> WEB and AI : popular to
