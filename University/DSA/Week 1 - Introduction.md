@@ -23,9 +23,53 @@
 	- Building complex data structures : linked list, stacks, queues, trees
 
 ### Basics
-
+- Variables are allocated at *addresses* in computer memory (depends on os system)
+- Name of the variable is a reference to that memory address
+- A pointer variable contains a representation of an address of another variable
+- ![[Pasted image 20250304095544.png]]
 ### Definition 
+```C
+Basic syntax: Type *Name Examples:
+int *P; /* P is var that can point to an int var */
+float *Q; /* Q is a float pointer */
+char *R; /* R is a char pointer */
 
+Complex example:
+int *AP[5]; /* AP is an array of 5 pointers to ints */
+//     – more on how to read complex declarations later
+```
+
+##### Address (&) 
+- Address (&) operator can be used in front of any variable object in C -- the result of the operation is the location in memory of the variable
+```C
+Syntax: &VariableReference 
+//Examples:
+
+int V; 
+int *P; 
+int A[5];
+// &V - memory location of integer variable V
+
+// &(A[2]) - memory location of array element 2 in array A 
+//&P - memory location of pointer variable P
+```
+
+### Pointer Variable Initialization/ Assignment
+- NULL - pointer lit constant to non-existent address
+	- It points to nothing
+- Can initialize/assign pointer vars to NULL or use the address (&) op to get address of a variable
+```C
+Examples:
+int V; 
+int *P = &V; 
+int A[5]; 
+P = &(A[2]); // P points to address of the third element in array
+```
+### Dereference | Indirection ( * ) Operator
+- refer to the contents of the variable that the pointer points to
+```C
+
+```
 ### Sample
 ```C
 int A = 3; // initialize A to store value 3
