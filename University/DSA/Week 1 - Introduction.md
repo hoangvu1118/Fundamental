@@ -523,3 +523,22 @@ StrucPtr->Field /* equivalent to (*StrucPtr).Field */
 • Field must be a name of a field of that type of structure
 ```
 
+#### Array within Structure
+```C
+typedef struct {
+	char name[20];
+	int score[5]; 
+} Student;	
+void readS(Student *s){
+	scanf("%20s", s->name);
+	for (i = 0; i < 5; i++){
+		scanf("%d",&(s->score[i])); // access the address since score[i]-INT
+	}
+}
+```
+Slight difference in ARRAY and Pointer
+- Array as pointer in C
+	- When use name without index - s->name - it decays ( implicitly convert) to a pointer points to first element ==> name === &name[0]
+	- Since name is a pointer so no & is needed to get the address
+- But in score, we getting each element, which is integer, score[i] 
+	- Providing the & give the address of the location in array that need to be stored
