@@ -542,3 +542,54 @@ Slight difference in ARRAY and Pointer
 	- Since name is a pointer so no & is needed to get the address
 - But in score, we getting each element, which is integer, score[i] 
 	- Providing the & give the address of the location in array that need to be stored
+NOTE: 
+If we write "s->score" --> treated as pointer 
+However, it depends on the scanf which will decide how the input will be
+- For "%s" --> it will scan char until it find a "whitespace" so array would be 'h', 'o', 'a', 'n', 'g'
+- For "%d" --> it will scan the integer --> therefore array would be '123',' ', ' ', ...
+	- Instead of '1', '2', '3'
+
+### Nested Structure 
+```C
+typedef struct { 
+char B;
+float C; 
+} MyDType;
+
+typedef struct { 
+	int A; 
+	MyDType D; // D is a variable
+} MyType;
+
+MyType V;
+// Fields of V:
+V.A /* int field */
+V.D /* structure field */ 
+V.D.B /* char field */ 
+V.D.C /* float field */
+
+or MyType V = { 43, { ‘A’, 3.5 } };
+```
+![[Pasted image 20250304230154.png]]
+# Application of Struct
+##### Representing Table Data 
+To store information of each students (ID, Class, Name, GPA) we need to create a struct
+We would like to keep the values for each entry in the table together as one unit
+**--> Array will be a TABLE to store these students information (Struct)**
+```C
+include <stdio.h>
+#define MAXSTUDENT 100
+
+typedef struct { int id;
+	float gpa; 
+	char class;
+	char name[20]; 
+} Student;
+
+void main() {
+	Student Ss[MAXSTUDENT]; 
+	int numS = 0; // INT var to keep track of how many of the array elements are in use: == How many students are being recorded
+	int option;
+}
+```
+![[Pasted image 20250304230937.png]]
