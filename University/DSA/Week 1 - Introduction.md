@@ -14,7 +14,6 @@
 ```
 
 
-
 # Pointer
 #pointer #c
 - Reference to another variable (memory location) in a program
