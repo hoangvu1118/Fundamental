@@ -175,3 +175,41 @@ Removes warning, but is still a somewhat unsafe thing to do
 - Ideas - Allocate an array of pointers (  first dimension )
 	- Make each pointer point to a 1D array of desired size
 --> Treat result as 2D array
+
+# Structure in C
+- A data type in a programming language is a set of data with predefined values. 
+- Examples of data types are: integer, float, string,…
+### User-defined data types
+In C we can create structure. In C++/Java, we can create class.
+``` C
+For example:
+struct student{
+ char[20] name;
+ int id;
+};
+
+struct student x; // how to declare user-defined data type
+```
+
+### Type Definition
+- Syntax: typedef type Name ;
+- Name becomes a name you can use for the type
+
+```C
+typedef struct student Student; 
+Student x; /* x is an struct student */ 
+Student* PtrToStudent
+
+typedef char *STRING;
+
+STRING sarray[10];
+
+/* sarray is an array of char *’s, equivalent to declaring: 
+char *sarray[10]; */
+SIMILAR TO
+
+typedef struct { 
+	char[20] name;
+	int id;
+} Student;
+```
