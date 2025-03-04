@@ -262,6 +262,8 @@ while calloc is initialized with all 0
 | - A structured collection of **elements of the same type.**<br>- Can be statically or dynamically allocated.<br>- Example: `calloc(10, sizeof(int))` allocates memory for an array of 10 integers (40 bytes if `int` is 4 bytes). | - A **contiguous** region of memory allocated dynamically.<br>- Can store **any type of data** (e.g., structures, single values, arrays).<br>- Example: `malloc(100)` allocates a single block of 100 bytes. |
 | implies structured storage (usually multiple elements of the same type).                                                                                                                                                          | raw allocated space                                                                                                                                                                                          |
 | [ 0 ][ 0 ][ 0 ][ 0 ][ 0 ][ 0 ][ 0 ][ 0 ][ 0 ][ 0 ]                                                                                                                                                                                | [------------------------------------]                                                                                                                                                                       |
+| Need an array or a block of memory that **must start with zero values.**                                                                                                                                                          | Intend to **immediately overwrite** it with your own data.                                                                                                                                                   |
+| SAFER                                                                                                                                                                                                                             | FASTER                                                                                                                                                                                                       |
 #### CALLOC
 #calloc #memory #allocation
 ```C
@@ -307,13 +309,66 @@ NULL returned if not enough memory available
 
 malloc(N * sizeof(float)) === calloc(N,sizeof(float))
 ```
+
+#### Increasing Memory Size with realloc
+```C
+prototype: void * realloc(void * ptr, size_t esize)
+
+ptr : pointer to a piece of memory "previously dynamically allocated"
+esize : new size to allocate (no effect if esize is smaller than the size of the memory block ptr points to already)
+```
+
+```Text
+FLOW: 
+program allocates memory of size esize -->
+--> Copies the content of the memory at the "OLD PTR", paste it in the first part of the new piece of memory
+--> OLD memory is freed up
+```
+
+```C
+float *nums; 
+int I;
+nums = (float *) calloc(5, sizeof(float)); /* nums is an array of 5 floating point values */
+
+for (I = 0; I < 5; I++) 
+	nums[I] = 2.0 * I;
+
+/* nums[0]=0.0, nums[1]=2.0, nums[2]=4.0, etc. */
+nums = (float *) realloc(nums,10 * sizeof(float));
+/*
+the first 5 floats from the old nums are copied as the first 5 floats of the new nums, then the old nums is released */
+```
 ### Dynamically Allocating 2D Arrays 
 - Cannot simply dynamically allocate 2D (or higher) array
 - Ideas - Allocate an array of pointers (  first dimension )
 	- Make each pointer point to a 1D array of desired size
 --> Treat result as 2D array
+```C
+float **A; /* A is an array (pointer) of float pointers */ 
+int I;
 
+A = (float **) calloc(5,sizeof(float *)); /* A is a 1D array (size 5) of float pointers */
 
+for (I = 0; I < 5; I++)
+	A[I] = (float *) calloc(4,sizeof(float));
+
+/* Each element of array points to an array of 4 float variables */
+/* A[I][J] is the Jth entry in the array that the Ith member of A points to */
+```
+
+### Non-Square 2D arrays
+![[Pasted image 20250304213042.png]] 
+```C
+float **A;
+int I;
+
+A = (float **) calloc(5, sizeof(float *));
+for (I = 0; I < 5; I++) {
+	A[I] = (float **)
+	calloc(I+1, sizeof(float));
+}
+```
+C++ is more strict about type checking than C. In C++, you _must_ cast the return value of `malloc()` or `calloc()` to the desired pointer type. Without the cast, a C++ compiler will generate an error.
 # Structure in C
 - A data type in a programming language is a set of data with predefined values. 
 - Examples of data types are: integer, float, string,…
