@@ -243,6 +243,8 @@ ArrayName[][Dim2][Dim3]
 - Idea: user request some memory, after they finish using it, they return (free) those memory
 **--> Memory allocated in the Data Heap**
 ### Memory Management Functions
+		``Malloc | Calloc -> memory is allocated from heap``
+		
 ```Text
 calloc = routine used to allocate ARRAYS of memory
 malloc = routine used to allocate a single block of memory
@@ -254,6 +256,57 @@ NOTE: we have to explicitly free the memory
 malloc is slightly faster than calloc 
 since malloc do not initialize, thus it only holds garbage value
 while calloc is initialized with all 0
+
+| Arrays of memory                                                                                                                                                                                                                  | Single block of memory                                                                                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| - A structured collection of **elements of the same type.**<br>- Can be statically or dynamically allocated.<br>- Example: `calloc(10, sizeof(int))` allocates memory for an array of 10 integers (40 bytes if `int` is 4 bytes). | - A **contiguous** region of memory allocated dynamically.<br>- Can store **any type of data** (e.g., structures, single values, arrays).<br>- Example: `malloc(100)` allocates a single block of 100 bytes. |
+| implies structured storage (usually multiple elements of the same type).                                                                                                                                                          | raw allocated space                                                                                                                                                                                          |
+| [ 0 ][ 0 ][ 0 ][ 0 ][ 0 ][ 0 ][ 0 ][ 0 ][ 0 ][ 0 ]                                                                                                                                                                                | [------------------------------------]                                                                                                                                                                       |
+#### CALLOC
+#calloc #memory #allocation
+```C
+Calloc example
+It returns the address of the first byte of this memory
+Return NULL if not enough memory
+void *calloc(size_t num, size_t esize)
+// size_t : special type used to indicate sizes, generally an unsigned int
+// num : number of elements to be allocated in array
+// esize : size of the ELEMENT (INT FLOAT DOUBLE)
+float *nums; int N; int I;
+printf(“Read how many numbers:”); 
+scanf(“%d”,&N);
+        // type        num         esize
+nums = (float *) calloc(N, sizeof(float));
+/* nums is now an array of floats of size N */ 
+for (I = 0; I < N; I++) {
+	printf(“Please enter number %d: “,I+1); 
+	scanf(“%f”,&(nums[I]));
+}
+```
+
+#### Free 
+```Text 
+It is problematic to free an address of something that was not allocated dynamically or has been freed
+```
+For example :
+```C
+nums = (float *) calloc(N, sizeof(float));
+
+/* when done with nums: */ 
+free(nums);
+/* would be an error to say it again - free(nums) */ ERROR ❌❌❌
+```
+If the address is not FREED ==> The memory is still occupied BUT no longer accessible
+--> This is **MEMORY LEAKAGE**
+
+#### MALLOC
+```C
+MALLOC EXAMPLE
+void * malloc(size_t esize) // a big chunk of memory
+NULL returned if not enough memory available
+
+malloc(N * sizeof(float)) === calloc(N,sizeof(float))
+```
 ### Dynamically Allocating 2D Arrays 
 - Cannot simply dynamically allocate 2D (or higher) array
 - Ideas - Allocate an array of pointers (  first dimension )
