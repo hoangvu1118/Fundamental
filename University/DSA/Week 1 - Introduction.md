@@ -182,11 +182,11 @@ Address of A + x * bytes to represent int
 Address of array + element num * bytes for element size
 ```
 - The key behind these 2 formulas is 
-	1.  The first one might be used in a RAW pointer which will then <font color="#ff0000">calculated the offset by x </font>element (similar to Computer Architecture)   
+	1.  The first one might be used in a ==RAW pointe==r which will then <font color="#ff0000">calculated the offset by x </font>element (similar to Computer Architecture)   
 		- When multiply bytes --> multiply to its elements size 
 			- Ex: for int : 4 bytes | char : 1 bytes --> like array in CA 1 Word = 4 bytes
 			- This is manually computing the address
-			- int *new_addr = (int *)((char *)ptr + x * size);
+			- int * new_addr = (int *)((char *)ptr + x * size);
 			- Base Address+(Offset×Size) 
 				- 0x1000 + (3×4) =0x100C
 			-  So, `new_addr` now points to address `0x100C`.
@@ -196,7 +196,20 @@ Address of array + element num * bytes for element size
 		- int *element_addr = arr + element_num;              or the one above
 		- `0x2000 + (2 * 4) = 0x2008`  
 		- So, `element_addr` points to `0x2008` 
+```C
+int arr[5] = {10, 20, 30, 40, 50}; 
+int offset = 2; 
+int size = sizeof(int); // arr is NOT a pointer variable, so this is invalid:
+arr = (int *)((char *)arr + offset * size); // ❌ ERROR!
+```
 
+```C
+int arr[5] = {10, 20, 30, 40, 50}; int *ptr = arr; // ✅ Now ptr is a real pointer // Now we can apply the first method: 
+int offset = 2; 
+int size = sizeof(int); 
+int *manual_addr = (int *)((char *)ptr + offset * size);
+```
+We still need another pointer to traverse through array in both ways
 - However, C already accounted for size of the type --> we can simply do
 - **array + element_num // No need to multiply by size!**
 
@@ -221,12 +234,32 @@ int totalArray(int *A, int N) {
 return total;
 }
 ```
-==**HOWEVER**, ==
+==**HOWEVER**== **for multi-dimensional array**, we still have to use the form, dimension after the first one have to be specified
+```C
+ArrayName[][Dim2][Dim3]
+```
+### Dynamic Memory Allocation 
+- Allow the program to allocate some variables (notably arrays), **during the program**
+- Idea: user request some memory, after they finish using it, they return (free) those memory
+**--> Memory allocated in the Data Heap**
+### Memory Management Functions
+```Text
+calloc = routine used to allocate ARRAYS of memory
+malloc = routine used to allocate a single block of memory
+realloc = routine used to extend the amount of space allocated previously
+free = routine used to tell program a piece of memory no longer needed
+
+NOTE: we have to explicitly free the memory
+```
+malloc is slightly faster than calloc 
+since malloc do not initialize, thus it only holds garbage value
+while calloc is initialized with all 0
 ### Dynamically Allocating 2D Arrays 
 - Cannot simply dynamically allocate 2D (or higher) array
 - Ideas - Allocate an array of pointers (  first dimension )
 	- Make each pointer point to a 1D array of desired size
 --> Treat result as 2D array
+
 
 # Structure in C
 - A data type in a programming language is a set of data with predefined values. 
