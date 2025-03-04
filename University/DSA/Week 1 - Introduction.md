@@ -68,18 +68,35 @@ P = &(A[2]); // P points to address of the third element in array
 ### Dereference | Indirection ( * ) Operator
 - refer to the contents of the variable that the pointer points to
 ```C
+Syntax: *PointerVariable Example:
 
+int V = 101; 
+int *P = &V;
+/* Then *P would refer to the contents of the variable V (in this case, the integer 101) */
+
+printf(“%d”,*P); /* Prints 101 */
 ```
 ### Sample
 ```C
 int A = 3; // initialize A to store value 3
-int B;// also for B
+int B;// also for B --> depends compiler Might be either 0 or random value
 int *P = &A; // pointer P now holds the address of A
 int *Q = P; // pointer Q is assigned to P --> also store the address of A
 int *R = &B; // pointer R stores the address of B
 Q = &B; // now pointer Q is reassigned to B, thus hold the address of B no more A
 ```
 
+### Reference Parameters
+- Make changes to a variable that exist after function ends
+- Use **indirection** operator inside the function to change value the parameter points to
+```C
+void changeVar(float *cvar) { 
+	*cvar = *cvar + 10.0;
+}
+float X = 5.0; 
+changeVar(&X); // Pass by reference 
+printf(“%.1f\n”,X);
+```
 ### Pointer Return Values
 - It is considerable different from pointer to function 
 ```C
@@ -125,3 +142,36 @@ int (*ptr)[5] = &arr; // Pointer to an array of 5 ints
 std::cout << (*ptr)[0] << std::endl; // Output: 1
 }
 ```
+### Pointers to Pointers
+- A pointer can also be made to point to a pointer variable
+- But the pointer must be of A TYPE that allows it to point to a pointer (similar type)
+```C
+int V = 101;
+int *P = &V; 
+int **Q = &P; /* P points to int V */ /* Q points to int pointer P */
+
+printf(“%d %d %d\n”,V,*P,**Q); /* prints 101 3 times *
+```
+
+### Pointer Types
+- Pointers are generally of the same size (enough bytes to represent all possible memory addresses
+- Generally results in a Warning rather than error since C allow to do so
+```C
+int V = 101;
+float *P = &V; /* Generally results in a Warning */
+```
+
+### Casting Pointers
+- Best way to assign to different type
+```C
+int V = 101;
+float *P = (float *) &V; /* Casts int address to float * */
+
+Removes warning, but is still a somewhat unsafe thing to do
+```
+
+### Dynamically Allocating 2D Arrays 
+- Cannot simply dynamically allocate 2D (or higher) array
+- Ideas - Allocate an array of pointers (  first dimension )
+	- Make each pointer point to a 1D array of desired size
+--> Treat result as 2D array
