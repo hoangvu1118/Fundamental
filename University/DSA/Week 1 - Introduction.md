@@ -14,7 +14,7 @@
 ```
 
 
-# Pointer
+# 1. Pointer
 #pointer #c
 - Reference to another variable (memory location) in a program
 	- Change variable inside function
@@ -369,7 +369,7 @@ for (I = 0; I < 5; I++) {
 }
 ```
 C++ is more strict about type checking than C. In C++, you _must_ cast the return value of `malloc()` or `calloc()` to the desired pointer type. Without the cast, a C++ compiler will generate an error.
-# Structure in C
+# 2. Structure in C
 - A data type in a programming language is a set of data with predefined values. 
 - Examples of data types are: integer, float, string,…
 ### User-defined data types
@@ -391,14 +391,15 @@ struct student x; // how to declare user-defined data type
 ```C
 typedef struct student Student; 
 Student x; /* x is an struct student */ 
+            // Otherwise, we will have to type "struct student x"
 Student* PtrToStudent
 
-typedef char *STRING;
+typedef char *STRING; // declaring a string array of 10 pointer to string
 
 STRING sarray[10];
-
 /* sarray is an array of char *’s, equivalent to declaring: 
 char *sarray[10]; */
+
 SIMILAR TO
 
 typedef struct { 
@@ -407,7 +408,46 @@ typedef struct {
 } Student;
 ```
 
+#### Declare Variables in Two ways
+```C
+// Tag declaration 
+struct TagName { 
+	Type1 Field1; 
+	Type2 Field2; 
+	Type3 Field3;
+};
+//Variable declaration
+struct TagName temp1;
+```
 
+```C
+// Type definition 
+typedef struct { 
+	Type1 Field1; 
+	Type2 Field2; 
+	Type3 Field3;
+
+} TypeName;
+
+//Variable declaration:
+TypeName temp1;
+```
+```Text
+	It aint need a TAGNAME if we define Typename afterall
+```
+
+### Field Selection
+- Dot (.) form to refer to field of structured var
+- Syntax: VarName.FieldName
++ Each field treated as an individual variable of that type
+```C
+void main() { 
+DATE d1;
+d1.month = 12; 
+d1.day = 2; 
+d1.year = 1970;
+}
+```
 ### Structure Comparison
 - Should not use == or !=
 	- It may be due to slack bytes
