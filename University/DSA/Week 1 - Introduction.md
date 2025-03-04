@@ -446,9 +446,21 @@ DATE d1;
 d1.month = 12; 
 d1.day = 2; 
 d1.year = 1970;
+// OR
+DATE d1 = { 12, 2, 1970 };//must follow the order it is declared inside struct
 }
 ```
+
+### Structure assignment
+* variables must be of same type (same name)
++ values are copied one at a time from field to corresponding field
+```C
+DATE d1 = { 12, 2, 1970 }; 
+DATE d2;
+d2 = d1; /* Assignment */
+```
 ### Structure Comparison
++ Many compilers require vars to start on even numbered (or divisible by 4) boundaries, ***unused bytes called slack bytes***
 - Should not use == or !=
 	- It may be due to slack bytes
 	- Some bytes might no be used ( padding )
@@ -456,4 +468,58 @@ When we compare 2 structure variable --> it will compare byte by byte
 --> it also compares unused byte to another bytes which might result undefined behavior 
 Solution : Compare each off the fields of the structure one at a time
 --> Use the (.) to compare each attribute
+![[Pasted image 20250304215322.png]]
+### Structure as Value Parameter (pass like normal variable)
+### Structure as Return Value
+```C
+typedef struct { int id;
+float gpa;
+char class; 
+} Student; 
+
+void main() {
+
+ Student s1;
+ s1 = readS();
+ printS(s1); 
+} 
+
+Student readS() {
+	Student s; /* local */
+	printf(”Enter:\n"); 
+	printf(" ID#: ");
+	scanf("%d",&s.id);  // scanf so we have to use & to write to the address
+	printf(" GPA: "); 
+	scanf("%f",&s.gpa); 
+	printf(" Class: "); 
+	scanf(" %c",&s.class);
+	return s;
+} /* local as return val */
+```
+So the function readS now have the same attribute as the struct Student --> it has to return all of the attributes and then assign to s1 in the main function
+
+### Structure as Reference Parameter
+- We want to modify the original variable of type Student --> reduce copy and return 
+```C
+void main() {
+Student s1;
+readS(&s1); 
+printS(s1);
+}
+void readS(Student *s) { // s is a pointer to s1
+	printf(”Enter:\n"); 
+	printf(" ID#: "); 
+	scanf("%d",&((*s).id));  // or &(s->id)
+	printf(" GPA: "); 
+	scanf("%f",&((*s).gpa)); 
+	printf(" Class: "); 
+	scanf(" %c",&((*s).class));
+}
+```
+#### Other pointer selection 
+```C
+StrucPtr->Field /* equivalent to (*StrucPtr).Field */ 
+• StrucPtr must be a pointer to a structure
+• Field must be a name of a field of that type of structure
+```
 
