@@ -23,3 +23,34 @@ In C++, class is an abstract data type
 	`class Student
 	` Student a;
 
+### Overview of C++
+Non Object-Oriented Extension to C
++ Major improvement over C
+	+ Stream I/O : cout | cin
+	+ Declarations
+	+ Parameter passing by reference
+	+ Default argument values
+
+Mechanism to call a function
+It go through a flow then temporarily stop at certain points to start executing another function
+After it finish it return back to the point where it stopped before to continue the flow
+
+
+
+
+
+
+#### Declarations:
+Difference C | C++ 
+
+| C \| standard C compiler                                                                         | C++                                                                                       |
+| ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Variables have to be declared at the beginning of the code block \| at the start of the function | Can be declared any place in the function \| main, no need to declare it at the beginning |
+```C
+void test(){
+	int x,y;
+	y = g(x); // a random function
+	for(i = 0; i < 10; i++){ // might be error since i hasnt been declared
+	}
+}
+```
