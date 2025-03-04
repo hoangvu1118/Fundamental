@@ -170,6 +170,15 @@ float *P = (float *) &V; /* Casts int address to float * */
 Removes warning, but is still a somewhat unsafe thing to do
 ```
 
+### 1D Arrays and Pointers
+```C
+int A[5];
+A is the address where the array starts | equivalent to &(A[0])
+```
+
+**`To determine the address of A[x]`**
+
+
 ### Dynamically Allocating 2D Arrays 
 - Cannot simply dynamically allocate 2D (or higher) array
 - Ideas - Allocate an array of pointers (  first dimension )
