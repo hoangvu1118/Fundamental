@@ -176,9 +176,52 @@ int A[5];
 A is the address where the array starts | equivalent to &(A[0])
 ```
 
-**`To determine the address of A[x]`**
+**`To determine the address of A[x]`** , use 2 following formulas
+``` Text
+Address of A + x * bytes to represent int
+Address of array + element num * bytes for element size
+```
+- The key behind these 2 formulas is 
+	1.  The first one might be used in a RAW pointer which will then <font color="#ff0000">calculated the offset by x </font>element (similar to Computer Architecture)   
+		- When multiply bytes --> multiply to its elements size 
+			- Ex: for int : 4 bytes | char : 1 bytes --> like array in CA 1 Word = 4 bytes
+			- This is manually computing the address
+			- int *new_addr = (int *)((char *)ptr + x * size);
+			- Base Address+(Offset×Size) 
+				- 0x1000 + (3×4) =0x100C
+			-  So, `new_addr` now points to address `0x100C`.
+			
+	2. The second one is used for REAL array 
+		- Calculating the address of an element by <font color="#ff0000">multiplying index by the element size</font>
+		- int *element_addr = arr + element_num;              or the one above
+		- `0x2000 + (2 * 4) = 0x2008`  
+		- So, `element_addr` points to `0x2008` 
 
+- However, C already accounted for size of the type --> we can simply do
+- **array + element_num // No need to multiply by size!**
 
++ The + operator when applied to a pointer value uses the formula above:
+```C
+A + x is equivalent to &(A[x]) 
+*(A + x) is equivalent to A[x]
+```
+
+##### Passing 1D Array as Parameter
+- 2 Ways of passing an Array
+```C
+ParamName[]
+or // Either way is gonna be trated as representing array
+*ParamName
+
+int totalArray(int *A, int N) { 
+	int total = 0;
+
+	for (I = 0; I < N; I++) 
+		total += A[I];
+return total;
+}
+```
+==**HOWEVER**, ==
 ### Dynamically Allocating 2D Arrays 
 - Cannot simply dynamically allocate 2D (or higher) array
 - Ideas - Allocate an array of pointers (  first dimension )
