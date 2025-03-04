@@ -213,3 +213,14 @@ typedef struct {
 	int id;
 } Student;
 ```
+
+
+### Structure Comparison
+- Should not use == or !=
+	- It may be due to slack bytes
+	- Some bytes might no be used ( padding )
+When we compare 2 structure variable --> it will compare byte by byte
+--> it also compares unused byte to another bytes which might result undefined behavior 
+Solution : Compare each off the fields of the structure one at a time
+--> Use the (.) to compare each attribute
+
