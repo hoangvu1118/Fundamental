@@ -9,4 +9,17 @@
 Slight difference between Structure programming language(C) and C++:
 + A class in C++ can contain methods(function) which are capable of manipulating data which are also defined in the same class
 + Inheritance: reuse data, methods, properties from other class 
-+ Polymorphism: 
++ Polymorphism: Multi form/views for one object
+	+ Allow objects of different classes to be treated as one common base class
+		+ 2 Types 
+			+ Compile time Polymorphism:
+				+ Function Overloading
+				+ Operator Overloading
+				+ Templates....
+			+ Run-time polymorphism
+
+Abstract data type : similar to struct
+In C++, class is an abstract data type
+	`class Student
+	` Student a;
+
