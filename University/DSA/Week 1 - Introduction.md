@@ -602,7 +602,8 @@ We would like to keep the values for each entry in the table together as one uni
 include <stdio.h>
 #define MAXSTUDENT 100
 
-typedef struct { int id;
+typedef struct { 
+	int id;
 	float gpa; 
 	char class;
 	char name[20]; 
