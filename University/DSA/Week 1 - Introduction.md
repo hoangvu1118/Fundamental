@@ -105,7 +105,8 @@ float *findMax(float A[], int N) {
 	float *theMax = &(A[0]); 
 	for (I = 1; I < N; I++) 
 		if (A[I] > *theMax) theMax = &(A[I]); 
-	return theMax; } 
+	return theMax; 
+} 
 void main() { 
 	float A[5] = {0.0, 3.0, 1.5, 2.0, 4.1}; 
 	float *maxA; // THIS is a pointer
@@ -186,7 +187,7 @@ Address of array + element num * bytes for element size
 		- When multiply bytes --> multiply to its elements size 
 			- Ex: for int : 4 bytes | char : 1 bytes --> like array in CA 1 Word = 4 bytes
 			- This is manually computing the address
-			- int * new_addr = (int *)((char *)ptr + x * size);
+			- `int *new_addr = (int *)((char *)ptr + x * size);`
 			- Base Address+(Offset×Size) 
 				- 0x1000 + (3×4) =0x100C
 			-  So, `new_addr` now points to address `0x100C`.
@@ -204,7 +205,8 @@ arr = (int *)((char *)arr + offset * size); // ❌ ERROR!
 ```
 
 ```C
-int arr[5] = {10, 20, 30, 40, 50}; int *ptr = arr; // ✅ Now ptr is a real pointer // Now we can apply the first method: 
+int arr[5] = {10, 20, 30, 40, 50}; 
+int *ptr = arr; // ✅ Now ptr is a real pointer // Now we can apply the first method: 
 int offset = 2; 
 int size = sizeof(int); 
 int *manual_addr = (int *)((char *)ptr + offset * size);
@@ -263,7 +265,8 @@ while calloc is initialized with all 0
 | implies structured storage (usually multiple elements of the same type).                                                                                                                                                          | raw allocated space                                                                                                                                                                                          |
 | [ 0 ][ 0 ][ 0 ][ 0 ][ 0 ][ 0 ][ 0 ][ 0 ][ 0 ][ 0 ]                                                                                                                                                                                | [------------------------------------]                                                                                                                                                                       |
 | Need an array or a block of memory that **must start with zero values.**                                                                                                                                                          | Intend to **immediately overwrite** it with your own data.                                                                                                                                                   |
-| SAFER                                                                                                                                                                                                                             | FASTER                                                                                                                                                                                                       |
+| SAFER                                                         TradeOff                                                                                                                                                            | FASTER                                                                                                                                                                                                       |
+| Safe to use `arr[i]` directly                                                                                                                                                                                                     | Still safe, but uninitialized                                                                                                                                                                                |
 #### CALLOC
 #calloc #memory #allocation
 ```C
@@ -284,6 +287,12 @@ for (I = 0; I < N; I++) {
 	printf(“Please enter number %d: “,I+1); 
 	scanf(“%f”,&(nums[I]));
 }
+
+// Access as an array 
+int *arr = (int *)calloc(n, sizeof(int)); // Allocates memory for 5 integers
+for (int i = 0; i < n; i++) {
+	arr[i] = i * 10; 
+	// Safe because calloc() allocated space for n elements
 ```
 
 #### Free 
@@ -308,6 +317,19 @@ void * malloc(size_t esize) // a big chunk of memory
 NULL returned if not enough memory available
 
 malloc(N * sizeof(float)) === calloc(N,sizeof(float))
+```
+```C
+if (arr == NULL) { 
+	printf("Memory allocation failed!\n"); // check 
+	return 1; 
+} // Unsafe if we assume it's zeroed like calloc() 
+for (int i = 0; i < n; i++) { 
+	printf("Before assignment: arr[%d] = %d\n", i, arr[i]); 
+	// Uninitialized garbage value 
+	arr[i] = i * 10; 
+}
+⚠ *Memory is uninitialized, leading to garbage values.*
+⚠ *You still access it like an array, but you must initialize values yourself.*
 ```
 
 #### Increasing Memory Size with realloc
@@ -364,11 +386,10 @@ int I;
 
 A = (float **) calloc(5, sizeof(float *));
 for (I = 0; I < 5; I++) {
-	A[I] = (float **)
-	calloc(I+1, sizeof(float));
+	A[I] = (float *)calloc(I+1, sizeof(float));
 }
 ```
-C++ is more strict about type checking than C. In C++, you _must_ cast the return value of `malloc()` or `calloc()` to the desired pointer type. Without the cast, a C++ compiler will generate an error.
+C++ is more strict about type checking than C. In C++, you _must_ cast the return value of `malloc()` or `calloc()` to the desired pointer type. Without the cast, a C++ compiler will ==generate an error.==
 # 2. Structure in C
 - A data type in a programming language is a set of data with predefined values. 
 - Examples of data types are: integer, float, string,…
@@ -472,7 +493,8 @@ Solution : Compare each off the fields of the structure one at a time
 ### Structure as Value Parameter (pass like normal variable)
 ### Structure as Return Value
 ```C
-typedef struct { int id;
+typedef struct { 
+int id;
 float gpa;
 char class; 
 } Student; 
@@ -538,7 +560,7 @@ void readS(Student *s){
 ```
 Slight difference in ARRAY and Pointer
 - Array as pointer in C
-	- When use name without index - s->name - it decays ( implicitly convert) to a pointer points to first element ==> name === &name[0]
+	- When use name without index - =="s->name"== - it decays ( implicitly convert) to a pointer points to first element --> name === &name[0]
 	- Since name is a pointer so no & is needed to get the address
 - But in score, we getting each element, which is integer, score[i] 
 	- Providing the & give the address of the location in array that need to be stored
