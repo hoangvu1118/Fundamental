@@ -126,7 +126,7 @@ Notion: **Empty string** is $\lambda$ or (lamn-dah)
 	 --> $\sum^+$ = {0, 1, 2, 01, .....}
 
 Sigma (+) & ( * ) : always **INFINITE** since there is no LIMIT on length of the string
-However 
+However, when being used in computer --> it becomes finite.
 ## Language
 ##### Definition: 
 - A language **L** is defined generally as a SUBSET of $\sum^*$ 
