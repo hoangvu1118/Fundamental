@@ -34,6 +34,7 @@ Non Object-Oriented Extension to C
 Mechanism to call a function
 It go through a flow then temporarily stop at certain points to start executing another function
 After it finish it return back to the point where it stopped before to continue the flow
+![[Pasted image 20250306080641.png]]
 
 #### Declarations:
 Difference C | C++ 
@@ -69,14 +70,13 @@ cout << "Sum of integers from 1 to 10 is " << sum (1); }//ex6-defaultarg.cpp
 ```C++
 
 void diffConstant(){
-    //Constant pointer points to an INT
+    //Constant pointer       points to an INT
     int x = 18;
     int *const myPtr = &x; // This mean the address is constant --> only using this address to store
     //     the different value --> attempting to assign a new address
-
     //   ==> crashh
-    // EX CORRECT : *myPtr = 10;
-    //  INCORRECT : myPtr = &y; --> since this can not reassign to point another address
+    // EXample: CORRECT : *myPtr = 10;
+    //          INCORRECT : myPtr = &y; --> since this can not reassign to point another address
     
     ////////////////////////////////////////
 
