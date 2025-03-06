@@ -1,4 +1,4 @@
-### Application and examples of AI
+### Application and examples of AI!
 #### Learning objectives:
 - AI? 
 - Examples, applications
@@ -35,3 +35,5 @@ Application of AI
 	- Saves money and time
 	- Reduce the risk of human error
 Example: 
+- Finance Industry: Fraud detection
+- Health Care industry: AI-powered robotics
