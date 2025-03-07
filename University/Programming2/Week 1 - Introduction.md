@@ -173,3 +173,17 @@ delete [] array;
 	- To store an array of strings (e.g. our names) 
 	-  Efficient storage for graph
 ![[Pasted image 20250305235938.png]]
+
+### Marginal Notation between New(C++) vs Malloc/Calloc (C)
+
+| Feature                               | `new` (C++)                   | `malloc` (C)                           | `calloc` (C)                           |
+| ------------------------------------- | ----------------------------- | -------------------------------------- | -------------------------------------- |
+| **Type Safety**                       | Yes (returns typed pointer)   | No (returns `void*`, requires casting) | No (returns `void*`, requires casting) |
+| **Initialization**                    | Yes (default, value, or zero) | No (garbage values)                    | Yes (zero-initialized)                 |
+| **Failure Handling**                  | Throws `std::bad_alloc`       | Returns `NULL`                         | Returns `NULL`                         |
+|                                       |                               |                                        |                                        |
+| **Deallocation**                      | `delete` / `delete[]`         | `free()`                               | `free()`                               |
+| **Supports Constructors/Destructors** | Yes                           | No                                     | No                                     |
+New  :
+-  **Language:** C++ (not available in C)
+- **Returns:** A pointer of the specified type (no need for type casting)
