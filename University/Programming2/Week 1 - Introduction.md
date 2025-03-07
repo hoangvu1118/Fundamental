@@ -36,6 +36,27 @@ It go through a flow then temporarily stop at certain points to start executing 
 After it finish it return back to the point where it stopped before to continue the flow
 ![[Pasted image 20250306080641.png]]
 
+### Using "fstream"
+- Input/output stream class to operate on files.
+```C
+#include <iostream>
+#include <fstream>
+int fileSum(); 
+int fileSum() { 
+	std::ifstream infile("Ex2file");  // reading input from files
+	int value, n; 
+	int sum=0; //Read the number of integers 
+	infile>>n; //Read members 
+	int i=0; 
+	while (i>value){
+		infile>>value; // INPUT
+		sum=sum+value; 
+		i++;
+	} 
+	infile.close(); 
+	return sum; 
+	}
+```
 #### Declarations:
 Difference C | C++ 
 
@@ -65,6 +86,32 @@ void test(){
 main() { 
 cout << "Sum of integers from 1 to 10 is " << sum (1); }//ex6-defaultarg.cpp
 ```
+
+### Pass by reference
+```C
+#include <iostream>
+using namespace std; 
+int incrementByRef(int &); 
+void main() { 
+	int z = 9; 
+	cout << "z = " << z << " before incrementByRef\n"; 
+	incrementByRef(z); // DONOT have to include & TO PASS address like C
+	cout << "z = " << z << " after incrementByRef\n"; 
+}	
+int incrementByRef(int &a) { 
+	return a += 10; // caller's argument modified 
+}
+```
+
+SLIGHT DIFFERENCE IN C / C++
+
+| Feature       | C++ (Pass by reference)    | C ( pass by pointer)   |
+| ------------- | -------------------------- | ---------------------- |
+| Syntax        | \|`void func(int &x)`\|    | `void func(int *x)`\|  |
+| Dereferencing | No need                    | Required (*x)          |
+| Readability   | More readable              | explicit dereference   |
+| Safety        | Less risk of Null pointer  | Check for null pointer |
+| Flexibility   | CANNOT reassign references | Can reassign pointers  |
 
 ### Different type of pointer declaration
 ```C++
