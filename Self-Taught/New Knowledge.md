@@ -91,3 +91,7 @@ It's gonna push the day so that the order is follow the decreasing order
 75 71 69 and then 72 
 --> It then pop the top at 69 --> which give the result array become [1, 1 ,    ,    , 1,   ,   ,   ]
 The first 2 empty space is for 75 and 72 the other is still under calculation
+--> then pop 71 --> calculate the difference is 2 days --> [1, 1,   , 2, 1 ,   ,   ,]
+==> Continue to meet 76 which is larger than 72 --> pop 72 --> append 1 day to the array
+--> then pop 75 and append 4 days difference to the array --> [1,1,4,2,1,1, 0 ,0]
+
