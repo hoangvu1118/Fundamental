@@ -616,3 +616,34 @@ void main() {
 }
 ```
 ![[Pasted image 20250304230937.png]]
+
+## Pointer Arithmetic
+
+### Topic relating to 2D array
+#### Application of pointer to pointer
+ - It can be used to create a 2D array
+```C
+int (*printArr)[col] = array; // Similar to create an ARRAY of pointers to INT
+```
+- This is because an ARRAY is a pointer itself --> each element will be arrays that decays into pointers
+- This form a 2D array
+
+#### Accessing 2D array via pointer
+First method : using Array notation `arr[row][col`
+Second method : using arrow
+- Flow : pointer printArr is a pointer to "col" integer
+	- `printArr + i`: it will access the address of the element at `arr[i]` of col (j)
+	- `*(printArr+i)` : dereference this will give the address of col(j) which is the address of a pointer to integer mentioned above
+	- `*(printArr+i) + j` : give the address of the j-element in the i-th row
+	- `*(*(printArr+i)+j)` : give the value at the desired position
+
+```C
+ int (*printArr)[col] = array; // Similar to create an ARRAY of pointers to INT
+    for(int i = 0; i < row; i++){
+        printf("Element(s) at row [%d]: " , i+1);
+        for(int j = 0; j < col; j++){
+            printf("%d | ", *(*(printArr + i) + j));
+        }
+        printf("\n");
+    }
+```
