@@ -41,7 +41,7 @@ Number: "0/1" are labels
 
 For example : 
 - W1 = 10010110
-- S1 (-1->) S1 (-0->) S2 (-0->) S1 (-1->) S1 (-0->) S2 (-1->) S2 (-1->) S2 (-0->) S1
+- -->S1 (-1->) S1 (-0->) S2 (-0->) S1 (-1->) S1 (-0->) S2 (-1->) S2 (-1->) S2 (-0->) S1
 A ring surrounded by another ring
 	- Initial state : starts with 1 ring
 	- final state : multiple ring
