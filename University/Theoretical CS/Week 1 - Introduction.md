@@ -170,3 +170,8 @@ Summary:
 	- However, when apply on computer --> all infinite
 - Language is a subset of ALPHABET(sigma*)
 ```
+
+## Mathematical Preliminaries and Notation
+- Set with no elements --> empty set or the null set ==> $\phi$
+- S     
+- 
