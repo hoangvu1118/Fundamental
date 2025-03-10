@@ -350,3 +350,10 @@ EXAMPLE:
 ![[Pasted image 20250310114237.png]]
 ![[Pasted image 20250310115133.png]]
 HOMEWORK : create ID for C
+``` Text
+<id> -> <letter> <rest> | <underscore> <rest>
+<rest> -> <digit> <rest> | <letter> <rest> |λ,
+<letter> -> a....z | A....Z,
+<digit> -> 0.....9,
+<underscore> -> _,
+```
