@@ -284,11 +284,63 @@ Automaton has 4 components:
 - An automaton has a control unit
 - Can be in any one of a finite number of internal states
 - Can change state in some defined manner
---> Internal State
+--> **Internal State**
 For example: S1 --> S2 --> S3 with s1 and s3 can be either initial or final state
 --> S2 will be internal state --> not start or end
 This state will go with input/output
-Configurations: go with input/output and a state Si with i $\epsilon$ (0,n)
+==Configurations==: go with input/output and a state Si with i $\epsilon$ (0,n)
+- Is a particular state of the control unit, input file, and temporary storage.
 **OUTPUT**
 - The automaton can produce output of some form
-	- Example : one 
+	- Example : one variable or sentential form
+
+***CONCEPTS***
+- *Internal State* : IT is not current state --> read the above in [Control Unit]
+-  *Next Stage* : Following state of a control unit at the next time step
+- *Transition function* : Gives the ==Next state== in terms of "<font color="#f79646">*the current state, the current input symbol, information currently in the temporary storage</font>"* (top of the storage) - Last in First out
+	- Example: f(qi, xi, z) = {q1, q2, q3, ..}
+		- qi : current state
+		- xi : current input symbol
+		- z : value on top of the memory
+	- Automata will help to transmit data from qi to q1 | q2 | q3 (next state)with data from the current state
+ -  Move :  Is the transition of the automaton from one configuration to the next one
+
+### OPERATION
+- An automaton operates in a discrete timeframe
+- At any time, the control unit is in some internal state, and the input mechanism is scanning a particular symbol on the input file
+
+- The internal state of the control unit at the next time step is determined *by the next-state or transition function* --> if we cannot find the transition function 
+	- We say it go to death-end since it cant move anymore | find a death-end
+
+- During the transition from one time interval to the next, output maybe produced or the information in the temporary storage changed
+
+**Deterministic Automaton**
+- Each move is **uniquely determined** by the *current configuration*
+- If we know the internal state, the input, and the contents of the temporary storage, we can predict the future behavior of the automaton exactly
+Example: f(qi, xi, z) = {q1} --> it go directly to the q1 state
+
+**Nondeterministic Automaton**
+- At each point, a nondeterministic automaton may have several possible moves, so we can only predict a set of possible actions
+Example: f(qi, xi, z) = {q1, q2, q3,...) --> a set of possible states
+
+**Accepter** 
+- Is an automaton whose *output* response is limited to a simple "yes" or "no"
+- With an input string, an accepter either accepts the string("yes") or rejects it ("no")
+**Transducer**:
+- Producing strings of symbols as output
+- Computer is a typical transducer
+
+### Applications:
+- Grammar  : used to define the programming languages
+- Accepter: define some parts of the programming languages - valid or invalid
+- Build the lexical analyzer and the syntax analyzer for programming languages.
+
+EXAMPLE:
+![[Pasted image 20250310113839.png]]
+
+![[Pasted image 20250310114227.png]]
+3 is wrong --> should only 1 ring --> so that when the invalid syntax go into it --> return false. Otherwise, it true --> since 2 rings -> true
+::=  means -> (a rule)
+![[Pasted image 20250310114237.png]]
+![[Pasted image 20250310115133.png]]
+HOMEWORK : create ID for C
