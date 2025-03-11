@@ -174,7 +174,7 @@ delete [] array;
 	-  Efficient storage for graph
 ![[Pasted image 20250305235938.png]]
 
-### Marginal Notation between New(C++) vs Malloc/Calloc (C)
+### Marginal Difference between New(C++) vs Malloc/Calloc (C)
 
 | Feature                               | `new` (C++)                   | `malloc` (C)                           | `calloc` (C)                           |
 | ------------------------------------- | ----------------------------- | -------------------------------------- | -------------------------------------- |
