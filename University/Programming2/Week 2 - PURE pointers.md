@@ -24,3 +24,11 @@ p = (int*) v // cast is needed
 ```
 
 ### 2.1 Allocating Memory
+Fragmentation : Not actually an error
+- **External fragmentation:** Occurs when there's enough total free memory, but it's not contiguous.  --> it is not used effectively
+- **Internal fragmentation:** occurs when allocated memory is larger than the requested memory.
+- **Fragmentation errors:**
+    - Problems can arise during this process:
+        - Fragments can be lost or corrupted during transmission.  
+        - Reassembly can fail, resulting in lost or incomplete data.  
+        - Security risks can arise, as firewalls have difficulty filtering fragmented packets.
