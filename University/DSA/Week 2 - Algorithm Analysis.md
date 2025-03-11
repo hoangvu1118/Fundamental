@@ -98,7 +98,7 @@ Since T(N) will always smaller than 31N$^3$ (31 is constant) --> T(n) is O(f(n))
 **Three orthogonal axes**
 **Bound flavor**
 - Upper bound (O, o)
-- Lower bound($\ohm$, $\omega$)
+- Lower bound($\ohm$, $\omega$) can be ignore 
 - Asymptotically tight ($\theta$)
 **Analysis Case**
 - Worst case (adversary)
@@ -108,3 +108,62 @@ Since T(N) will always smaller than 31N$^3$ (31 is constant) --> T(n) is O(f(n))
 **Analysis quality**
 - Loose bound(most true analyses)
 - Tight bound (no better bound which is asymptotically different)
+
+## 3. Analyzing Code
+```C
+for(int i = 0; i < n; i++){ --> N times
+	for(int j = 0; j < n; j++) --> N times
+		sum = sum + 1;
+}
+```
+--> T(N) = N * N  = O(N$^2$)
+**Rule 1** : Single loops 
+- The running time of a loop 
+**Rule 2** : Nested loop 
+- Analyze from the inside out. Total running time is the product of the sizes of all the loops.
+*Condition* : 
+Worst-case running time: the test, *plus either the then part or the else part (whichever is the larger)*
+Conditional 
+	if C then S 1 else S 2 
+		T(n) <= time of C + MAX (S1, S2)
+		    <= time of C + S1 + S
+==Example==
+```C
+If (N == 0) return 0; 
+else { 
+	for (i=0; i< N; i++) sum++;
+}
+```
+> This case else take longer time
+
+*Consecutive statements*
+**Rule 3**: Add the time complexities of each statement
+If T1(N) = O(f(N)) and T2(N) = O(g(N))
+- T1(N) + T2(N) = max(O(f(N)), O(g(N)))
+- T1(N) * T2(N) = O(f(N) * g(N))
+Only take care about *dominant part
+
+#### Logarithms in running time
+```C
+for(int i  = 0; i < N )
+	i = i / 2
+```
+Flow : 
+i = N/2 -> 1
+i = N/4 -> 2
+.........
+i = 1 --> k steps     --> 2$^k$ = N --> k = $\log_{2}N$
+T(N) = O($\log n$)
+
+#### Recursion
+- Function calls its self
+- Some cases are very difficult to analyze
+Example :
+Normal case: O(n)
+Recursion: O(n)
+```C
+fac(n)
+	if n == 0; return 1
+	else return n* fac(n-1);
+```
+
