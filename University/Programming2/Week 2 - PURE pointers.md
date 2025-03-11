@@ -95,4 +95,71 @@ Requirements : Clear + Solution : Clear --> Top-Down
 **OOP Significant**
 - A thinking methodology
 	- Everything is an object
-	- Any syst
+	- Any system is composed of objects ( a system is itself an object) : education system
+	- The evolution and development of a system is caused by the interaction of objects
+
++ Objects have both data and methods 
++ Objects of the same class have the same data elements and methods
++ Objects send and receive messages to invoke actions
+
+**Key idea in object-oriented** : the real world can be accurately described as a collection of objects that interact.
+
+**Object-orientation support**
+- Induction: object -> a class
+	- Tools to do this automatically
+- Deduction: a class -> objects
+	- Usually done by programmers
+- Top-Down : from a super class to sub-classes
+- Bottom-up : from sub-class to super-class
+
+### Why OOP?
+It supports 
+- Easy representation of 
+	- Real-World objects
+	- Their states and Abilities
+- Save development time (and cost) by reusing code 
+	- Once an object class is created it can be used in other applications
+
+**FOUR main design principles of Object-Oriented Programming**
+- Abstraction
+- Encapsulation
+- Polymorphism
+- Inheritance
+
+**Abstraction**
+Implication details is hidden away --> fact about the problem at hand to design, produce and describe so that it can be easily used without knowing the details of how it works
+--> Drive a car -> don't have to know the gasoline and air are mixed and ignited
+
+**Abstract Data Types (ADT)**
+In ADTs, define the interface to data abstraction w/o specifying implementation details
+It includes the following properties
+- It exports a type
+- Exports a set of operations
+- Axioms and preconditions define the application domain of the type
+
++ Showing only essential features and hiding the unnecessary features
++ Access modifiers in C++ or any OOP language provides abstraction
++ Function also provide abstraction || We only care to know the input and output
++ If a variable is declared as private, then other classes cannot access it
+		or public --> it is contrast with the above
+
+**Encapsulation**
++ The process of bringing together data and method of an object is called as encapsulation
++ The data and method are given in the class definition
++ Classes provides us with this feature - Encapsulation
+**Inheritance**
++ Allows code reusability, which a new abstract data type can be inherit the data and functionality of some existing type and is also allowed to modify some of those entities
++ *Terminology*
+	+ Class : abstract data type in OOP
+	+ Object : a class instance
+	+ Derived class (subclass) : A class that is defined through inheritance from another class
+	+ Parent class(superclass) : A class from which a new class is derived
+	+ Methods: The subprograms that define the operations on objects of a class
+	+ Messages: 
+
+**Polymorphism**
+Poly : many
+Morph: form 
+--> Polymorphism --> coexist in more than one form
+Meaning: the ability to response differently to the same message or function/method call
+C++ supports **function overloading** and **operator overloading** to implement polymorphism
