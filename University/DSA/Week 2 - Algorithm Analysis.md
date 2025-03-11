@@ -58,7 +58,7 @@ Determine
 ## 2. Big-O  
 ### 2.1. Definition
 >Algorithm A requires time proportional to f(N) - it's said to be of order f(N) or O(f(N))
-> Ex: f(N) = N$^3$  | 3$^N$
+
 ```Text
 Def: An algorithm is said to take time proportional to O(f(N)) if there is some constant C such for all but a finite number of values of N, the time taken by the algorithm is less than C * f(N)
 ```
@@ -69,12 +69,25 @@ Def: An algorithm is said to take time proportional to O(f(N)) if there is some 
 	- This mean any value smaller than n0 will make the time btw T(N) and c* f(n) fluctuate
 	- at the point n0 forward: T(N) will always smaller or equal than c * f(n)
 	- n0 is required to be large enough to serve this purpose
+NOTE: c has to be large enough to absorb the less dominant variables (2n+5) 
+- Normally it is larger than the coefficient of the highest dominant variable (3 in 3n$^2$)
 
-**f(N) (Growth Rate Function):** `f(N)` expresses how the algorithm's resource consumption _changes_ as `N` grows. It's not the _exact_ time or memory used, but rather a simplified representation of how that usage _scales_.
-> f(n) tells you the shape of the time increase as n increases.
 
-For example : 50N$^2$ + 31N$^3$ + 24N +15 -> O(N$^3$)
-Since T(N) will always smaller than 31N$^3$ (31 is constant) --> T(n) is O(f(n)) --> T(n) = O(N$^3$)
+**T(n)** represents the **exact number of operations** (or runtime) of an algorithm as a function of the input size n.
+>Example: If an algorithm performs T(n)=3n$^2$+2n+5 operations, this is the **precise count of steps** it takes.
+
+**f(N)**:function that describes the **growth rate** of an algorithm’s runtime or resource usage.
+>Ex: If f(n)=n$^2$, this means the runtime grows quadratically with the input size n
+
+**O(f(N))** is a **set of functions** that grow no faster than f(n) (up to a constant factor).
+When we say T(n)=O(f(n)), we mean that T(n) (the actual runtime of the algorithm) is **bounded above** by some scaled version of f(n).  In other words, T(n) grows **asymptotically no faster** than f(n).
+> Ex: `f(n) = 3n² + 2n + 5`, then `O(f(n)) = O(n²)` (drop constants like `3` and lower-order terms like `2n` and `5`).
+	Big O tells you the "shape" of the growth, not the exact runtime.
+
+**SUMMARY**
+- **T(N)≤c⋅f(N)** means T(N) grows no faster than c⋅f(N) for large N.
+- **Big O** is about finding c and n0​ to "trap" T(N) under c⋅f(N).
+- The goal is to describe **growth rates**, not exact runtime.
 ### 2.2 Terminology
 - O(f(n)) --> f(n) : the growth-rate function of the algorithm
 	- f(n) : upper-bound on T(n)
