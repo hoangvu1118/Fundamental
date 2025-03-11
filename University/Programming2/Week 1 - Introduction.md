@@ -155,6 +155,7 @@ void diffConstant(){
 
 ### Some brand-new Operator
 - The **new** operator is used to allocate memory dynamically
+#new #pointer 
 ```C
 int *p; 
 p = new int; 

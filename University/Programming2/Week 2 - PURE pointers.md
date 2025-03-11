@@ -32,3 +32,67 @@ Fragmentation : Not actually an error
         - Fragments can be lost or corrupted during transmission.  
         - Reassembly can fail, resulting in lost or incomplete data.  
         - Security risks can arise, as firewalls have difficulty filtering fragmented packets.
+
+#### New operator
+#new #pointer 
+Initialize a pointer to point to an array 
+```Cpp
+int *p = new int[5];
+free(p)
+```
+Initialize a pointer to pointer -> each element point to an array
+```Cpp
+int** arr = new int*[5]; // Allocate an array of 5 int pointers
+
+for (int i = 0; i < 5; i++) {
+    arr[i] = new int[4]; // Allocate an array of 4 integers for each row
+}
+for (int i = 0; i < 5; i++) {
+    delete[] arr[i]; // Delete each row
+}
+delete[] arr; // Delete the array of pointers
+```
+
+
+# 2. Introduction to OOP
+## 2.1 Solving a programming Problem
+4 Pillars: Analysis --> Design  --> Coding --> Management 
+Tools: Programming paradigms --> programming language
+
+### 2.1.1 Thinking methodology 
+**Induction** 
+- From specialization to generalization
+- e.g, to create the (abstract) concept "Bus" from different bus
+
+**Deduction**
+- From generalization to specialization
+- From a class bus --> create school bus, .... any type of bus
+
+### 2.1.2 Concepts and <font color="#f79646">Relationships</font>
+- A rectangle <font color="#f79646">uses</font> lines
+- A Circle<font color="#f79646"> is an </font>ellipse
+- A wheel <font color="#f79646">is part of</font> automobile
+- A set <font color="#f79646">creates it</font>s elements
+
+**Approaches in Software Development** 
+- Top Down approach
+	- A single module will be split into several smaller modules
+	- General to Specific
+- Bottom Up approach
+	- Lot of small modules will be grouped to form a single large module
+	- Specific to General
+
+If the requirements *are clear at the first* instance we can go for <u>Top-Down approach</u>
+If circumstances where the *requirements may keep on adding*, we go for <u>Bottom-Up approach</u>
+
+Some combinations:
+Requirements : Clear + Solution : Clear --> Top-Down
+             Unclear                Unclear --> 
+             Clear                     Unclear --> Bottom-up | Top-down --> meet the team frequently
+
+**Structured Programming**
+- Using function 
+**OOP Significant**
+- A thinking methodology
+	- Everything is an object
+	- Any syst
