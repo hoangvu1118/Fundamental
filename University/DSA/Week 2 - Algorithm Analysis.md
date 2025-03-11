@@ -81,13 +81,25 @@ NOTE: c has to be large enough to absorb the less dominant variables (2n+5)
 
 **O(f(N))** is a **set of functions** that grow no faster than f(n) (up to a constant factor).
 When we say T(n)=O(f(n)), we mean that T(n) (the actual runtime of the algorithm) is **bounded above** by some scaled version of f(n).  In other words, T(n) grows **asymptotically no faster** than f(n).
-> Ex: `f(n) = 3n² + 2n + 5`, then `O(f(n)) = O(n²)` (drop constants like `3` and lower-order terms like `2n` and `5`).
+> Ex: `T(n) = 3n² + 2n + 5`, then `O(f(n)) = O(n²)` (drop constants like `3` and lower-order terms like `2n` and `5`).
 	Big O tells you the "shape" of the growth, not the exact runtime.
 
 **SUMMARY**
 - **T(N)≤c⋅f(N)** means T(N) grows no faster than c⋅f(N) for large N.
 - **Big O** is about finding c and n0​ to "trap" T(N) under c⋅f(N).
 - The goal is to describe **growth rates**, not exact runtime.
+
+#### SMALL O vs BIG O Notation
+- **Big O(f(n))**:
+    - T(n) grows **no faster** than f(n) (up to a constant factor).
+    - Example: T(n)=3n$^2$+2n+5 is O(n$^2$).
+
+- **Small  o(f(n))**:
+    - T(n) grows **strictly slower** than f(n).
+    - Example: T(n)=n is o(n$^2$), but T(n)=3n$^2$ is **not** o(n$^2$).
+To find small o --> find the limit and make sure it equals to 0:  $\lim_{ n \to \infty }$ $\frac{T(N)}{f(n)}$ = 0 
+--> Otherwise it is not small o =>  T(n)≠o(f(n))
+
 ### 2.2 Terminology
 - O(f(n)) --> f(n) : the growth-rate function of the algorithm
 	- f(n) : upper-bound on T(n)
