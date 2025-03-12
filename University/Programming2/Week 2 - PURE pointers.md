@@ -142,6 +142,7 @@ It includes the following properties
 + Function also provide abstraction || We only care to know the input and output
 + If a variable is declared as private, then other classes cannot access it
 		or public --> it is contrast with the above
+>Ex: Stack, Linked list -> constructed with class --> use w/o exposing how it is implemented
 
 **Encapsulation**
 + The process of bringing together data and method of an object is called as encapsulation
