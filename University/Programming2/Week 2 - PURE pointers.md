@@ -24,7 +24,7 @@ p = (int*) v // cast is needed
 ```
 
 ### 2.1 Allocating Memory
-Fragmentation : Not actually an error
+*Fragmentation* : Not actually an error
 - **External fragmentation:** Occurs when there's enough total free memory, but it's not contiguous.  --> it is not used effectively
 - **Internal fragmentation:** occurs when allocated memory is larger than the requested memory.
 - **Fragmentation errors:**
@@ -67,7 +67,7 @@ Tools: Programming paradigms --> programming language
 **Deduction**
 - From generalization to specialization
 - From a class bus --> create school bus, .... any type of bus
-
+- E.g., from the concept “Bus” we have learned, we deduce that a **vehicle is or is not a bus.**
 ### 2.1.2 Concepts and <font color="#f79646">Relationships</font>
 - A rectangle <font color="#f79646">uses</font> lines
 - A Circle<font color="#f79646"> is an </font>ellipse
@@ -87,20 +87,26 @@ If circumstances where the *requirements may keep on adding*, we go for <u>Botto
 
 Some combinations:
 Requirements : Clear + Solution : Clear --> Top-Down
-             Unclear                Unclear --> 
+             Unclear                Unclear --> Bottom-up
              Clear                     Unclear --> Bottom-up | Top-down --> meet the team frequently
 
 **Structured Programming**
 - Using function 
+- Function & program is divided into modules 
+-  Every module has its own *data and function* which can be called by other modules
+
 **OOP Significant**
 - A thinking methodology
 	- Everything is an object
 	- Any system is composed of objects ( a system is itself an object) : education system
 	- The evolution and development of a system is caused by the interaction of objects
+- Real World scenarios, software development, we need requirements
+	- However, requirements increases every time
+		- Bottom-up is an appropriate approach (OOP strategy)
 
-+ Objects have both data and methods 
-+ Objects of the same class have the same data elements and methods
-+ Objects send and receive messages to invoke actions
+>Objects have both data and methods 
+  Objects of the same class have the same data elements and methods
+  Objects send and receive messages to invoke actions
 
 **Key idea in object-oriented** : the real world can be accurately described as a collection of objects that interact.
 
@@ -117,6 +123,10 @@ It supports
 - Easy representation of 
 	- Real-World objects
 	- Their states and Abilities
+- Interaction with objects of same type 
+-  Relations with objects of other type 
+-  Polymorphism and Overloading
+
 - Save development time (and cost) by reusing code 
 	- Once an object class is created it can be used in other applications
 
@@ -127,7 +137,7 @@ It supports
 - Inheritance
 
 **Abstraction**
-Implication details is hidden away --> fact about the problem at hand to design, produce and describe so that it can be easily used without knowing the details of how it works
+Implication details is hidden away --> fact about the problem at hand to design, produce and describe so that it can **be easily used without knowing** the details of how it works
 --> Drive a car -> don't have to know the gasoline and air are mixed and ignited
 
 **Abstract Data Types (ADT)**
@@ -148,6 +158,11 @@ It includes the following properties
 + The process of bringing together data and method of an object is called as encapsulation
 + The data and method are given in the class definition
 + Classes provides us with this feature - Encapsulation
+
+➢Allows for modularity  ➢Controls access to data 
+➢Separates implementation from interface ➢Extends the built-in types
+
+![[Pasted image 20250312203719.png]]
 **Inheritance**
 + Allows code reusability, which a new abstract data type can be inherit the data and functionality of some existing type and is also allowed to modify some of those entities
 + *Terminology*
@@ -156,7 +171,9 @@ It includes the following properties
 	+ Derived class (subclass) : A class that is defined through inheritance from another class
 	+ Parent class(superclass) : A class from which a new class is derived
 	+ Methods: The subprograms that define the operations on objects of a class
-	+ Messages: 
+	+ Messages: the calls to methods. 
+		+ Messages have two parts--a method name and the destination object. 
+	+ Message Protocol (Message Interface): the entire collection of an object’s methods
 
 **Polymorphism**
 Poly : many
