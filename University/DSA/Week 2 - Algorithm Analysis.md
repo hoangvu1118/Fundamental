@@ -89,6 +89,20 @@ When we say T(n)=O(f(n)), we mean that T(n) (the actual runtime of the algorit
 - **Big O** is about finding c and n0​ to "trap" T(N) under c⋅f(N).
 - The goal is to describe **growth rates**, not exact runtime.
 
+>Example of finding T(N)
+```Cpp
+Sum = 0;  // (1) Initialization → 1 op
+for (i = 1; i <= N; i++) { // (2) i initialization → 1 op
+                        // (3) i <= N check → N + 1 ops (last fails)
+                        // (4) i++ → N ops
+    for (j = 0; j <= N * N; j++) { //(5) j initialization → N ops (once per i)
+                        // (6) j <= N * N check → N(N * N + 1) ops
+                        // (7) j++ → N * N * N ops
+        Sum++;  // (8) Increment Sum → N * N * N ops
+    }
+}
+```
+>Look at the draft for more example with illustration [Week 2 Draft]
 #### SMALL O vs BIG O Notation
 - **Big O(f(n))**:
     - T(n) grows **no faster** than f(n) (up to a constant factor).
