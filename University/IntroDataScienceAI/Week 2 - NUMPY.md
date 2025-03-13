@@ -51,3 +51,40 @@ The first axis has a length of 2 and
 the second axis has a length of 3.
 **
 ```
+- AXIS 0 is vertical
+- AXIS 1 is horizontal
+- This is for 2D array
+### EXPLANATION
+```Python
+import numpy as np
+# Create the array
+out = np.array([
+    [[1, 2, 3, 4],   # Layer 1
+     [5, 6, 7, 8],
+     [9, 10, 11, 12]],
+
+    [[10, 20, 30, 40],  # Layer 2
+     [50, 60, 70, 80],
+     [90, 100, 110, 120]]
+])
+print("Original shape:", out.shape)  # (2, 3, 4)
+
+# Sum along axis 0
+result = out.sum(axis=0)
+print("Result shape:", result.shape)  # (3, 4)
+print("Result:\n", result)
+
+```
+- `out[0]` (Layer 1) has shape **(3, 4)**.
+- `out[1]` (Layer 2) has shape **(3, 4)**.
+- When you sum along `axis=0`, the two layers get added element-wise:
+```
+[[ 11  22  33  44] 
+ [ 55  66  77  88]  
+ [ 99 110 121 132]] --> this is (3,4)
+ ```
+## Function NameNaN-safe Version  
+
+| np.sum              | np.nansum                                                                                                                   |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| May have some error | It will place "nan" if there is any error but not stop the program --> it ignore that bugs and add the sum of other numbers |
