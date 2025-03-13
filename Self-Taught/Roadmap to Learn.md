@@ -24,7 +24,7 @@ We can do it with easy problem but here is medium
 
 ![[Pasted image 20250311084430.png]]
 ![[Pasted image 20250311084438.png]]
-15 PATTERN should learn
+# 15 PATTERNS should learn
 Prefix Sum [1:25](https://www.youtube.com/watch?v=DjYZk8nrXVY&t=85s) 
 => Two Pointer [2:05](https://www.youtube.com/watch?v=DjYZk8nrXVY&t=125s) 
 => Sliding Window [2:54](https://www.youtube.com/watch?v=DjYZk8nrXVY&t=174s)
