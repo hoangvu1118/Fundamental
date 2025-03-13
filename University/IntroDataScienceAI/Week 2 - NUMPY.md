@@ -88,3 +88,5 @@ print("Result:\n", result)
 | np.sum              | np.nansum                                                                                                                   |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | May have some error | It will place "nan" if there is any error but not stop the program --> it ignore that bugs and add the sum of other numbers |
+
+## Slicing and Indexing
