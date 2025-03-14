@@ -288,8 +288,18 @@ Automaton has 4 components:
 For example: S1 --> S2 --> S3 with s1 and s3 can be either initial or final state
 --> S2 will be internal state --> not start or end
 This state will go with input/output
+
 ==Configurations==: go with input/output and a state Si with i $\in$(0,n)
-- Is a particular state of the control unit, input file, and temporary storage.
+- refers to a specific state of the automaton at a given point in time. It includes the *current state* of the *control unit*, the *input* being processed, and the *contents of any temporary storage.*
+```Text
+Suppose we have a simple finite automaton that reads binary strings and accepts those that end with "01". A configuration might look like this:
+
+- *Current State: q1​ (indicating the automaton is in state q1q1​)
+- *Input*: "101" (the input string being processed)
+- **Temporary Storage**: None (if the automaton doesn't use additional storage)
+
+As the automaton processes the input "101", it transitions through different states, and each combination of state and input position represents a configuration.
+```
 **OUTPUT**
 - The automaton can produce output of some form
 	- Example : one variable or sentential form
