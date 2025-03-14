@@ -126,11 +126,9 @@ To find small o --> find the limit and make sure it equals to 0:  $\lim_{ n \to 
 	- --> c1 * f(n) < T(n) < c2 * f(n)
 
 * T(n) = o(f(n)) :  growth rate of T(n) < that of f(n)
-	* Slower than the upper-bound but near there
 	* T(n) = O(f(n)) and T(n) != Θ(f(n))
 
 - T(n) = $\omega$(f(n)) : growth rate of T(n) > that of f(n)
-	- Faster than minimum rate a little bit
 	- T(n) = $\ohm$(f(n)) and T(n) != Θ(f(n))
 
 ### 2.3 Types of Analysis
