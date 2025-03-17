@@ -204,3 +204,39 @@ fac(n)
 	else return n* fac(n-1);
 ```
 
+Bad example for recursion : FIBONACCI
+```C
+#include <stdio.h>
+#include <time.h>
+int fib(int n){ // growth rate upper bound of approximately 1.666 golden ratio
+    if(n <= 1) return 1;
+    else
+        return fib(n-1) + fib(n-2);
+}
+
+int main(){
+    clock_t start = clock();
+    int n = 40;
+    int first = 0;
+    int second = 1;
+    int temp = 0;
+    for(int i = 2; i <= n; i++){ // n loop
+        temp = first + second;
+        first = second;
+        second = temp;
+    }
+    
+    printf("%d-th number in fibo sequence is : %d\n", n, second);
+
+    clock_t end = clock();
+    double time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("Time taken: %f seconds\n", time_taken); // 0.000000 seconds
+  
+    clock_t start1 = clock();
+    fib(n);
+    clock_t end1 = clock();
+    double time_taken1 = ((double)(end1 - start1)) / CLOCKS_PER_SEC;
+    printf("Time taken: %f seconds\n", time_taken1); //0.419000 seconds
+    return 0;
+}
+```
