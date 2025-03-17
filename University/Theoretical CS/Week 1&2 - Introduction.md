@@ -356,6 +356,7 @@ EXAMPLE:
 
 ![[Pasted image 20250310114227.png]]
 3 is wrong --> should only 1 ring --> so that when the invalid syntax go into it --> return false. Otherwise, it true --> since 2 rings -> true
+--> That is call trap state
 ::=  means -> (a rule)
 ![[Pasted image 20250310114237.png]]
 ![[Pasted image 20250310115133.png]]
