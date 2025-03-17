@@ -80,23 +80,40 @@ To determine if is valid DFA
 > w8 is REJECTED by F via a sequence of rules (1,1,1,1,4,5,3)
 > 1,1,1,1,4,5,3
 
+**Extended Transition function**
+$\delta$* : Q x $\sum$* --> Q
+- The 2nd argument of $\delta$* is *a string*, rather than a single symbol
+-  $\delta$* 's value gives the state the automaton will be in after reading that string
+> If $\delta$(q0, $\alpha$) = q1, $\delta$(q1, b) = q2
+> Then --> $\delta$* (q0, ab) = q2
+> --> $\delta$* (q0, 0001) = q1
 
+>$\delta$* is defined recursively by:
+>$\delta$* (q, $\lambda$) = q, --> assume that lambda is a string of multiple lambda
+>--> in some case we can remove that "asterisk(* )"
+>![[Pasted image 20250317111117.png]]
+-> w is a string of vb --> with b is the right most --> recursively split the string except the rightmost
+--> we end up with the result at the left most
 
+**Associated Language of DFA's**
+>[!Definition] Def 2.2:
+>The language L accepted by a dfa M = (Q, $\sum$, $\delta$, q0, F) is set of all strings on $\sum$ accepted by M
 
+>--> Formal Notation: L(M) : { w $\epsilon$ $\sum$* : $\delta$* (q0, w) $\epsilon$ F}
+>
+![[Pasted image 20250317111643.png]]
 
+**EXAMPLE**
+![[Pasted image 20250317111718.png]]
+The language L accepted by the automaton is *L(M) = {a$^n$ b : n $\ge$ 0}*
 
-> 
+**Trap state:** when the dfa goes into trap state from which it can never escape. 
+• E.g., q 2 is the trap state. 
+• Trap state can be the last state or not. (not final) --> reject
+• Can be defined for the trap state group which can be final or not.
 
-
-
-
-
-
-
-
-
-
-
+**TRANSITION TABLE**
+![[Pasted image 20250317112941.png]]
 
 
 
