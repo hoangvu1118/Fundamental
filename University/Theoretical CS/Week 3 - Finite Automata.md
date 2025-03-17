@@ -115,6 +115,11 @@ The language L accepted by the automaton is *L(M) = {a$^n$ b : n $\ge$ 0}*
 **TRANSITION TABLE**
 ![[Pasted image 20250317112941.png]]
 
+>[!warning]
+>Since it is DFA (deterministic finite automata) --> each outgoing edges have to be unique 
+>otherwise the rules will be violated 
+
+
 
 
 
