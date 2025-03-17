@@ -8,6 +8,7 @@ Provided the basic knowledge to build the programming languages, compiler
 >[!Definition] 
 >A dfa is defined by the quintuple
 ![[Pasted image 20250317094553.png]]
+is a finite-state machine that *accepts or rejects* strings of symbols, *transitioning to a unique next state based* on the current state and input symbol, making the computation path deterministic
 
 F is subset of Q and it contains final states
 Red: current state + input --> output the next state
@@ -16,4 +17,87 @@ For automata case, internal state can cover initial and final state
 **DFA Operation** ~ similar to input mechanism in automata (lecture 1)
 + At the ==initial time==, it is assumed to be in the initial state q0, with its input mechanism on the *leftmost symbol of the input string.* 
 + The input mechanism can move *only from left to right* of the input string and *reads exactly one symbol on each step*
-Since it is a Accepters --> a type of automa
++ During each move of the automaton, the input mechanism advances *one position to the right*, so each moves consumes one input symbol
+
+**MIGHT be in the Midterm**
+Since it is a Accepters --> a type of automata --> so its has same rules and grammar to automata in lecture 1
+> [!Warning]
+> When the end of the string is reached, the string is *accepted* if the automaton is in one of its final states. Otherwise, the string is *rejected*
+
+![[Pasted image 20250317095801.png]]
+
+**TRANSITION GRAPH** : To *visualize* and *represent* finite automata
+![[Pasted image 20250317095948.png]]
+> [!example] 
+> ![[Pasted image 20250317100043.png]]
+
+--> Basically we make a GRAPH by those transition function $\delta$ 
+To determine if is valid DFA
+--> Check if at each state --> does it have at least the length $\sum$ outgoing (from that state go out to other state) function from that state --> in the example --> length of $\sum$ is 2
+
+> [!example]
+> w1 = 100
+> $\delta$(q0, 1) = q1 (4)
+> $\delta$(q1, 0) = q0 (2)
+> $\delta$(q0,0) = q0 (1)
+> --> Rejected since q0 is not a subset of F
+> w1 = 100 is REJECTED by F via a sequence of rules (4,2,X)
+> 
+> w2 = 101
+> $\delta$(q0, 1) = q1 (4)
+> $\delta$(q1, 0) = q0 (2)
+> $\delta$(q0, 1) = q1 (4)
+> --> Accepted since q1 is a subset of F
+> w2 = 101 is ACCEPTED by F via a sequence of rules (4,2,4)
+> 
+> w3 = 0001
+> $\delta$(q0, 0) = q0 (1)
+> $\delta$(q0, 0) = q0 (1)
+> $\delta$(q0, 0) = q0 (1)
+> $\delta$(q0, 1) = q1 (4)
+> --> Accepted since q1 is a subset of F
+> w3 = 0001 is REJECTED by F via a sequence of rules (1,1,1,4)
+> 
+> w4 = 0111
+> $\delta$(q0, 0) = q0 (1)
+> $\delta$(q0, 1) = q1 (4)
+> $\delta$(q1, 1) = q2 (5)
+> $\delta$(q2, 1) = q1 (6)
+> --> Accepted since q1 is a subset of F
+> w4 = 0111 is ACCCEPTED  by F via a sequence of rules (1,4,5,6)
+> 
+> Since time is not enough --> I only write the final statement for the rest
+> w5 = 1100
+> w5 is REJECTED by F via a sequence of rules (4,5,3,X)
+>
+> w6 = 01001
+> w6 is ACCEPTED by F via a sequence of rules (1,4,2,1,4)
+> 
+> w7 = 11001
+> w7 is ACCEPTED by F via a sequence of rules (4,5,3,3,6)
+> 
+> w8 = 0000110
+> w8 is REJECTED by F via a sequence of rules (1,1,1,1,4,5,3)
+> 1,1,1,1,4,5,3
+
+
+
+
+
+
+> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
