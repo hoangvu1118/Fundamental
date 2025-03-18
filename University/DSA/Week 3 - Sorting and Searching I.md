@@ -92,4 +92,13 @@ Out-place sorting algorithm
 >- Divide an unsorted list into two sub-lists,
 >- Sort each sub-list recursively using merge sort and then merge
 
+RUN-TIME:
+T(n) = 2T(n/2) + n
+T(n/2) to do one recursive call to sort one half of the array
+the other to sort right side of array
+n is to combine both side
 
+T(N) = $\theta$(nlogn)
+![[Pasted image 20250318112757.png]]
+
+**Drawback** : We need extra memory O(n)
