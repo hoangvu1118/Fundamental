@@ -84,6 +84,9 @@ When we say T(n)=O(f(n)), we mean that T(n) (the actual runtime of the algorit
 > Ex: `T(n) = 3n² + 2n + 5`, then `O(f(n)) = O(n²)` (drop constants like `3` and lower-order terms like `2n` and `5`).
 	Big O tells you the "shape" of the growth, not the exact runtime.
 
+$\lim_{ n \to \infty }$ $\frac{T(n)}{f(n)}$ $\leq$ infinity
+
+
 **SUMMARY**
 - **T(N)≤c⋅f(N)** means T(N) grows no faster than c⋅f(N) for large N.
 - **Big O** is about finding c and n0​ to "trap" T(N) under c⋅f(N).
@@ -242,3 +245,5 @@ int main(){
 ```
 
 ## MASTER THEOREM - See in the yellow notebook
+
+## Maximum subsequence problem
