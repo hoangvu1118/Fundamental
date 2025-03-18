@@ -68,7 +68,8 @@ So, on average --> there would be roughly $\frac{n(n-1)}{2}$ / 2 pairs would for
 ### Complexity Analysis of Insertion Sort
 Worst-Case: O(n$^2$) Move to all element 
 Best-Case: O(n) Array has very few inversions or already increasing order
-Average-Case: O(?) --> Time complexity *depends on the number of inversion* in the array--> T(n) = O(n+d) = O(n+ $\frac{n(n-1)}{2}$) = O(n$^2$)
+Average-Case: O(?) --> Time complexity *depends on the number of inversion* in the array
+--> T(n) = O(n+d) = O(n+ $\frac{n(n-1)}{2}$) = O(n$^2$)
 ==Note==: If the number of inversions in an array is low, the time complexity is low
 
 ## Selection Sort
