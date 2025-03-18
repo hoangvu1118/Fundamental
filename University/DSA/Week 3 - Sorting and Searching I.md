@@ -53,4 +53,43 @@ Main idea:
 We can image it as a reverse bubble sort, since we have to loop backward to check if there is any smaller/larger number than the current/selected number
 
 
+## Number of inversions:
+There are $\frac{n(n-1)}{2}$ pairs of numbers in any set of n objects
+==> each pair contributes to 
++ Set of ordered pairs, or
++ set of inversions
+
+For a random ordering, we would expect roughly half of all pairs, or
+$\frac{1}{2}$ $C(2,n)$   = $\frac{n(n-1)}{4}$ = O(N$^2$) inversions
+**Any algorithm that sorts by exchanging adjacent element has O(n$^2$) on average** 
+So, on average --> there would be roughly $\frac{n(n-1)}{2}$ / 2 pairs would form inversions
+![[Pasted image 20250318103351.png]]
+
+### Complexity Analysis of Insertion Sort
+Worst-Case: O(n$^2$) Move to all element 
+Best-Case: O(n) Array has very few inversions or already increasing order
+Average-Case: O(?) --> Time complexity *depends on the number of inversion* in the array--> T(n) = O(n+d) = O(n+ $\frac{n(n-1)}{2}$) = O(n$^2$)
+==Note==: If the number of inversions in an array is low, the time complexity is low
+
+## Selection Sort
+Select the smallest value in the group and bring it to the top of the list. Continue this process until the entire list is selected
+34 8 61 51 21
+--> 8 34 61 51 21
+--> 8 21 34 61 51
+--> 8 21 34 61 51
+--> 8 21 34 51 61
+Worts-Case: O(n$^2$) 
+Best-case: O(n$^2$)
+Average-Case: O(n$^2$)
+**Worse than Insertion Sort**
+
+## Merge Sort
+Out-place sorting algorithm
+>[!Definition]
+>It is defined recursively 
+>If the list is of size 1, it is sorted --> we are done
+>Otherwise:
+>- Divide an unsorted list into two sub-lists,
+>- Sort each sub-list recursively using merge sort and then merge
+
 
