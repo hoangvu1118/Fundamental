@@ -3,6 +3,13 @@
 - Base computation for ML libraries: [scikit-learn](https://scikit-learn.org/stable/index.html)
 - Tensor computations → pytorch, tensorflow
 
+### Using list comprehension to create a dictionary to count frequency:
+```python
+s = "hello ho"
+frequence = {char : s.count(char) for char in sorted(s) if char != ' '}
+print(frequence) # {'e': 1, 'h': 2, 'l': 2, 'o': 2}
+```
+
 ### Why multidimensional Array:
 Images : 2D array --> Compute parallelly --> on the GPU
 Sound, time series data: 1D array
@@ -18,6 +25,7 @@ c = []
 for i in range(len(a)):
     c.append(a[i]*b[i]) # C = a * b
 ```
+
 **LIST vs Numpy**
 List can store dynamic types
 List = `[True, "2", 3.0, 4]`
