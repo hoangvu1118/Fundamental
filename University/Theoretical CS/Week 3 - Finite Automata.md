@@ -7,7 +7,8 @@ Provided the basic knowledge to build the programming languages, compiler
 ## 1. Deterministic Finite Accepters (DFA)
 >[!Definition] 
 >A dfa is defined by the quintuple
-![[Pasted image 20250317094553.png]]
+![[Pasted image 20250317094553.png | 400]]
+
 is a finite-state machine that *accepts or rejects* strings of symbols, *transitioning to a unique next state based* on the current state and input symbol, making the computation path deterministic
 
 F is subset of Q and it contains final states
@@ -29,7 +30,7 @@ Since it is a Accepters --> a type of automata --> so its has same rules and gra
 **TRANSITION GRAPH** : To *visualize* and *represent* finite automata
 ![[Pasted image 20250317095948.png]]
 > [!example] 
-> ![[Pasted image 20250317100043.png]]
+> ![[Pasted image 20250317100043.png ]]
 
 --> Basically we make a GRAPH by those transition function $\delta$ 
 To determine if is valid DFA

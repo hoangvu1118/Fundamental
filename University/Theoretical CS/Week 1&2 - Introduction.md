@@ -203,7 +203,7 @@ Ex: `<sentence> -> <noun phrase> <predicate>` "predicate " : verb --> 1
 *S* $\epsilon$ V : special symbol called *start variable*
 *P* : finite set of production ( means rules --> create a sentence)
 
-Terminal : cant not replace with any variable | values since it is a final value
+Terminal : cant not be replaced with any variable | values since it is a final value
 Terminal : constant
 Non-terminal : variable
 
