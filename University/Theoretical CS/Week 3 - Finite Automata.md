@@ -33,7 +33,7 @@ Since it is a Accepters --> a type of automata --> so its has same rules and gra
 > ![[Pasted image 20250317100043.png ]]
 
 --> Basically we make a GRAPH by those transition function $\delta$ 
-To determine if is valid DFA
+To determine if is valid DFAe
 --> Check if at each state --> does it have at least the length $\sum$ outgoing (from that state go out to other state) function from that state --> in the example --> length of $\sum$ is 2
 
 > [!example]
@@ -120,7 +120,11 @@ The language L accepted by the automaton is *L(M) = {a$^n$ b : n $\ge$ 0}*
 >Since it is DFA (deterministic finite automata) --> each outgoing edges have to be unique 
 >otherwise the rules will be violated 
 
-
+**Regular language**
+>[!Definition]
+>A language is called **regular** if and only if there exists some deterministic finite accepter (dfa) M such that L = L(M)
+>![[Pasted image 20250324093517.png | 400]]
+ 
 
 
 
