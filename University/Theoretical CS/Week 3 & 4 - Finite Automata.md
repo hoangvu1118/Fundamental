@@ -134,4 +134,31 @@ The language L accepted by the automaton is *L(M) = {a$^n$ b : n $\ge$ 0}*
 
 **The range of $\delta$ is in the power set 2$^Q$ so that its value is not a single element of Q but a ==subset== of Q**
 --> Subset is defined as the set of all possible states that can be reached by the transition
+![[Pasted image 20250324111017.png]]
 
+ **.$\lambda$ is allowed to be the second argument of $\delta$**
+ + This means that nfa can make a transition **without** consuming an input symbol
+ + Although we still assume that the input mechanism can **only** travel to the **right**, it is possible that it is ***stationary*** on some moves
+ ![[Pasted image 20250324111331.png]]
+ --> This is slight difference from the **TRAP** method 
+ --> This results in an empty set --> which can still be used (the machine stops and union/combine this result with other result)
+**NFA can be represented by a *transition graph*** 
+![[Pasted image 20250324111959.png | 450]]
+
+**Similarity**
+NFA and DFA are both defined by a quintuple M = **M = (Q,$\sum$, $\delta$ , q0, F)** (5 components)
+NFA and DFA move based on input symbols from the alphabet $\sum$ 
+They use transition diagram to display changes between states
+
+**Difference**
+
+| NFA                                                                                                                            | DFA                                                                                                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| + Each edge can have multiple similar label going out from one state \| for example q0 can have 2 paths with labels a          | + Each states have unique outgoing edges (a and b for example)                                                                                                                  |
+| + Each state can have multiple outgoing edges or can even have empty edge \| arrow (which mean at that state it is stationary) | + Each state have at most at and at least the number of edges similar to the number of component in the alphabet (for example $\sum$ ={a,b} so each edge have two path a and b) |
+| + A state in NFA can have a lambda path which signify the dead configuration                                                   | + DFA do not support this, each output have to have a label from the input symbols                                                                                              |
+| + It returns set of states 2$^Q$                                                                                               | + It returns one state                                                                                                                                                          |
+
+**Extended Transition Function**
+
+It is defined as **.$\delta$ * (qi, w)** 
