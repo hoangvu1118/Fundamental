@@ -120,6 +120,10 @@ The language L accepted by the automaton is *L(M) = {a$^n$ b : n $\ge$ 0}*
 >Since it is DFA (deterministic finite automata) --> each outgoing edges have to be unique 
 >otherwise the rules will be violated 
 
+**Exercises**
+![[Pasted image 20250324150120.png | 400]]
+d) at **q1** --> should be a **<font color="#ff0000">self-loop 'a' to have 2 outgoing edges</font>**
+![[Pasted image 20250324150142.png | 500]]
 **Regular language**
 >[!Definition]
 >A language is called **regular** if and only if there exists some deterministic finite accepter (dfa) M such that L = L(M)
