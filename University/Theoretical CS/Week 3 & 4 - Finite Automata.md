@@ -139,6 +139,7 @@ The language L accepted by the automaton is *L(M) = {a$^n$ b : n $\ge$ 0}*
  **.$\lambda$ is allowed to be the second argument of $\delta$**
  + This means that nfa can make a transition **without** consuming an input symbol
  + Although we still assume that the input mechanism can **only** travel to the **right**, it is possible that it is ***stationary*** on some moves
+ + --> $\delta$ (qi, $\lambda$)
  ![[Pasted image 20250324111331.png]]
  --> This is slight difference from the **TRAP** method 
  --> This results in an empty set --> which can still be used (the machine stops and union/combine this result with other result)
@@ -160,5 +161,23 @@ They use transition diagram to display changes between states
 | + It returns set of states 2$^Q$                                                                                               | + It returns one state                                                                                                                                                          |
 
 **Extended Transition Function**
+It might have a bit similar to the DFA
+However, here result is all of the possible output of the function not just 1 
 
-It is defined as **.$\delta$ * (qi, w)** 
+we can under stand $\delta$ * (q1, $\lambda$) as a combination of multiple transition function that starts from q1 
+and $\lambda$ = $\lambda$ * $\lambda$ * $\lambda$ * ..... * $\lambda$
+--> Each state has a $\lambda$ transition function that return to itself 
+
+It is defined as **.$\delta$ * (qi, w)** the extended transition function is defined so that δ*(qi ,w) contains q-j if and only if there is a **walk/path in the transition graph** from q-i to q-j labeled **w**. This holds for all q-i, q-j ∈ Q, and w ∈ Σ*.
+![[Pasted image 20250324141045.png | 550]]
+6/7 of the example are straight forward, we only have to read the next (second) argument in the extended transition function to find the next state 
+However, the **4th** example and also the **6th** example are slightly different from the rest
+- We can understand  ==δ*(q1 ,a)== as 
+	+ It starts from q1, however there is no **direct path with 'a'** to continue so it try the other possible path **until it can apply 'a'** for the input 
+		+ --> it read lambda and self-loop(q1) --> read lambda to q2 --> to q0 --> to q1
+		+ However, q1 is not included once again in the final input since it **only tells which states( not the complete path)** the transition function **went through**
+	+ 'a' can be written as ==$\lambda$ *$\lambda$ $\lambda$ 'a'$\lambda$ $\lambda$ $\lambda$==
+	+ So we have additional lambda upfront and behind
+
+**Conclude** : If there is a direct path --> use it otherwise, testing lambda as input until the symbol in the argument is available
+
