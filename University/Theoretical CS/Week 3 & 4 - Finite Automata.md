@@ -125,6 +125,13 @@ The language L accepted by the automaton is *L(M) = {a$^n$ b : n $\ge$ 0}*
 >A language is called **regular** if and only if there exists some deterministic finite accepter (dfa) M such that L = L(M)
 >![[Pasted image 20250324093517.png | 400]]
  
+## Nondeterministic Finite Accepters (NFA)
+>[!Def]
+>It is defined by the quintuple
+>**M = (Q, $\sum$, $\delta$, q0, F)**
+>
+>![[Pasted image 20250324105821.png]]
 
-
+**The range of $\delta$ is in the power set 2$^Q$ so that its value is not a single element of Q but a ==subset== of Q**
+--> Subset is defined as the set of all possible states that can be reached by the transition
 
