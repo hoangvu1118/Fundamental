@@ -64,4 +64,42 @@ In worst case, it might be O(n)
 ### 1.3.1 Cutoff
 Quicksort and Mergesort perform well for **Large Inputs** but not for small inputs
 --> Solution
-When the divisions beco
+When the divisions become small, we can use **insertion sort**  to sort the small division instead. 
+For example, 5 $\leq$ cutoff $\leq$ 20
+
+## 2. BinSort (a.k.a BucketSort)
+Special Case Sorting: Present **linear time** sorting algorithm 
+These apply *only* when the input has **Special Constraints** 
+- Inputs are INT and we already know the *min and max* of each element
+
+**Requires**:
++ Having an array with N elements
++ Each element is in {1,...., K}
+**Mechanism**:
++ Putting items into correct bin(cell) of array, based on key
+
+![[Pasted image 20250325111524.png | 300]]
+
+
+## 3 Searching
+Two things that affect search algorithm selection:
++ Whether the array is **sorted**
++ Whether all the elements in the array are *unique* or have *duplicate* values
+### 3.1 Linear Searching - unsorted list
+#search 
+Simplest way to find an element in an array 
+- Check if it **matches** the sought after value
+
+**Time complexity**
+Worst-Case: O(n) the entire array must be **linearly searched**. This occurs when the value is in the *last position* or not found
+Best Case: O(1) --> the element located in the first element
+Average Case: O(n)  --> C(2,n) / n
+
+### 3.2 Binary Searching - sorted list
+#binarySearch 
+Begin at the **middle** of the array
++ If the value is less than the middle -> check the middle item between the first item and the middle
++ If it is more than the middle item -> check the middle item between the middle and the last section
+Stop when the value is found or when the remaining array of elements to search consists of one value 
+**Time complexity** O(logn)
+
