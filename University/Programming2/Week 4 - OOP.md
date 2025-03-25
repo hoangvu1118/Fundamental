@@ -82,3 +82,30 @@ print(result)  # Output: 12
 print(increment())  # Output: 2
 
 ```
+
+**There is no encapsulation**
++ Programmer could directly manipulate the data, possibly putting the data in a compromised state
+
+## 2. What are objects?
+Booch:
++ Something that 'has state, behavior, and identity'
+Martin/Odell:
++ Anything, real or abstract, about which we store data and those methods(operations) that manipulate the data
+>[!Definition] Peter Müller
+>An **object** is an instance of a class. It can be uniquely identified by its *name* and it defines a *state* which is represented by the values of its attributes at a particular time
+
+
+### 2.1 Message 
+Message is a request to an object to invoke one of its methods
+A message therefore contains:
++ Name of the method
++ Arguments of the method
+### Interface
++ The operation "name" list open to other objects (other objects can send messages)
++ An object has a function but does not show it to the public, this is useless for the public (private function)
++ In C++, only public functions(belong to the interface) **can be called** by other objects (outsiders) 
+
+## Class
+- "Class - a definition of **an implementation** (methods and data structures) shared by a group objects"
+- --> from this the compiler then allocate memory for the data inside the class
+"Class" - a **template** from which objects may be created. It contains a definition of the state descriptors and methods for the objects
