@@ -103,3 +103,5 @@ Begin at the **middle** of the array
 Stop when the value is found or when the remaining array of elements to search consists of one value 
 **Time complexity** O(logn)
 
+
+
