@@ -115,3 +115,4 @@ A message therefore contains:
 + Classes can be created run-time by explicitly sending a message to a special meta-class
 + Not all OOP languages support meta-class
 --> Define a class inside another class
+**It is not inheritance**
