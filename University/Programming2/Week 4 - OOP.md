@@ -109,3 +109,9 @@ A message therefore contains:
 - "Class - a definition of **an implementation** (methods and data structures) shared by a group objects"
 - --> from this the compiler then allocate memory for the data inside the class
 "Class" - a **template** from which objects may be created. It contains a definition of the state descriptors and methods for the objects
+
+### Meta-class : Class of class
++ Explicit support of meta-classes means that objects, classes and meta-classes are treated uniformly 
++ Classes can be created run-time by explicitly sending a message to a special meta-class
++ Not all OOP languages support meta-class
+--> Define a class inside another class
