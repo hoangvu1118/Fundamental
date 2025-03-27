@@ -25,7 +25,6 @@ c = []
 for i in range(len(a)):
     c.append(a[i]*b[i]) # C = a * b
 ```
-
 **LIST vs Numpy**
 List can store dynamic types
 List = `[True, "2", 3.0, 4]`

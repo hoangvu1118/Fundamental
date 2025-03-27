@@ -118,6 +118,64 @@ Microcontrollers **don't** run the traditional OS
 	+ Communicate securely over the internet
 + GUI : Components for screens
 
+**ARDUINO Microcontroller framework**
++ Arduino is an open source electronics platform combining hardware & software
++ Core setup: 
+	+ When board powers up
+		+ Run setup() once
+		+ Run loop() *continuously* till power off
+
+**Architecture: Event Loop**
+*setup* : is for one-time initialization code
+	--> connected to wifi, cloud services etc.
+*loop*: is for processing code- add delay to save power (sleep/ wake cycle)
+	--> sensor read | send /receive messages
+
+>[!Note] Code can be recompiled for new compliant hardware with minimal effort
+
 WiO terminal ? 
---> USE Single-board computer over a mirco controller
-FGPA ? 
+--> USE Single-board computer over a mircocontroller
+
+###### Single Board Computers
+Example : Raspberry Pi
++ 3 Variants:
+	+ Full version:
+		+ *Complete single-board computers* (SBCs) with built-in ports (HDMI, USB, Ethernet, etc.) and are often used for prototyping, education, or even as desktop replacements.
+	+ Pi "zero":
+		+ *ultra-compact and low-cost* boards designed for projects where space and power are critical.
+	+ Compute module that can be built into your IOT device:
+		+ a variation designed for *industrial and commercial products* where you want the computing power of a Raspberry Pi but in a more **integrated, customizable form factor.**
+	
+**PROGRAMMING the SBC** (single board computer)
++ There is a WIDE RANGE of programming languages, tools and frameworks
+	+ Since they run a FULL operating system 
++ Most common language for IOT Apps = PYTHON
+**USE CASE**:
++ SBCs are used for both DEV KITS & Professional deployments
+	+ Control hardware
+	+ Run complex tasks (machine learning models)
+###### COMPARISION
+
+|                   | Microcontroller                                   | Single-board computer                |
+| ----------------- | ------------------------------------------------- | ------------------------------------ |
+| Purpose           | Single                                            | General                              |
+| Processing power  | Low, MHz clock speed \| Often single or dual-core | Higher. GHz clock speeds. Multi-core |
+| RAM               | Low - KB                                          | More substantial. GB                 |
+| OS                | No OS or RTOS                                     | Full-fledged OS (LINUX)              |
+| Power consumption | Low, designed for battery operation               | Higher, require powers               |
+| Cost              | Low                                               | High                                 |
+| Complexity        | Simpler architecture. Runs dedicated firmware     | More complex. Like desktop computer  |
+| Heat              | Low                                               | High - require cooling               |
+
+###### Reason to use one over the other
+
+| Microcontroller         | Single-board computer                 |
+| ----------------------- | ------------------------------------- |
+| Lower Power consumption | Higher processing power & flexibility |
+| Lower Cost              | Operating system & software ecosystem |
+
+FGPA 
++ A **Field-Programmable Gate Array (FPGA)** is a special type of **hardware chip** that you can reconfigure **after manufacturing** to perform different tasks.
++ FPGA allows you to **design custom digital circuits** that run in parallel, making them extremely fast and flexible.
+Example: 
++ A CPU processes video frames one at a time, but an FPGA can process multiple pixels **simultaneously**, making it ideal for real-time image processing.
