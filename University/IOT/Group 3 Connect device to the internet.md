@@ -70,4 +70,76 @@ Ensure reliable, timely data transmission from IoT devices to the internet
 + Manages network congestion
 
 *QoS 0* : "At most once" (Fire and Forget)
-+ The message is dilive
++ The message is delivered *once* at most, without any acknowledgement 
++ If message lost due to network issues -> will not be resent
++ **Fast** but least reliable
++ UseCase: Occasional message loss is acceptable, (sensor data that updates frequently)
+
+*QoS 1*: "At least once" (Acknowledge Delivery)
++ It is guaranteed to deliver at *least once*, -> duplicate may occur
++ Sender stores message until it gets a *PUBACK* or acknowledgement from receiver 
++ If no PUBACK --> resends the message
++ Slower than QoS 0 but more reliable 
++ UseCase: Message loss is not acceptable, but duplicates can be handled, (sending alerts or notifications)
+
+*QoS 2* : "Exactly once" (Guaranteed Delivery)
++ Message is delivered *exactly once*, ensuring no duplicates
++ *4-Step handshake* Publish -> Pubrec -> Pubrel -> Pubcomp
++ More network overhead and latency due to additional acknowledgments
++ UseCase: critical transaction where **duplicate** not acceptable (billing | financial transactions)
+
+>[!Warning] 
+>MQTT does not "Queue up" messages for subscribed clients
+>--> loses new messages if disconnected
+
+**Solutions:** 
++ Keep alive function : checks if connection btw MQTT client and the broker is alive 
+	+ If client do not send any messages within a specified time interval 
+	+ It must sent a packet (PINGREQ) to tell "I am still here"
+	+ Otherwise, wait for 1.5 times --> disconnect 
++ Retained flag: set it to ensure last message on topic is saved for late subscribers 
+	+ Normally, a client receive *new messages* when subscribing to a topic. 
+	+ However it a retained message exists for that topic 
+	+ --> new subscriber will instantly receive the last retained message
+>[!Warning]
+>Broker can store only **1 retained message PER topic**
+>So it overrides the previous one if there's a new retained message
+
+**Telemetry** : A Greek word : to measure remotely 
+It is the act of gathering data from sensors and sending it to the cloud for processing
+
+Flow example:
+1. Internet connected thermostat device
+2. Sensor telemetry published to cloud
+3. Cloud analyzes room telemetry, context to request action(on,off)
+4. Action published to IOT device for actuators
+
+**Send telemetry from IoT Devices**
+1. Send light level telemetry to /telemetry topic on MQTT
+2. Data sent encoded as Json (key/value pairs)
+
+**Receive Telemetry from MQTT Broker**
+1. "Sever" code that subscribes to telemetry, analyzes context, send decisions(commands) back to IoT devices
+2. Sever typically runs in cloud - for now, run in local server
+
+### How often should telemetry be sent?
+Higher frequency has better responses to change **but** use more resources and power
+*It still depends* (thermostat should send every 10 minutes)
++ If mission critical --> more frequent
+
+### Loss of connectivity
+1. Lose Data
+2. Store data | Till it is reconnected
+
+MQTT don't store automatically --> so write client/server code..
+Depends on the data which is mandatory to store
+Ex :
++ Thermostat --> no need
++ Machinery : data can be used for profiling and predictive maintenance --> store it
+
+### Handle commands on IoT Devices
+**IoT devices must**
++ Subscribe to relevant topic
++ Listen for messages on topic
++ Handle messages - Taking appropriate action to controlled
+
