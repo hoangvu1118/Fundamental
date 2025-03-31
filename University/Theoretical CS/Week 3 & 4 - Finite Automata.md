@@ -182,6 +182,27 @@ However, the **4th** example and also the **6th** example are slightly different
 		+ However, q1 is not included once again in the final input since it **only tells which states( not the complete path)** the transition function **went through**
 	+ 'a' can be written as ==$\lambda$ *$\lambda$ $\lambda$ 'a'$\lambda$ $\lambda$ $\lambda$==
 	+ So we have additional lambda upfront and behind
+>[!Warning]  Fixing slide 
+>$\delta$ * (q1, a) = {q2, q0, q1}
 
 **Conclude** : If there is a direct path --> use it otherwise, testing lambda as input until the symbol in the argument is available
+![[Pasted image 20250331094246.png | 400]] ![[Pasted image 20250331094540.png | 350]]
+
+![[Pasted image 20250331095813.png|450]]
+>[!Warning] Different between case 1 and 2
+>The basis (base case) 
+>+ For case 1 -> only 1 element
+>+ Case 2 -> {  } set of qi , i = 1,2,3,....
+
+
+![[Pasted image 20250331100818.png]]
+
+
+
+
+
+
+
+
+
 
