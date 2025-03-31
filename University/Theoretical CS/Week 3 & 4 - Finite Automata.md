@@ -200,11 +200,20 @@ However, the **4th** example and also the **6th** example are slightly different
 ![[Pasted image 20250331101600.png]]
 Use table for faster computation 
 
+**DEFINITION**
+![[Pasted image 20250331113420.png]]
 
+In words, the language consists of all strings w for which there is a walk labeled w from the initial vertex of the transition graph to some final vertex.
 
+>[!Note]
+>To know if the language is accepted
+>We take **the union** of the result we calculate with the set of final terms --> if it is empty --> wrong
+>-> non-empty is CORRECT
 
+ ![[Pasted image 20250331094540.png | 350]]
 
+So the final set is {q2} and the result set is {q0, q2} --> *Union* --> Q2 $\neq$ empty
 
-
-
+![[Pasted image 20250331113859.png | 500]]
+![[Pasted image 20250331113912.png | 350]]
 
