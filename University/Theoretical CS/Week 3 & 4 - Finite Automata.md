@@ -197,6 +197,8 @@ However, the **4th** example and also the **6th** example are slightly different
 
 ![[Pasted image 20250331100818.png]]
 
+![[Pasted image 20250331101600.png]]
+Use table for faster computation 
 
 
 
