@@ -43,3 +43,5 @@ Clustering : grouping the elements into sets
 	+  pair<input, target>
 + Testing on unseen dataset --> generalization ability
 ![[Pasted image 20250403103748.png | 300]]
+
+Relearn gradient descend 
