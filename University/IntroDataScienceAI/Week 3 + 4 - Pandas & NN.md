@@ -29,3 +29,17 @@ Clustering : grouping the elements into sets
 - Input/ features
 - Output/ targets (labels)
 *Unsupervised learning* (data w/o labels)
+
+### Measure performance
++ Training and test data
++ Underfit/ Overfit
+## Pattern Classification
+- Which category of an input?
+	- Example: Character recognition for input images
+![[Pasted image 20250403103203.png | 400]]
+
+### Supervised learning
++ Learn by a training dataset
+	+  pair<input, target>
++ Testing on unseen dataset --> generalization ability
+![[Pasted image 20250403103748.png | 300]]
