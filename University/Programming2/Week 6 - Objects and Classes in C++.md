@@ -95,5 +95,25 @@ class B {
 ## Inline - Outline functions
 *In-line* : functions are defined within the body of the class definition
 *Out-of-line* : functions are *declared* within the body of the class definition and *defined* outside --> similar to *Friend class example*
-*inline* keyword: define an 
+
+*inline* keyword: define an inline function outside the class definition
 ![[Pasted image 20250404100021.png | 400]]
+
+## Constant Member Function
+Guarantees that the state of the current class object is not modified by the function
+![[Pasted image 20250404101534.png | 200]]
+So the getX() will not allowed to change value of x
+
+## Constructors - it is a method
++ Called to create and object
++ Declared with the name : classname(...);
++ **Default constructors**: no parameters
++ **Alternate constructors**: with parameters
++ **Overloading Constructors** :with different parameters
+Point() and Point(int, int) are *overloaded constructors*
++ **Copy constructor** : is a constructor which creates an object by initializing it with an object of the same class, which has been created previously
+	+ If a copy constructor is not defined in a class, the compiler itself defines one
+![[Pasted image 20250404102258.png | 300]] 
+`[3]` : default constructor -> define 3 arrays 
+--> allocate elements for 3 objects (`m[0], m[1], m[2]`)
+for creating each of elements -> *default constructor*
