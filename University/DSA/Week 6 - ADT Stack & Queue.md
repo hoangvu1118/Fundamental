@@ -41,8 +41,41 @@ Array vs Linkedlist -> We chose Array
 	+ Delete/Access/Add at `A[array lenght  + 1]`
 ![[Pasted image 20250408100721.png | 100]]
 
-LINKLED LIST IMPLEMENTATION
+LINKLED LIST IMPLEMENTATION of stack
 No need to know the maximum size
 add/ access/ delete in the beginning, O(1)
 ![[Pasted image 20250408100828.png | 300]]
 ![[Pasted image 20250408101129.png | 400]]
+
+## STACK APPLICATION in coding
+### Function Calls 
+Put parameters in stack 
+
+### Decimal to Binary Conversion
+### Mathematical Expression
++ Symbol Matching
++ Evaluation of Postfix Expression 
+	+ ![[Pasted image 20250408041043.png | 300]]
+	+ Similar to one of the leetcode problem
++ Infix to Postfix Conversion
+## Queues ADT
+It is also a list,  an element is inserted at the end, but deleted from the beginning 
+FIFO : First in First OUT
+![[Pasted image 20250408041358.png | 350]]
+### Basic Operations of Queue
++ Queue CreateQueue()
++ int isEmpty(Queue Q)
++ ElementType Dequeue(Queue Head) : delete element at head of a queue
++ void Enqueue(Queue Tail, Elementtype X) : Add an element X at tail of a Queue
+### Linked List Implementation
+Insert at the end of the linked list 
+	Maintain a pointer to the last element.
+	Whenever there is insertion, update this ``last`` pointer to point to the newly inserted element. 
+Delete from the beginning of the list 
+Both insertion and deletion are O(1)
+
+**We need 2 pointers** : Actually we dont need -> but it requires more time to traverse to the end -> to add new value
+## Deque ADT
+![[Pasted image 20250408043036.png | 350]]
+
+

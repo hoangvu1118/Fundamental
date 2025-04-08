@@ -16,7 +16,8 @@ so name is an array -> system allocate name "-->"  "n" "a" "m" "e"
 --> change the pointer from p to name
 
 *Deep copy* `char * q = new char[20]`
-strcpy() : copy the how array from name into q --> so it just create a new string 
+#Deepcopy 
+**strcpy()** : copy the how array from name into q --> so it just create a new string 
 --> any changes made on this q *will not affect name*
 
 ```Cpp
@@ -117,3 +118,55 @@ Point() and Point(int, int) are *overloaded constructors*
 `[3]` : default constructor -> define 3 arrays 
 --> allocate elements for 3 objects (`m[0], m[1], m[2]`)
 for creating each of elements -> *default constructor*
+*Alternate constructor*
+![[Pasted image 20250408062125.png | 350]]
+
+### Pointers to Class Objects
+```Cpp
+Student *p; 
+p = new Student // Compiler will allocate memory with regard to variables insde Class Student
+if (!p) //could not create Student
+
+Point * figure = new Point[10]; // call Point() 10 times
+// allocate memory for 10 objects -> figure point to the first element
+```
+## Destructors
+Will be called automatically when the object is destroyed (run out of scope)
+OR it is to be deleted
+```Cpp
+~Point() { 
+	cout << “Destructor called.”;
+}
+```
+
+## Deep Copy Operation
+#Deepcopy
+Look above 
+
+
+![[Pasted image 20250408065014.png]]
+This constructure in student y -> deep copy element from x to y 
+This is a Copy Constructor 
++ However, the array inside X where the array (CourseTaken) is actually the address 
++ So y also use this address to access the array
++ -> The array will be shadow copy and changes make will affect both objects' arrays
+## Composite Classes
++ Class which contain data members that are objects of other classes
++ When a class contains *instances, references, or pointers* to other classes -> composite class
+A Circle contains a Point; a Figure contains an array of Points
+
+## Pre-defined Order
++ The constructors for all member objects are executed in the order in which they appear in the class
++ *All member constructors* are executed before the body of the enclosed class constructor executes 
+  >[!Example]
+  >Class A{
+  >	B(b);
+  >	 C(c);
+  >} 
+  >So B and C constructors will be called first -> and then A is called later
+
+**DESTRUCTORS**
+Destructors are called in the reverse order of constructors. 
+Therefore, the **body of the enclosed class destructor** is *executed* before the destructors of its member objects
++ So A will be free first then C then B
+![[Pasted image 20250408071807.png]]
