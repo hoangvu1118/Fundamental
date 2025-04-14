@@ -16,3 +16,15 @@
 explain 3 : choose a node in DFA --> then we assign the number of edges that equal to number of element inside sigma of NFA(which element is used during the process)
 
 ![[Pasted image 20250414093440.png| 450]]
+
+## Reduction of the Number of States in Finite Automata
+Given two equivalent DFAs below:
+![[Pasted image 20250414104826.png | 500]]
+*Inaccessible State* : it often appears when we convert NFA to DFA
+So it can never *be reached* from the initial state -> q5 as an example
+--> Inaccessible state can be **REMOVED** without affecting the language accepted by the automaton
+Two things are optimized -> Execution Time and Storage
+
+### Distinguishable vs Indistinguishable
+![[Pasted image 20250414105320.png | 450]]
+*TWO STATES* are either distingu
