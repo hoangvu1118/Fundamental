@@ -36,9 +36,7 @@ The last added element will be accessed or deleted
 >If top == -1 -> Stack is empty
 >top == size -1 -> Stack is full
 >When we push -> top increase by 1
->pop -> top decrease by 1
-
-
+>
 
 ## Stack Implementation
 Array vs Linkedlist -> We chose Array
