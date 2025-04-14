@@ -63,6 +63,8 @@ This is like we have private/ protected/ private so that we can control the acce
 + Single (simple) inheritance: 
 	+  A class can inherit from one superclass only. This means the inheritance hierarchy forms a tree
 + Multiple inheritance • A class can have more than one superclass
+![[Pasted image 20250414234008.png | 750]]
+Overall, whole -> public | partial -> protected | strict ->private
 
 **Multiple Inheritance**
 Naming Conflicts: if **attributes or methods** defined in one superclass have the **same name as attributes or methods** defined in *another superclass*
