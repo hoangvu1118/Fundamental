@@ -31,6 +31,14 @@ The last added element will be accessed or deleted
 + ElementType Pop(Stack S) : delete the element at top of a stack
 + void Push(Stack S, ElementType X): Add an element X at top of a stack
 + ElementType Top(Stack S): Access the element at top of a stack
+>[!Warning]
+>normally, a "top" index inside a struct Stack is used to track the current index of the Stack
+>If top == -1 -> Stack is empty
+>top == size -1 -> Stack is full
+>When we push -> top increase by 1
+>pop -> top decrease by 1
+
+
 
 ## Stack Implementation
 Array vs Linkedlist -> We chose Array
