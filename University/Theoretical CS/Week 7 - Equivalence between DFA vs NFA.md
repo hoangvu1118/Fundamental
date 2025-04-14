@@ -27,4 +27,10 @@ Two things are optimized -> Execution Time and Storage
 
 ### Distinguishable vs Indistinguishable
 ![[Pasted image 20250414105320.png | 450]]
-*TWO STATES* are either distingu
+*TWO STATES* are either distinguishable or indistinguishable 
+• Indistinguishability has the properties of an equivalence relation: **If p and q are indistinguishable and if q and r are also indistinguishable, then so are p and r, and all three states are indistinguishable.** 
+• One method for *reducing the states of a dfa* is based on *finding and combining indistinguishable states.*
+• A method for finding pairs of *Distinguishable* states
+![[Pasted image 20250414110217.png | 550]]
+![[Pasted image 20250414110403.png | 550]]
+
