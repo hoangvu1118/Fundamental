@@ -77,3 +77,43 @@ class_name::class_name(param-list) : ctor-initializer {
 }
 ```
 ctor-initializer is used to transfer the parameters to the constructors of the base-class
+
+### Destructors
+Destructors are called implicitly starting with the last derived class and moving int he direction of the base class
+
+### Compatibility Between Base and Derived Classes 
+➢An object of a derived class can be treated as an *object* of its base class 
+➢The reverse is not true
+
+### Nested Class Scope
+➢A public or protected base class member that is hidden from the derived class can be accessed using the scope resolution operator “::”
+➢**For example: base-class::member** 
+➢On the contrary, the base class cannot access the members of its derived classes
+
+### Implicit Conversion of Derived Pointers to Base Pointers
+➢A base type pointer can point to either a base object or a derived object
+
+```Cpp
+// Assume Point3D is derived from Point 
+Point3D * cp = new Point3D; 
+Point3D *cp1; 
+Point * p; 
+p = cp; //OK normal case
+cp1=p; //Error 
+cp1=(Point3D*) p;//OK special case
+```
+
+### Casting Base pointers to Derived Pointers
+A base pointer cannot be *implicitly* converted to a derived pointer
+--> this is in the special case
+But in the normal case: A base pointer will be automatically convert 
+
+
+### Multiple Inheritance
+### Virtual Base Classes
+Not created to have instances/ objects
+It is **a nested inner class whose functions and member variables can be overridden and redefined by subclasses of an outer class**.
+
+We use virtual for solving diamond problem
+When a class inherits from multiple classes that share common ancestor, so w/o Virtual -> it may ended up storing duplicate copies of the ancestor's members
+
