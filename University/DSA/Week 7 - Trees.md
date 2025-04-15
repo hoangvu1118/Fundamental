@@ -98,3 +98,20 @@ The largest DEPTH of a binary tree of N nodes : **N - 1** | Worst Case
 ## In-order Traversal
 ![[Pasted image 20250415095349.png | 500]]
 ==LEFT -> ROOT -> RIGHT==
+
+*TEST BRAIN*
+![[Pasted image 20250415101819.png | 400]]
+
+## Binary Search Tree (BST)
+Time complexity of searching in binary tree is O(N)
+For BST -> Reduce time to O(logN) in average case
+
+>[!Definition] Binary Search Tree
+>All elements in the *left subtree* of a node are **smaller** than the element of the node, all all element in the *right subtree* of a node are **larger**
+
+## Insertion 
+Any empty node is possible location for insertion
+![[Pasted image 20250415110439.png | 450]]
+
+
+
