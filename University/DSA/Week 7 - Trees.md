@@ -113,5 +113,25 @@ For BST -> Reduce time to O(logN) in average case
 Any empty node is possible location for insertion
 ![[Pasted image 20250415110439.png | 450]]
 
+## Erase
+A node being erased is not *always* going to be a leaf node
+There are *3 possible scenarios*:
++ The node is a leaf node
++ has exactly 2 children
++ 1 node
+For deleting node which is a leaf node -> if the leaf node is on the left -> set it to NULL
+--> similar to the right node
+
+For deleting node which has 1 child 
+![[Pasted image 20250415112401.png | 300]] ![[Pasted image 20250415112411.png | 300]]
+
+The node 8 is deleted and the left pointer of 11 is updated to 3
+
+Similarly
+![[Pasted image 20250415112645.png | 300]] ![[Pasted image 20250415112659.png | 300]]
 
 
+**HOWEVER for a node that only have 1 branch**
+![[Pasted image 20250415112738.png | 300]] ![[Pasted image 20250415112748.png | 300]]
+Finally, **Deletion of a node that have 2 children**
+We either loose the largest value on the left, or the smallest value on the right
