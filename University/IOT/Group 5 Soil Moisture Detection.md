@@ -8,7 +8,7 @@ Water is vital for plants since
 **Two types of soil moisture sensors**
 + Resistive sensor
 	+ Two probes measure electrical resistance in the soil
-	+ Lower resistance -> higher Moisture
+	+ Higher resistance -> higher Moisture
 + Capacitive sensor
 	+ Measures soil's ability to store electric charge(capacitance - điện dung)
 	+ Higher moisture = Lower voltage output
@@ -25,6 +25,8 @@ Water is vital for plants since
 + OUTPUT PINS USE AN DAC TO CONVERT FROM A 10-BIT NUMBER (0 - 1023)
 
 ### I$^2$C (Inter-Integrated Circuit)
+MULTI-CONTROLLER, MULTI-PERIPHERAL PROTOCOL
+ANY DEVICE ON THE BUS CAN BE A CONTROLLER OR PERIPHERAL
 - A **serial communication protocol** for connecting multiple devices using only **two wires**:
     - **SDA (Serial Data Line)**
     - **SCL (Serial Clock Line)**
@@ -56,6 +58,8 @@ How it works:
     - Parity settings
 
 ### SPI (Serial Peripheral Interface)
+SINGLE CONTROLLER, MULTIPLE PERIPHERAL
+ABILITY TO SEND AND RECEIVE DATA AT THE SAME TIME
 A **high-speed serial protocol** using **4 lines**:
 - **MOSI (Master Out, Slave In)**
 - **MISO (Master In, Slave Out)**

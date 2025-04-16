@@ -2,7 +2,7 @@
 + Send & Receive messages
 + Connect light to MQTT Broker
 + Connect device to internet
-
+gf
 ## Introduction
 IoT Device typically *connect to a single cloud* IoT service - using a standard communication protocol (~ speaking the same language)
 
