@@ -79,7 +79,7 @@ On clock tick --> CPU fetches instruction --> decodes it --> execute the task
 >PC                     --> Giga Bytes
 >Microcontroller --> Kilo Bytes
 >
->A byte = 1 character or number (0,255)
+>A byte = 1 character or number (0, 255)
 
 Example: 
 RAM: 
