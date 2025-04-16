@@ -134,7 +134,7 @@ Microcontrollers **don't** run the traditional OS
 >[!Note] Code can be recompiled for new compliant hardware with minimal effort
 
 WiO terminal ? 
---> USE Single-board computer over a mircocontroller
+--> USE Single-board computer over a microcontroller
 
 ###### Single Board Computers
 Example : Raspberry Pi
