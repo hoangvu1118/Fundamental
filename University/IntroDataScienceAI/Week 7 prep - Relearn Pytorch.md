@@ -112,4 +112,34 @@ We will calculate the loss then call l.backward()
 ## Minimize Loss Using Gradient Descent
 Recap : epoch is an iteration of over the training set
 ->> we need multiple epoch to minimize the loss
- 
+![[Pasted image 20250417101441.png | 370]]
+
+So the program iterate through multiple epoch to minimize the loss
+At each epoch we set the over_loss to 0 to calculate the loss
+from that point we iterate through examples(samples) 
+	at each example -> we will calculate the activate function output
+		Then use this to update overall_loss at each example 
+		Eventually we normalize the over_loss by dividing it by n 
+Finally, we compute the gradient of this loss and the bias
+--> use these gradient to update the parameters
+
+For perceptron -> we use error to update the parameter
+For gradient descent -> we use the gradient of over_loss to update 
+$\alpha$ is a learning rate -> allow the program to learn at a small rate to avoid volatile
+
+Stochastic Gradient Descent is *main component* of back propagation
+*Back propagation* is most popular learning algorithm for Deep Neural Networks
+
+## Using Stochastic GD
+Update more frequently than batch/gradient descent
+Code is slightly similar to the *batch*
+
+Better solution : Most ideal -> Minibatch Gradient Descent
+Hybrid = Batch + Stochastic
+The size of minibatch(m) are multiple of 2 
+So they make it fit to the GPU architecture for computation
+### Minibatch
+![[Pasted image 20250417102920.png | 450]]
+Much better GPU utilization
+
+w1.grad -> the slop of w1 -> so that it decrease to 1
