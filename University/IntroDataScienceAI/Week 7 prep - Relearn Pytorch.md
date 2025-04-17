@@ -87,7 +87,24 @@ requires_grad : the gradient of the loss with respect to these parameters
 ![[Pasted image 20250416234550.png | 450]]
 **Inputs and weigh + bias**
 
-![[Pasted image 20250416234623.png | 450]]**
+![[Pasted image 20250416234623.png | 450]]
 **Compute the weighted sum**
 
 ![[Pasted image 20250416234715.png | 450]]
+**Sigmoid activation function**
+
+![[Pasted image 20250416234751.png]]
+**Calculate the loss**
+--> feed in the net input instead of the activation function
+So the program will calculate the sigmoid activation function internally
+
+![[Pasted image 20250416234941.png | 350]]
+
+Compute the gradient automatically
+retain_graph: retain the graph in still in memory
+--> we want to calculate the partial derivative with respect to w1 and b
+
+**Instead of calculating these manually**
+We use L.backward()
+We will calculate the loss then call l.backward()
+![[Pasted image 20250416235013.png | 350]]
