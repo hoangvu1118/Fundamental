@@ -108,3 +108,8 @@ retain_graph: retain the graph in still in memory
 We use L.backward()
 We will calculate the loss then call l.backward()
 ![[Pasted image 20250416235013.png | 350]]
+
+## Minimize Loss Using Gradient Descent
+Recap : epoch is an iteration of over the training set
+->> we need multiple epoch to minimize the loss
+ 
