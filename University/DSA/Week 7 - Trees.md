@@ -78,6 +78,10 @@ Again, we still starts with a Root A but we don't visit them, we just go through
 --> so actually we traverse to E(leaves) -> we start computing from leaves up to A
 E→F→B→G→C→D→A
 ==LEFT->RIGHT->ROOT==
+## In-order Traversal
+![[Pasted image 20250415095349.png | 500]]
+==LEFT -> ROOT -> RIGHT==
+
 **BFS**:
 Visit all nodes at the current level before moving to the next level 
 Ignoring the order of that level 
@@ -95,9 +99,6 @@ The largest DEPTH of a binary tree of N nodes : **N - 1** | Worst Case
 **Best-Case** Every node have 2 children
 -> The depth is O(logN)
 
-## In-order Traversal
-![[Pasted image 20250415095349.png | 500]]
-==LEFT -> ROOT -> RIGHT==
 
 *TEST BRAIN*
 ![[Pasted image 20250415101819.png | 400]]
