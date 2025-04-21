@@ -34,3 +34,18 @@ Two things are optimized -> Execution Time and Storage
 ![[Pasted image 20250414110217.png | 550]]
 ![[Pasted image 20250414110403.png | 550]]
 
+**Algorithm for solving "states reduction"**
+
+First for 0 equivalence, we have 2 distinguishable sets
+- For each set that has more than 2 elements, we have to investigate 'em
++ Example: 0-Equivalence : {q0} {q1,q2,q3}
+	+ We gonna investigate the 2nd set
+		+ Checking each pair : (q1,q2) (q1,q3) (q2,q3)
+		+ However, if you check and see that q1 ,q2 are equivalent 
+		+ then we do not have to check (q2,q3)
+		+ So by using the 0-equivalence -> we can from that construct 1 equivalence
+		+ By checking the state at which these nodes move 
+			+ Ex: q1-a> q3 ... q2-b> q1
+			+ If for "a" or "b" the 2 nodes are in different set (taken from previous equivalence) 
+			+ Then they're distinguishable
+
