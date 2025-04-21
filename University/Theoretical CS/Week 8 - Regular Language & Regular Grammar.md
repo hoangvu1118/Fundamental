@@ -31,3 +31,28 @@ On the other hand, (a + b +) is not a regular expression, since there is no way 
 ### Definition 3.2
 ![[Pasted image 20250421112535.png]]
 
+If r1 and r2 are *regular expressions* then
+1. L(r1 + r2) = L(r1) $\cup$ L(r2)
+2. L(r1 . r2) = L(r1) . L(r2)
+3. L((r1)) = L(r1)
+4. L(r1*) = (L(r1))*
+For the star closure, it is **zero or more repetitions** of the preceding element (character, group, or pattern).
+
+**Priority** on the operators from *left to right*: * , ., +
+The symbol for concatenation may be omitted, so we can write r1 .r2.
+![[Pasted image 20250421113148.png | 500]]
+
+>[!Example] 
+>Find a regular expression for the language L = {w ∈{0,1} * : w has no pair of consecutive zeros}
+>![[Pasted image 20250421114201.png | 300]]
+>
+>Equivalence of regular expressions: the two regular expressions are equivalent if they *denote the same language*
+
+>[!Warning] Attention
+>![[Pasted image 20250421114429.png | 200]]
+
+
+
+
+
+
