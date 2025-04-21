@@ -24,7 +24,7 @@ class Publisher{
 		string getPublish():
 			return p;
 }
-Class Book : class Publisher{
+Class Book : public Publisher{
 	private:
 		....
 	public:
