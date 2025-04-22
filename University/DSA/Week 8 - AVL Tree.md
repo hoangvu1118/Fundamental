@@ -49,6 +49,7 @@ However, we only need to fix the node 17 -> the last node
 >Case 1 and 4 : Same ( Similar for 2 and 3)
 
 ## Case 1 and 4 : Single Rotation
+![[Pasted image 20250422112635.png | 200]]  ![[Pasted image 20250422112651.png | 200]]
 
 ![[Pasted image 20250422111200.png]]
 Easily spotted that *36* is imbalance since left height : 3 and right height : 1
@@ -64,7 +65,23 @@ and make it balance
 >[!Success] Algorithm
 >Step 1 : Find the imbalance node
 >Step 2 : Fix the latest node
-
+>**REMEMBER the LATEST imbalance node**
 
 ## Case 2: Double Rotation
+
+![[Pasted image 20250422112744.png | 200]]  ![[Pasted image 20250422112758.png | 200]]  ![[Pasted image 20250422112816.png | 200]]
+
+![[Pasted image 20250422112906.png | 450]]
+*Bức + gắn*
+*Explanation* : *21* is imbalance 
+This is case 2 : *Insert the right subtree of the left child*
+So we gonna have *21->left = NULL* and *6->right = NULL*
+But before that create a *temp node* that store *18*
+Then we point *21->left = 18->right* && *6->right = 18->left*
+*18->left = 6* && *18->right = 21* 
+So we rotate twice -> the node 
+
+>[!warning] Avoid Failure
+>Only apply the rule(case) only for the lowest node that is imbalance / not from the root
+>we starts consider case only from the lowest node to the leaf
 
