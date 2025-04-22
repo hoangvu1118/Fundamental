@@ -61,9 +61,24 @@ Dynamic binding is a *description of how that concept is implemented*
 >So pointer to parent class *can not access private method and attribute* from their derived class
 >For the felid example -> it typecast the cat, tiger, ocelot to parent class/ data type 
 >So they cannot access to cat, tiger ocelot private method no more
->However, the function in those derived class are just public to *demonstrate overriding*
+>However, the function in those derived class are just public 
+>But, it is not override the function in the base class, as u can see from the terminal above
 
 
- 
-  
+#### Dynamic Binding
+>[!Code]
+>![[Pasted image 20250422141643.png | 300]]
+>In C++, methods are non-virtual by default. They can be made virtual by using *virtual keyword* 
+>➢This design decision is due to the fact that C++ was *made to be almost as efficient as C*
+> • Dynamic binding is more costly than static binding 
+> • “If you don’t use it, you don’t pay for it” 
+> ➢If a method cannot be overridden, it then can be statically bound (and/or made inline
+> **This is OVERRIDING, when u run the code, the tiger and Ocelot will print different text**
+
+**Virtual Function** 
+• A non-static member function prefaced by the virtual keyword 
+• It tells the compiler to generate code that selects the appropriate version of this function at run-time
+
+
+
 
