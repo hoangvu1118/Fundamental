@@ -23,7 +23,7 @@ For Σ = {a, b, c}, the string (a+b+c) * .(c+Ø) is a regular expression since i
 
 If we take r1 = c and r2 = Ø, we find that c + Ø and (c + Ø) are also regular expressions. Repeating this, we eventually generate the whole string.
 So if the string is 
-	(a+b+c)+ .(c + Ø) still wrong, since there is no "+" closure
+	(a+b+c)+ .(c + Ø) is wrong, since there is no "+" closure
 
 On the other hand, (a + b +) is not a regular expression, since there is no way it can be constructed from the primitive regular expressions
 ```
