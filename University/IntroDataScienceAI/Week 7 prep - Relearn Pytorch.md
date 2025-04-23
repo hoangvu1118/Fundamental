@@ -143,3 +143,13 @@ So they make it fit to the GPU architecture for computation
 Much better GPU utilization
 
 w1.grad -> the slop of w1 -> so that it decrease to 1
+
+
+>[!warning]
+>When calling loss.backward() we have to pay attention to before
+Normally, loss is calculated first -> and this should be a scalar instead of any vector so that we can start calculate the backward to start optimize the loss
+ So if the loss that is not in a scalar form -> it might be vector or something ->
+ We have to use loss.mean() or loss.sum() before calling loss.backward() to avoid error
+ 
+
+
