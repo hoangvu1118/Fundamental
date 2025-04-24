@@ -97,6 +97,7 @@ requires_grad : the gradient of the loss with respect to these parameters
 **Calculate the loss**
 --> feed in the net input instead of the activation function
 So the program will calculate the sigmoid activation function internally
+so logist is for the lost that is not normalized
 
 ![[Pasted image 20250416234941.png | 350]]
 
