@@ -14,8 +14,8 @@ r1 + r2
 A NFA for regular expression r*
 ![[Pasted image 20250428094128.png | 400]]
 **EXAMPLE PROBLEM**
-![[Pasted image 20250428151034.png | 700]]
-![[Pasted image 20250428151106.png | 500]]
+![[Pasted image 20250428151034.png | 500]]
+![[Pasted image 20250428151106.png | 700]]
 
 ## Generalized Transition Graph (GTG)
 • A *generalized transition graph (GTG)* is a transition graph whose edges are labeled with regular expressions; otherwise, it is the same as the usual transition graph. 
