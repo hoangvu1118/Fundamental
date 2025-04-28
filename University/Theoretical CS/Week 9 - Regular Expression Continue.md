@@ -13,6 +13,9 @@ r1 + r2
 ![[Pasted image 20250428094014.png | 400]]
 A NFA for regular expression r*
 ![[Pasted image 20250428094128.png | 400]]
+**EXAMPLE PROBLEM**
+![[Pasted image 20250428151034.png | 500]]
+![[Pasted image 20250428151106.png | 500]]
 
 ## Generalized Transition Graph (GTG)
 • A *generalized transition graph (GTG)* is a transition graph whose edges are labeled with regular expressions; otherwise, it is the same as the usual transition graph. 
@@ -34,4 +37,5 @@ Conversely, *every language* accepted by a *GTG is regular.*
 • To find a regular expression for a GTG, we need to remove the intermediate states to the simplest equivalent GTG. 
 • *Immediate states*: are neither initial states nor final states
 ![[Pasted image 20250428114457.png | 450]]
+
 
