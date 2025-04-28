@@ -9,7 +9,7 @@ We fractorize 'em' out -> then we can draw a NFA for it
 *Step 2*: Build up nfas by *the complex regular expression*:
 r1 + r2
 ![[Pasted image 20250428093554.png | 450]]
-
+    
 ![[Pasted image 20250428094014.png | 400]]
 A NFA for regular expression r*
 ![[Pasted image 20250428094128.png | 400]]
