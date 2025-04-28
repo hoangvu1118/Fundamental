@@ -36,7 +36,8 @@ If r1 and r2 are *regular expressions* then
 2. L(r1 . r2) = L(r1) . L(r2)
 3. L((r1)) = L(r1)
 4. L(r1*) = (L(r1))*
-For the star closure, it is **zero or more repetitions** of the preceding element (character, group, or pattern).
+For the ==star closure==, it is **zero or more repetitions** of the preceding element (character, group, or pattern).
+Example : (aa)* = {$\lambda$, aa, aaaa, aaaaaa, .....} it repeat the thing inside the bracket
 
 **Priority** on the operators from *left to right*: * , ., +
 The symbol for concatenation may be omitted, so we can write r1 .r2.
