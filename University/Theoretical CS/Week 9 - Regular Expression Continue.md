@@ -14,7 +14,7 @@ r1 + r2
 A NFA for regular expression r*
 ![[Pasted image 20250428094128.png | 400]]
 **EXAMPLE PROBLEM**
-![[Pasted image 20250428151034.png | 500]]
+![[Pasted image 20250428151034.png | 700]]
 ![[Pasted image 20250428151106.png | 500]]
 
 ## Generalized Transition Graph (GTG)
