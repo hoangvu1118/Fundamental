@@ -61,10 +61,46 @@ We only allow one Key at each entry:
 + First one there gets the spot
 + Next one must go in another spot
 **Constraints**
-+ $\lambda$ < 1 
++ $\lambda$ $\leq$ 1 
 	+ *Number of elements $\leq$ TableSize*
 	+ Performance degrades with difficulty of finding right spot
 
 ### Probing - To handle collision
+![[Pasted image 20250429111956.png | 350]] ![[Pasted image 20250429112009.png | 300]]
 
+### Searching
+Start at the appropriate position, and searching forward until 
+1. The item is found
+2.  An empty item is found, or 
+3. We have traversed the entire array
+The third case will only occur if the hash table is full (load factor of 1)
+
+### Erasing
+Elements *cannot be removed naively* without affecting search correctness
+
+Real Deletion: We remove the wanted element and then move the elements that are in wrong location ->> move them back to the correct location 
+![[Pasted image 20250429113725.png | 350]]
+
+Problems of primary clustering vs Quadratic
+**Primary clustering** is when a group of **consecutive filled slots (a cluster)** forms in the hash table. As more keys are added, this cluster grows.
+
+When new keys collide and are placed into the cluster (since they hash to somewhere inside it), they get added to the **end** of the cluster — making it **longer**.
+
+As a result:
+- **New insertions** are more likely to land near or inside this cluster.
+- **Search time** and **insertion time** increase dramatically as the cluster grows.
+- Performance degrades even if the load factor is not very high.
+### Quadratic Probing
+![[Pasted image 20250429113748.png | 340]]
+
+### Double Hashing
+Load Factor ($\lambda$) 
+![[Pasted image 20250429114443.png | 340]]
+
+Double hashing method
+![[Pasted image 20250429114804.png | 400]]
+Those location that has been occupied, we then calculate a *second hash function* 
+The result will be the total of next move we have to move, in order to insert the value into the *hash table* 
+Ex: 47 modulo 7 == 5, but 5 has been occupied
+So we start calculating from the next location 6(1) -> 0(2) -> 1(3) : then 1 which is 3rd element -> will be perfect location
 
