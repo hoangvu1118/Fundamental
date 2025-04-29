@@ -81,7 +81,25 @@ Then we point *21->left = 18->right* && *6->right = 18->left*
 *18->left = 6* && *18->right = 21* 
 So we rotate twice -> the node 
 
+So, when we insert to the case *RIGHT LEFT*
+We rotate the child right first, then rotate the root left
+For *LEFT RIGHT*
+We rotate the left child to the left, then rotate the root to the right
+
 >[!warning] Avoid Failure
 >Only apply the rule(case) only for the lowest node that is imbalance / not from the root
 >we starts consider case only from the lowest node to the leaf
 
+## Erase / Delete
+Problems: Insert may cause 1 imbalance node
+However, deletion may cause ==many imbalance nodes== -> that must be fixed
+
+### Three different cases:
+**A leaf node**
++ Just delete node and balance tree if needed
+**A node with 1 child**
++ Delete node and link its parent node to its child node and then balance tree if needed
+**A node with 2 children:**
++ Replace this node by the largest node in left subtree. Delete this largest node and balance tree if needed OR
++ Replace this node by the smallest node in right subtree. Delete this smallest node and balance tree if needed
+Deletion similar to the BST but now we have to check balance multiple time and fix the unbalance one.
