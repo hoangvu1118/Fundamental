@@ -119,6 +119,7 @@ Notion: **Empty string** is $\lambda$ or (lamn-dah)
 	- w$^n$ : string obtained by repeating string "w" n times
 		- --> w$^n$ = w.w.w...w . w (n times)
 	- ==Special Case:== w$^0$ = $\lambda$ for all w
+	
 ![[Pasted image 20250303113838.png]]
  For example:
 	- Z = {0, 1, 2}
@@ -350,6 +351,9 @@ Example: f(qi, xi, z) = {q1, q2, q3,...) --> a set of possible states
 - Grammar  : used to define the programming languages
 - Accepter: define some parts of the programming  languages - valid or invalid
 - Build the lexical analyzer and the syntax analyzer for programming languages.
+- String Processing 
+	-  Functions: search, find in compiler or string processing.
+	- Natural language processing: spelling correction, lexical labelling.
 
 EXAMPLE:
 ![[Pasted image 20250310113839.png]]

@@ -96,6 +96,7 @@ $\delta$* : Q x $\sum$* --> Q
 -> w is a string of vb --> with b is the right most --> recursively split the string except the rightmost
 --> we end up with the result at the left most
 
+
 **Associated Language of DFA's**
 >[!Definition] Def 2.2:
 >The language L accepted by a dfa M = (Q, $\sum$, $\delta$, q0, F) is set of all strings on $\sum$ accepted by M

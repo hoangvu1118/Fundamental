@@ -39,3 +39,4 @@ Conversely, *every language* accepted by a *GTG is regular.*
 ![[Pasted image 20250428114457.png | 450]]
 
 
+

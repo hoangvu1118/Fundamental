@@ -55,7 +55,7 @@ Worst case searching complexity depends on the maximum length of a list `H[p]` =
 Want $\lambda$ to be approximately 1. 
 To reduce worst case complexity we choose hash functions which distribute the elements evenly in the list
 
-#### Closing Hashing / Open Addressing
+#### Close Hashing / Open Addressing
 We only allow one Key at each entry:
 + Two objects that hash to the same spot can not both go there
 + First one there gets the spot
@@ -65,6 +65,10 @@ We only allow one Key at each entry:
 	+ *Number of elements $\leq$ TableSize*
 	+ Performance degrades with difficulty of finding right spot
 
+>[!Notion]
+>An **insert** using *closed hashing* cannot work with *a load factor of 1 or more.*
+• An insert using closed hashing with **quadratic probing** may not work with a **load factor of ½** or more.
+• Whether you use open or closed hashing, large load factors lead to poor performance!
 ### Probing - To handle collision
 ![[Pasted image 20250429111956.png | 350]] ![[Pasted image 20250429112009.png | 300]]
 
