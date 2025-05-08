@@ -27,8 +27,6 @@ ReLu is an activation function that use to generate the overall_loss
 ![[Pasted image 20250417111339.png | 300]]
 So each input will give an ouput (imagine it is a pixel of an image)
 So here teachers inputted 3 inputs so it results in 3 outputs
-
-
 ## Pytorch API
 
 ![[Pasted image 20250423215349.png | 250]]
