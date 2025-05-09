@@ -221,6 +221,8 @@ A + x is equivalent to &(A[x])
 *(A + x) is equivalent to A[x]
 ```
 
+## The way Pointer works in function
+
 ##### Passing 1D Array as Parameter
 - 2 Ways of passing an Array
 ```C
