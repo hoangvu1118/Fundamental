@@ -140,4 +140,25 @@ So we need different formulars
  + Call Percolate down (or up) per each node
  ![[Pasted image 20250506112051.png | 300]]
  Even if the 95 (the largest) at the root, however, the other huge number still stay somewhere in the node, So we have to continue the search to percolate 'em'
- 
+
+>[!important] Heap Sort instruction on Paper - Heapify
+>Firstly, Heapify the array: Either Max Heap or Min Heap
+>Max Heap : Increasing Order
+>Min Heap : Decreasing Order
+>Start from a non-heap node - Heap node is a node that has children
+>Non-Heap : just 'leaves'
+>Start comparing and swapping from the *non-heap node* to the root (But have to make sure that the node we swap --> and also it children after we swap the node MUST stay in the correct space)
+>Near the end, after we swap the root with its greatest child 
+>Now you have to repeat the process as above, RECURSIVELY swap that root to stay in the correct location by checking its children `(2 * n || 2 * n  + 1)`
+>Verify by drawing the complete GRAPH
+
+>[!Tip] Start sorting 
+>We will remove the TOP (root) and the final(last) node of the tree
+>+ The root value will be inserted into the last location of the array
+>+ While the last node will go to the root and begin PERCOLATE DOWN
+>+ The PERCOLATION DOWN happens:
+>	+ Compare the children node (`2*i || 2*i + 1) then choose the correct value
+>	+ Recursively compare and swap until the the 'last' node stay in the correct space
+>
+
+
