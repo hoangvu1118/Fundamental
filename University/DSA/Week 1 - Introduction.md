@@ -222,6 +222,41 @@ A + x is equivalent to &(A[x])
 ```
 
 ## The way Pointer works in function
+```C
+// WRONG - would pass pointer to the pointer
+void insertHeap(BinaryHeap* heap, int data){
+    // ...
+    perculateUp(&heap);  // Wrong! Would be BinaryHeap**
+}
+// CORRECT - just pass the pointer
+void insertHeap(BinaryHeap* heap, int data){
+    // ...
+    perculateUp(heap);  // Correct
+}
+
+void perculateUp(BinaryHeap* heap){}
+```
+So for a function to have a parameter as a pointer --> *It would expect* the callee to pass a *pointer to it*, So let's say 
+If we are in insertHeap --> and want to call perculateUp -> then we only need to call perculateUp(heap) since we already declare it as a pointer, and that is what the other function required
+
+However, in main or in other function that *Your heap* is not declared as a POINTER
+**Two ways of using the heap**
+```C
+Option 1: Declare a structure variable and pass its address
+
+    BinaryHeap heap;
+    initialize(&heap);
+    insertHeap(&heap, 20);
+    
+OR Option 2: Dynamically allocate memory for the structure
+    BinaryHeap* bh = (BinaryHeap*)malloc(sizeof(BinaryHeap));
+    initialize(bh);
+    insertHeap(bh, 20);
+    // Don't forget to free memory if using Option 2
+    free(bh->data);
+    free(bh);
+```
+This is very similar to #stack #linkedlist #pointer the way it is declared
 
 ##### Passing 1D Array as Parameter
 - 2 Ways of passing an Array
