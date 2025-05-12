@@ -157,7 +157,7 @@ So we need different formulars
 >+ The root value will be inserted into the last location of the array
 >+ While the last node will go to the root and begin PERCOLATE DOWN
 >+ The PERCOLATION DOWN happens:
->	+ Compare the children node (`2*i || 2*i + 1) then choose the correct value
+>	+ Compare the children node (`2*i || 2*i + 1`) then choose the correct value
 >	+ Recursively compare and swap until the the 'last' node stay in the correct space
 >![[Pasted image 20250509152835.png | 300]]
 
