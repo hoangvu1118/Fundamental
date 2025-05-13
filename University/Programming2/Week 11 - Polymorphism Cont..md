@@ -47,3 +47,25 @@ Point operator+();      // ❌ invalid (wrong number of operands)
 ❌ Only existing operators may be overloaded
 
 
+```cpp
+class Compute{
+    int _x;
+    public:
+        Compute(int x = 0){
+            _x = x;
+        }
+        Compute operator+(Compute& other){ // The & is not neccessary 
+        //But it will reduce time on CPU --> it dont have to make acopy of 'other'
+            return Compute(_x + other._x);
+        }
+        void print(){
+            std::cout << "Value = " << _x;
+        }
+};
+int main(){
+    Compute left(24), right(50), result;
+    result = left + right; // it see as left.operator+(b)
+    result.print();
+    return 0;
+}
+```
