@@ -3,9 +3,11 @@ L is a regular language. Then there exists a regular expression *r* such that L 
 ![[Pasted image 20250505092830.png]]
 We need it to stop so the program should stop at qf since it has *
 The ring (r4 + r3r1* r2)* might cause confusion
-But just imagine *that* is an hidden ring but it use r1 from q0 so we donot have to draw it out like below images
+But just imagine *that* is an hidden ring but it use r1 from q0 so we do not have to draw it out like below images
 ![[Pasted image 20250421114429.png | 200]]
 Remember this one
+
+
 ![[Pasted image 20250505093836.png | 400]]
 
 Regular Expressions for *Describing Simple Patterns* 
