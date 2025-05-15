@@ -157,3 +157,6 @@ The x.grad called after the function.backward() -> mean that the x will store a 
 the change of the function with respect to x
 say x = 2 ->> then the function x^2 + 3x + 8 would be 7(after calculating the derivative of f(x) --> 2x + 3) then x.grad = 7 
 Which is how the function react on the tiny change on the input `x`
+
+**`loss.backward()`**: This is the **backward pass**. PyTorch's autograd engine calculates the gradients of the `loss` with respect to all the model's parameters (those with `requires_grad=True`). These gradients are stored in the `.grad` attribute of each parameter.
+

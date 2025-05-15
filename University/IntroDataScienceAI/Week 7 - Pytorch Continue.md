@@ -60,3 +60,6 @@ Compute the weighted sum by calling *linear(x)*
 >[!Tip] With torch.no_grad() :
 >This will disabling the pytorch function to save the computation in the graph -> so we dont want it to be in the graph when we call the loss.backward() later on. 
 >
+
+### Gradient Explanation
+When computing the 
