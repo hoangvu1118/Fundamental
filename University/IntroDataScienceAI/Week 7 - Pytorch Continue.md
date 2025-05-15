@@ -61,5 +61,8 @@ Compute the weighted sum by calling *linear(x)*
 >This will disabling the pytorch function to save the computation in the graph -> so we dont want it to be in the graph when we call the loss.backward() later on. 
 >
 
-### Gradient Explanation
-When computing the 
+## Logistic Regression - Perceptron
+Has a threshold (Ex: larger than 0.5) --> Output class 1 otherwise, class 0
+**Activation Function** : Sigmoid Function
+Activation function followed by a threshold --> to determine whether the class (1 or 0)
+![[Pasted image 20250516002046.png | 400]]

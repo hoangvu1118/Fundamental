@@ -44,6 +44,7 @@ From there on, we consider the model parameter (bias)
 --> the `>0` if yes -> update the output the perceptron
 
 ## Different view 
+**Computational graph**
 ### Model Parameters
 ![[Pasted image 20250410091611.png | 400]]
 Explanation
@@ -57,7 +58,7 @@ Then we add these input up and with also the bias (B)
 **THE process is called FORWARD**
 
 ![[Pasted image 20250416225914.png]]
-This graph is a combination of computing error and update model parameters
+This *computation graph* is a combination of computing error and update model parameters
 First we need to computing for errors
 This is calculated by subtracting the predicted value *y hat (pink one)* by the true value (Y)
 so Y is the value we want the model to predict
