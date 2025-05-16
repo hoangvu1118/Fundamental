@@ -64,7 +64,7 @@ However, the grammar itself is *neither right nor left* --> not regular
 >[!Example]
 >![[Pasted image 20250505103208.png | 350]]
 
-**Theorem 3.4**: If L is a regular language on the alphabet $\sum$ then there exists a right-linear grammar G = (V, $\sum$, S, P) such that L = L(G).
+**Theorem 3.4**: If L is a regular language on the alphabet $\sum$ then there exi[[]]sts a right-linear grammar G = (V, $\sum$, S, P) such that L = L(G).
 ![[Pasted image 20250505105228.png | 400]]
 ![[Pasted image 20250505105244.png | 400]]
 
