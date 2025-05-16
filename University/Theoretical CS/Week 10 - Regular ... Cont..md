@@ -6,7 +6,8 @@ The ring (r4 + r3r1* r2)* might cause confusion
 But just imagine *that* is an hidden ring but it use r1 from q0 so we do not have to draw it out like below images
 ![[Pasted image 20250421114429.png | 200]]
 Remember this one
-
+R = P + RQ
+R = QP*
 
 ![[Pasted image 20250505093836.png | 400]]
 
@@ -45,6 +46,7 @@ The sequence S => abS => ababS => ababa is a *derivation* with G1.
 From this single instance it is easy to conjecture that L(G1) is the language denoted by the regular expression **r = (ab)* a***
 
 In a similar way, we can see that L(G2) is the regular language **L(aab(ab)* )***
+
 **Linear Grammar** 
 The grammar G = ({S, A, B}, {a, b}, S, P) with productions
 S → A, 
@@ -65,3 +67,5 @@ However, the grammar itself is *neither right nor left* --> not regular
 **Theorem 3.4**: If L is a regular language on the alphabet $\sum$ then there exists a right-linear grammar G = (V, $\sum$, S, P) such that L = L(G).
 ![[Pasted image 20250505105228.png | 400]]
 ![[Pasted image 20250505105244.png | 400]]
+
+![[Pasted image 20250516100604.png | 450]]
