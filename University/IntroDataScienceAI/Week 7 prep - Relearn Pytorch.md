@@ -83,6 +83,9 @@ breakdown to individual steps from the Loss (y) ![[Pasted image 20250416232751.p
 **Gradient** : This will store the result of each of the partial derivative in to a vector form (an array)
 ![[Pasted image 20250416233333.png | 450]]
 
+![[Pasted image 20250517231229.png | 250]] ![[Pasted image 20250517231256.png | 300]]
+Slope in 2 dimensions , the gradient of the partial derivative is a vector of 2 derivative
+
 ### Automatic Differentiation in PyTorch
 requires_grad : the gradient of the loss with respect to these parameters
 ![[Pasted image 20250416234550.png | 450]]
@@ -131,7 +134,19 @@ $\alpha$ is a learning rate -> allow the program to learn at a small rate to avo
 
 Stochastic Gradient Descent is *main component* of back propagation
 *Back propagation* is most popular learning algorithm for Deep Neural Networks
+```python
+for each_training in epoch: #Epoch is 1 iteration over the training set -> we need multiple epoch
+    overall_loss_L = 0
+    for each_train_example: # iterate through training example
+        output = Φ(z)   # calculate the activation function
+        overall_loss_L = overall_loss_L + l(output, label) # calculate the loss value
+        # We summing the overall_loss
+    overall_loss_L = overall_loss_L / n # bring to normal scall for later
+    #Normalize the loss 
+    #This will COMPUTE the loss over the training example
 
+    #Then update parameters once per epoch
+```
 ## Using Stochastic GD
 Update more frequently than batch/gradient descent
 Code is slightly similar to the *batch*
@@ -141,7 +156,20 @@ Hybrid = Batch + Stochastic
 The size of minibatch(m) are multiple of 2 
 So they make it fit to the GPU architecture for computation
 ### Minibatch
-![[Pasted image 20250417102920.png | 450]]
+```python
+For each training epoch:
+    for each minibatch:
+        overall_loss_L = 0
+        for each training example in minibatch:
+            output = Φ(z)
+            overall_loss_L = overall_loss_L +  l(output, label)
+        overall_loss_L = overall_loss_L / n;
+        #then update parameters
+
+# Explanation
+This is very somewhat similar to the gradient descent approach
+However with frequent updates, parameters will get adjusted after every the minibatch
+```
 Much better GPU utilization
 
 w1.grad -> the slop of w1 -> so that it decrease to 1

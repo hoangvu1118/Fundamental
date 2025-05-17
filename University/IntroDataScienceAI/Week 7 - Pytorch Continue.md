@@ -14,6 +14,10 @@ Data in minibatch should be shuffle so that it can be trained to make it more ge
 ![[Pasted image 20250417093536.png | 200]]![[Pasted image 20250417093526.png | 200]]![[Pasted image 20250417093510.png | 250]]
 
 
+
+
+
+
 ## Hidden Layer
 ### Linear Layer
 ![[Pasted image 20250417110644.png | 300]]![[Pasted image 20250417111126.png | 300]]
