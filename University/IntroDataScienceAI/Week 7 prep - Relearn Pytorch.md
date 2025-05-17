@@ -114,6 +114,27 @@ We use L.backward()
 We will calculate the loss then call l.backward()
 ![[Pasted image 20250416235013.png | 350]]
 
+Code
+```Python
+import torch
+w1= torch.tensor(0.23, requires_grad = True)
+b = torch.tensor(0.1, requires_grad = True)
+
+# inputs and target --> no need to check --> no need requires_grad
+x1 = torch.tensor(1.23)
+y = torch.tensor(1.)
+
+u = x1 * w1
+z = u + b
+print(z)
+
+a = torch.sigmoid(z)
+print(a)
+
+import torch.nn.functional as F
+l = F.binary_cross_entropy_with_logits(z, y) # reflect how wrong the program is
+w1.grad, b.grad
+```
 ## Minimize Loss Using Gradient Descent
 Recap : epoch is an iteration of over the training set
 ->> we need multiple epoch to minimize the loss
