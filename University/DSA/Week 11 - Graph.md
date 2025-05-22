@@ -17,7 +17,7 @@ There are a number of data structures that can be used to implement abstract und
 ![[Pasted image 20250513105309.png | 300]]
 
 ## Sub-Graphs
-A *sub-graph of a graph* is a subset of the vertices and a subset of the edges that connected the subset of vertices in the original graph
+A *sub-graph of a graph* is a subset of the vertices and a subset of the edges that *connected* the subset of vertices in the original graph
 ![[Pasted image 20250513105643.png | 350]]
 
 ## Paths
@@ -57,7 +57,7 @@ A graph is a tree if it is connected and there is a *unique* path between any tw
 >[!tip] Consequences:
 >The number of edges is **|E| = |V| – 1**
 – The graph is *acyclic*, that is, it *does not contain any cycles*
-– Adding one more edge must create a cycle
+– Adding one *more edge* must create a *cycle*
 – Removing any one edge creates two disjoint non-empty sub-graphs
 
 **Any tree** can be converted into a ROOTED tree by
@@ -70,7 +70,7 @@ parent are now defined to be that vertices children
 ## Forest
 A **forest** is any graph that has **no cycles**:
 >[!Important] Consequences:
->The number of edges = |E| < |V|
+>The number of edges is |E| < |V|
 >The number of trees = |V| – |E|
 >- Removing any one edge adds one more tree to the forest
 >- ![[Pasted image 20250522164201.png | 340]]
@@ -103,5 +103,67 @@ A path in a *directed graph* is an ordered sequence of vertices
 
 ## Connectedness (Cont.)
 Two vertices vj, vk are said to be **connected** if there *exists a path* from vj to vk
-+ A graph is *strongly connected* if there exists a directed path between any two vertices
-+ A graph is weakly connected if there exists a path between any two vertices that ignores the direction
++ A graph is *strongly connected* if there *exists a directed path* between any two vertices
++ A graph is *weakly connected* if there *exists a path* between *any two vertices* that ignores the direction
+![[Pasted image 20250522170518.png | 400]]
+
+## Weighted undirected graphs
+Given a *weighted undirected graph*. In **some cases**, we can consider the graph as weighted directed graph
+![[Pasted image 20250522170625.png | 350]]
+In a *weighted directed graphs*, each edge is associated with a value
+*Unlike* weighted *undirected graphs,* if both *(vj, vk) and (vj, vk)* are edges, it is not required that they have the same weight
+![[Pasted image 20250522171009.png | 250]]
+## Directed acyclic graphs
+A directed acyclic graph is a **directed graph** which has **no cycles**
+– These are commonly referred to as **DAGs**
+![[Pasted image 20250522171055.png | 250]]![[Pasted image 20250522171108.png | 300]]
+
+>[!Tip] Applications
+>– The parse tree constructed by a compiler
+>– A reference graph that can be garbage collected using simple reference counting 
+>– Dependency graphs such as those used in instruction scheduling and makefiles
+>– Dependency graphs between classes formed by inheritance relationships in object-oriented programming languages 
+>– Information categorization systems, such as folders in a computer 
+>– Directed acyclic word graph data structure to memory efficiently store a set of strings (words)
+
+## Representations - How do we store the adjacency relations?
+– Binary-relation list
+– Adjacency matrix
+– Adjacency list
+
+### Binary-Relation list - The most inefficient 
+
+==A container storing the edges==
+{(1, 2), (1, 4), (3, 5), (4, 2), (4, 5), (5, 2), (5, 3), (5, 8), (6, 9), (7, 9), (8, 4)}
+![[Pasted image 20250522171427.png | 350]]
+
+### Adjacency Matrix
+– The matrix entry (j, k) is set to true if there is an edge (vj, vk)
+![[Pasted image 20250522171502.png | 350]]
+
+### Adjacency list - Most efficient for algorithms
+*Each vertex* is associated *with a list of its neighbors*
+1 • → 2 → 4
+2 •
+3 • → 5
+4 • → 2 → 5
+5 • → 2 → 3 → 8
+6 • → 9
+7 • → 9
+8 • → 4
+9 •
+![[Pasted image 20250522171613.png | 350]]
+
+## The Graph ADT
+The *Graph ADT* describes a container storing an *adjacency relation*
+– Queries include:
+• The number of vertices
+• The number of edges
+• List the vertices adjacent to a given vertex
+• Are two vertices adjacent?
+• Are two vertices connected?
+
+– Modifications include:
+• Inserting or removing an edge
+• Inserting or removing a vertex (and all edges containing that vertex)
+==The run-time of these operations will depend on the representation==
