@@ -39,8 +39,7 @@ dfs(v)
 >Then we no longer have to revisited that node in the tree and neglect that path
 >
 ###### Implementation: 
-
-
+![[Pasted image 20250523145144.png | 300]]
 ### How to determine the route from s to t ?
 Create a table and update the table when we traverse dfs(v)
 ![[Pasted image 20250523093451.png | 400]]
@@ -57,6 +56,7 @@ By drawing it out like
 >![[Pasted image 20250523100641.png]]
 
 ## Shortest path problem
+![[Pasted image 20250523151423.png| 150]]![[Pasted image 20250523151413.png | 250]]![[Pasted image 20250523151456.png| 200]]
 Given: a graph G and vertices s and t
 Find: the path which has the shortest length from s to t.
 
