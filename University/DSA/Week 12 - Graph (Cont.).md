@@ -100,9 +100,32 @@ We initially don’t know the distance to any vertex except the initial vertex
 	+ We need to track visited vertices—a Boolean table of size |V|
 + Do we need to track the shortest path to each vertex?
 	+ That is, do I have to store (A, B, F) as the shortest path to vertex F? No
-
+[]
 ![[Pasted image 20250523105904.png | 400]]
 To find the adjacent neighbor of K
 ![[Pasted image 20250523105956.png | 400]]
 Now, we know that H, K form the shortest PATH
 ![[Pasted image 20250523110038.png | 400]]
+**Final Path** from K to every nodes
+![[Pasted image 20250523111027.png | 400]]
+![[Pasted image 20250523111428.png | 400]]
+
+### Comments on Dijkstra's algorithm
+Questions:
+• What if at some points, all unvisited vertices have a distance ∞?
+	• This means that the graph is unconnected
+	• We have found the shortest paths to all vertices in the connected subgraph containing the source vertex
+• What if we just want to find the shortest path between vertices vj and vk?
+	• Apply the same algorithm, but stop when we are visiting vertex vk (or visited status of vk is turned on T)
+• Does the algorithm change if we have a directed graph?
+	• No
+
+## Quiz
+Find the shortest path from A to other vertices using Dijkstra’s algorithm
+![[Pasted image 20250523111857.png | 300]]
+
+![[Pasted image 20250523113754.png]]
+
+**THE PROBLEM**:
+Dijkstra's algorithm will explore every edges and hence, 
+if we only want to find 1 location --> then it will be not optimized since they go to discover every paths
