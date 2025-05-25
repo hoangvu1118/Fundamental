@@ -123,6 +123,8 @@ Questions:
 ## Quiz
 Find the shortest path from A to other vertices using Dijkstra’s algorithm
 ![[Pasted image 20250523111857.png | 300]]
+![[Pasted image 20250523154028.png | 450]]
+
 
 ![[Pasted image 20250523113754.png]]
 
