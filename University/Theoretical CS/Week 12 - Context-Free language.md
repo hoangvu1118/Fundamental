@@ -1,5 +1,4 @@
 
-
 >[!Tip] Definition 5.2:
 > A derivation is said to be *leftmost if in each step* the leftmost variable in the sentential form is replaced. If in each step the *rightmost variable is replaced*, we call the *derivation rightmost*
 > ![[Pasted image 20250525201518.png | 400]]
@@ -33,7 +32,8 @@ An **algorithm** that can tell us whether **w is in L(G) is a membership algorit
 • The grammar S → SS | aSb | bSa | ab | ba 
 	• Given any w ∈ {a,b}+ , the exhaustive search parsing method will always **terminate** in no **more than |w| rounds.** 
 	This is clear because the length of the sentential form grows by *at least one symbol* in each round. After *|w| rounds* we have either produced a parsing or we know that w $\epsilon$ L(G).
-
+Round 0 is not count, we just listing out the rules 
+To check if the *w* can be written based on the preliminary  
 >[!Tip] Theorem 5.2:
 > Suppose that **G = (V, T, S, P**) is a **context-free** grammar that **does not have** any rules of the form              **A → λ, or A → B,** 
 > where A, B ∈ V.
@@ -47,4 +47,31 @@ An **algorithm** that can tell us whether **w is in L(G) is a membership algorit
 > and any pair (A, a) occurs **at most once in P.**
 > Example:
 > ![[Pasted image 20250525205741.png]]
+
+>[!Important] How to prove a s-Grammar
+>Cond.1: G1 satisfies the form A->ax with a is one terminal, x is string of variables $\epsilon$ V
+>Cond.2: (S,a) (S,b) (S,c) occur once in G1
+>+ Second case:
+>+ Cond1: G2 satisfies ....
+>+ (S,a) occur twice in G2 --> G2 is not s-Grammar
+
+>[!Example] 
+>S --> aS | bA
+>A --> aAA |b
+>Cond1: Gx satisfies...
+>Cond2: (S,a) (S,b) (A,a) (A,b) occurr once in G
+
+## Ambiguity in Grammars and Languages
+• Given any *w ∈ L(G)*, exhaustive search parsing will produce *a derivation tree for w.* 
+• A possibility that a number of different derivation trees may exist. This situation is referred to as **ambiguity**.
+--> more than 1 tree --> ambiguity (given 1 string)
+
+>[!Tip] Definition 5.5: 
+>A context-free grammar G is said to be ambiguous if there exists some *w ∈ L(G)* that has at least *two distinct derivation trees.* Alternatively, ambiguity *implies* the *existence of two or more leftmost or rightmost derivations.*
+
+To make a Grammar unambiguous
+![[Pasted image 20250526101414.png | 400]]
+
+>[!Tip] Definition 5.6:
+> If L is a context-free language for which there exists an unambiguous grammar G, then L is said to be unambiguous. If every grammar that generates L is ambiguous, then the language is called inherently ambiguous
 
