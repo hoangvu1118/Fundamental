@@ -77,4 +77,3 @@ To make a Grammar unambiguous
 
 + One of the most *important uses* of the theory of *formal languages* is in the definition of programming languages and in the construction of *interpreters and compilers* for them
 + Both *regular and context-free languages* are used to define a programming language. While regular languages are used in the *recognition of certain simple patterns* that occur in programming languages, context-free languages are needed to model more *complicated aspects*
-![[Pasted image 20250526111254.png | 450]]
