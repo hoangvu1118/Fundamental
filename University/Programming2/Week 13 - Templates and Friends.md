@@ -32,7 +32,8 @@ void display(const T &val) {
 
 One parameter function with an additional parameter which is note a template parameter: 
 ```cpp
-template void display(const T & val, osteam &os) { 
+template<class T>
+void display(const T & val, osteam &os) { 
 	os << val; 
 } 
 ```
@@ -62,7 +63,8 @@ When we want the function to behave different with respect to the parameters
 
 ## Table Lookup
 ```cpp
-template long indexOf( T searchVal, const T * table, unsigned size ) { 
+template <class T>
+long indexOf( T searchVal, const T* table, unsigned size ) { 
 	for (unsigned i = 0; i < size; i++) 
 		if (searchVal == table[i]) 
 			return i; 
