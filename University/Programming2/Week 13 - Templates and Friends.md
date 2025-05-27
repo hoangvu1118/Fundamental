@@ -102,8 +102,33 @@ Circle<unsigned, float> c2; // T1 will be unsigned, T2 will be float
 ```
 
 ### Array class templates
-
-
+```cpp
+template<class T>
+class Array {
+	public: 
+		Array( unsigned sz ); 
+		~Array(); 
+		T & operator[]( unsigned i ); 
+	private: 
+		T * values; 
+		unsiged size;
+};
+```
+This is a header 
+--> now implement 
+```cpp
+template<class T> Array<T>::Array( unsigned sz ) {
+	values = new T[sz]; size = sz; 
+} 
+template<class T> T & Array<T>::operator[] ( unsigned i ) {
+	if( i >= size ) { 
+		cout << "ERROR: array index out of bound!!!\n
+		abort(); 
+	} 
+	return values[i]; 
+} 
+template<class T> Array<T>::~Array() { delete [] values;}
+```
 ### Templates and Inheritance
 A **template is not a class** 
 	• A template is not inherited 
@@ -116,4 +141,25 @@ class Myclass : public aClass {
 //OK!!! 
 }
 ```
+Static members defined in a template are static members of the classes associated with a template 
+
+>[!Important]
+>If you want a class or function to be generic (work with different types), you must write `template<class T>` (or similar) before it.
+>--> I’m writing a **template** — not a normal function or class. The type `T` will be provided later.”
+
+What? Why? How? The result?
+
+## Friends
+A friend class is a class in which all member functions have been granted full access to all the (private, protected, and public) member of the class defining it as a friend(by instances)
+The friend class is declared inside the class granting friendship
+
++ In normal class, a class method (A) can access a public method of another class (B) in and only if class(A) has instance inside the method in A --> Then it can access **public** in B
++ In Friend class, this is more, A can access every fking thing in B (public, protected, private)
+
+### A friend function
+Similar to friend class but this time the scope is only for a **FUNCTION**
+Assume we got a class Employee
+Then we have a function in main like void printSalary()
+--> If we do not grand the **friend** access for printSalary --> then it cannot access to private and protected features in Employee
+--> if we put **friend void printSalary()** then that function have full right to access every element in Employee class
 
