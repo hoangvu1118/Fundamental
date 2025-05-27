@@ -163,3 +163,13 @@ Then we have a function in main like void printSalary()
 --> If we do not grand the **friend** access for printSalary --> then it cannot access to private and protected features in Employee
 --> if we put **friend void printSalary()** then that function have full right to access every element in Employee class
 
+>[!Warning]
+>Non-Symmetrical
+>+ c2 is friend of c1 but **c1 is not necessarily a friend of c2**
+>Non-Transitive
+>+ If c2 is a friend of c1 and c3 is a friend of c2, but c3 is not necessarily a friend of c1
+>Not inheritable 
+>+ A friend of a base class is not inherited by derived class
+
+➢Friends diminish encapsulation and information hiding
+➢Limit the use of “friends"
