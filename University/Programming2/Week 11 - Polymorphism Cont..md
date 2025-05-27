@@ -69,3 +69,13 @@ int main(){
     return 0;
 }
 ```
+
+>[!Tip]
+>A derived class knows about its base, but a base class knows nothing about who might derive from it.
+>"The base class is able to access the attribute and method in base (public only)." 
+>But the base class isn't "accessing" the derived class method The compiler/runtime is choosing the correct version of the method at runtime, via the virtual table (vtable) mechanism. 
+>
+>The base class definition knows only its own members. 
+>
+>The caller (e.g., main function or another class) may call virtual functions through base class pointers, and C++ ensures the correct override is called at runtime — if it's virtual.
+
