@@ -131,3 +131,15 @@ Find the shortest path from A to other vertices using Dijkstra’s algorithm
 **THE PROBLEM**:
 Dijkstra's algorithm will explore every edges and hence, 
 if we only want to find 1 location --> then it will be not optimized since they go to discover every paths
+
+## A* Algorithm
+Explore the direction first before exploring the path 
+>[!Tip] 
+>f(A) = W(s, A) + h(A, dest)
+Where:
+• W(s, A): the sum of weights from source s to A (as Dijkstra’s Algorithms)
+• h(A, dest): the estimated weights (or cost) from A to destination
+	• h(A, dest) is a heuristic function collected from experience or from other sources.
+	• We need to know this information before finding the shortest path => informed search
+--> Basically **we use Dijkstra algorithm but with informed information, the distance**
+
