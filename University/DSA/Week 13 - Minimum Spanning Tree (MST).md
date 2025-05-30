@@ -20,6 +20,9 @@ There is **no source** for a MST.
 Nonetheless, the MST sometimes happens to be an SPT for **a specific vertex.**
 For a **weighted undirected graph**, there is only **1 MST** and the number of edges of a MST **is V-1** if its edge weights are unique.
 
+## Finding Union --> Cycle
+![[Pasted image 20250530150727.png]]
+
 ## Algorithm 
 Basic : Just random cut
 Start with no edges in the MST.
@@ -30,4 +33,5 @@ This should work, but we need some way of finding a cut with no crossing edges!
 ● Random isn’t a very good idea
 
 ### Prim's Demo
+![[Pasted image 20250530152302.png | 450]]
 ### Optimized Prim's --> Using Priority Queue

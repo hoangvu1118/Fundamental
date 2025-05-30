@@ -142,4 +142,6 @@ Where:
 	• h(A, dest) is a heuristic function collected from experience or from other sources.
 	• We need to know this information before finding the shortest path => informed search
 --> Basically **we use Dijkstra algorithm but with informed information, the distance**
+![[Pasted image 20250530145117.png | 500]]![[Pasted image 20250530145159.png|200]]
+
 
