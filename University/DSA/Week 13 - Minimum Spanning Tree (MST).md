@@ -20,4 +20,14 @@ There is **no source** for a MST.
 Nonetheless, the MST sometimes happens to be an SPT for **a specific vertex.**
 For a **weighted undirected graph**, there is only **1 MST** and the number of edges of a MST **is V-1** if its edge weights are unique.
 
+## Algorithm 
+Basic : Just random cut
+Start with no edges in the MST.
+● Find a cut that has no crossing edges in the MST.
+● Add smallest crossing edge to the MST.
+● Repeat until MST has V-1 edges.
+This should work, but we need some way of finding a cut with no crossing edges!
+● Random isn’t a very good idea
 
+### Prim's Demo
+### Optimized Prim's --> Using Priority Queue
