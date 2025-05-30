@@ -35,3 +35,10 @@ This should work, but we need some way of finding a cut with no crossing edges!
 ### Prim's Demo
 ![[Pasted image 20250530152302.png | 450]]
 ### Optimized Prim's --> Using Priority Queue
+![[Pasted image 20250530154111.png | 450]]
+>[!Important] Compare Dijkstra | |  Prim
+>Prim’s and Dijkstra’s algorithms are exactly the same, except Dijkstra’s considers “**distance from the source**”, and Prim’s considers “**distance from the tree".**
+>Visit order:
+● Dijkstra’s algorithm visits vertices **in order of distance** from the source.
+● Prim’s algorithm visits vertices **in order of distance from the MST** under construction.
+The running time is O(V2) without heaps, and O(E ln(V)) using binary heaps
