@@ -1,4 +1,4 @@
-8888 **Objective** 
+**Objective** 
 + s-t Path: Is there a path between vertices s and t?
 	+ Traversal
 + Shortest s-t Path: how to find the shortest path between vertices s and t?
