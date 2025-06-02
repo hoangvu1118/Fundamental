@@ -39,7 +39,7 @@ int main(){
 ```
 
 ### Order of Constructor and Destructor Execution
-Base class constructors are always executed first
+**Base class** constructors are always executed first
 Destructors are executed in *reverse order of constructors*
 
 ### Overriding
@@ -63,11 +63,11 @@ Look back at the "opt" so if the specifiers is PUBLIC
 -> Then the public and protected will remain the same in the derived class
 
 #### Private Inheritance
-public and protected members of the base class become private members of the derived class
+public and protected members of the base class become **private** members of the derived class
 ![[Pasted image 20250415135859.png | 300]]
 
 #### Protected Inheritance
-public and protected members of the base class become protected members of the derived class
+public and protected members of the base class become **protected** members of the derived class
 ![[Pasted image 20250415135932.png | 300]]
 
 **Constructor - Initializers**
@@ -88,7 +88,7 @@ Destructors are called implicitly starting with the last derived class and movin
 ### Nested Class Scope
 ➢A public or protected base class member that is hidden from the derived class can be accessed using the scope resolution operator “::”
 ➢**For example: base-class::member** 
-➢On the contrary, the base class cannot access the members of its derived classes
+➢On the contrary, the base class *cannot access* the members of its derived classes
 
 ### Implicit Conversion of Derived Pointers to Base Pointers
 ➢A base type pointer can point to either a base object or a derived object

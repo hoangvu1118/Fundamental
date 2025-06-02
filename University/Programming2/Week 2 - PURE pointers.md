@@ -159,7 +159,8 @@ It includes the following properties
 + The data and method are given in the class definition
 + Classes provides us with this feature - Encapsulation
 
-➢Allows for modularity  ➢Controls access to data 
+➢Allows for modularity  
+➢Controls access to data 
 ➢Separates implementation from interface ➢Extends the built-in types
 
 ![[Pasted image 20250312203719.png]]

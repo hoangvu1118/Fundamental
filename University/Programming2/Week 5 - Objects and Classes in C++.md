@@ -151,6 +151,7 @@ This is a Copy Constructor
 + So y also use this address to access the array
 + -> The array will be shadow copy and changes make will affect both objects' arrays
 ## Composite Classes
+"has-a" relationship
 + Class which contain data members that are objects of other classes
 + When a class contains *instances, references, or pointers* to other classes -> composite class
 A Circle contains a Point; a Figure contains an array of Points

@@ -12,7 +12,7 @@ morph: forms/ shapes
 + Inclusion Polymorphism or Overriding
 
 #### Overloading
-When we want to do the same action but for different parameters
+When we want to do the same action but for *different parameters*
 ```cpp
 int add(int a, int b) { return a + b; }
 float add(float a, float b} { return 1.0 + a + b; }

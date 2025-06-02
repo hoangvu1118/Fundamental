@@ -29,7 +29,8 @@ A good example for real-world objects **A person**
 ### 1.2 Virtual objects
 Objects that exist in programs only:
 +Virtual objects consist of the above features
-• Virtual objects are **much more precise** in their names, borders, interactions, etc. • Virtual objects are the *basic components* for your ==object oriented program==
+• Virtual objects are **much more precise** in their names, borders, interactions, etc. 
+• Virtual objects are the *basic components* for your ==object oriented program==
 
 Example: 
 **A bank account**

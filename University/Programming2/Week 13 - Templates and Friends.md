@@ -1,4 +1,4 @@
-## Objectives
+## Course Objectives
 + ADT
 + Encapsulation 
 + Inheritance
@@ -149,8 +149,8 @@ Static members defined in a template are static members of the classes associate
 >If you want a class or function to be generic (work with different types), you must write `template<class T>` (or similar) before it.
 >--> I’m writing a **template** — not a normal function or class. The type `T` will be provided later.”
 
+#### Report
 What? Why? How? The result?
-
 ## Friends
 A friend class is a class in which all member functions have been granted full access to all the (private, protected, and public) member of the class defining it as a friend(by instances)
 The friend class is declared inside the class granting friendship
