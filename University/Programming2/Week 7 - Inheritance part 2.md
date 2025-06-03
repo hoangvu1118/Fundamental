@@ -117,3 +117,6 @@ It is **a nested inner class whose functions and member variables can be overrid
 We use virtual for solving diamond problem
 When a class inherits from multiple classes that share common ancestor, so w/o Virtual -> it may ended up storing duplicate copies of the ancestor's members
 
+>[!Tip] Derived class of the same branch
+>As long as the derived class (child) is not sibling, meaning that they're further derived from the base class --> then it can access the protected, public member of the base class by using pointer (this) or it can have a instance inside other derived class member. It has to be the same *branch*
+
