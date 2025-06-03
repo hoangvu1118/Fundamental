@@ -53,3 +53,4 @@ We have seen 4 divide and conquer algorithms:
 >	+ In merge sort, b = 2
 >	+ In 3$^n$, b = 2
 
+   
