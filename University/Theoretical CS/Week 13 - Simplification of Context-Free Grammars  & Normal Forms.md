@@ -18,7 +18,7 @@ The production S → A clearly plays **no role,** as A cannot be transformed int
 
 >[!Tip] Steps to remove USELESS
 >Two cases in which a variable is useless
->1. Either it *cannot derive* a terminal string: A ==>* w ∈ `T*`
+>1. Either it *cannot derive* a terminal string: A ==>`*` w ∈ `T*`
 >2. Or it *cannot be reached* from the *start* symbol: S ==> * xAy
 >![[Pasted image 20250526211721.png | 500]]
 
