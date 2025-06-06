@@ -32,3 +32,28 @@ The production S → A clearly plays **no role,** as A cannot be transformed int
 ![[Pasted image 20250526212042.png | 400]]  
 Just edges without any label 
 the final answer is: Grammar 𝐺^= (𝑉^, 𝑇^, S, 𝑃^) with 𝑉^= {𝑆, 𝐴}  ,𝑇^ ={a}, 𝑃^: ![[Pasted image 20250526212055.png | 100]]
+
+>[!Important]
+>When every we reducing the *useless* productions
+>+ We have to remove sequentially from *case 1* --> *case 2*
+
+
+>[!Important] Implementation Tips
+>Case 1: A is useless as A cannot derive a terminal string 
+>--> Remove A and its associated production (2, 3, 4)
+>==> P^ : S--> aSb | ab (1, 2)
+>         B --> b (5)
+> Case 2: Dependency graph of P$^$ below
+> --> Draw it out 
+> --> B is useless
+> ==> Removing B and its associated rules
+> P^' : S--> aSb | ab (1, 2)
+> Finally, P^'
+
+## Removing $\lambda$ production
+>[!Definition]
+>![[Pasted image 20250606101031.png | 400]]
+>A grammar may generate a language not containing λ, yet have some λ productions or nullable variables. In such cases, the λ-productions can be removed
+
+
+
