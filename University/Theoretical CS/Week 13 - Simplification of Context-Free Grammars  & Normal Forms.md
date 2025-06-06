@@ -54,6 +54,16 @@ the final answer is: Grammar 𝐺^= (𝑉^, 𝑇^, S, 𝑃^) with 𝑉^= {𝑆, 
 >[!Definition]
 >![[Pasted image 20250606101031.png | 400]]
 >A grammar may generate a language not containing λ, yet have some λ productions or nullable variables. In such cases, the λ-productions can be removed
+Example
+![[Pasted image 20250606104933.png | 400]]
 
+## Removing Unit-Productions:
+>[!Definition]
+>![[Pasted image 20250606105029.png | 400]]
+
+Unit-production: Exact 1 Variable derived from 1 variable
+>[!Warning] Dependency Graph
+>The edges in the USELESS removing is not having the direction
+>*For removing Unit-production* edges have direction
 
 
