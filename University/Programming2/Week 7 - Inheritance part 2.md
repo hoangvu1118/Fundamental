@@ -91,7 +91,7 @@ Destructors are called implicitly starting with the last derived class and movin
 ➢On the contrary, the base class *cannot access* the members of its derived classes
 
 ### Implicit Conversion of Derived Pointers to Base Pointers
-➢A base type pointer can point to either a base object or a derived object
+➢A base type pointer can point to either a base object or a derived **object**
 
 ```Cpp
 // Assume Point3D is derived from Point 
