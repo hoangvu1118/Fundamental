@@ -22,3 +22,9 @@ One instance of this is the Chomsky normal form
 > ![[Pasted image 20250609092128.png | 300]] ![[Pasted image 20250609092350.png|300]]
 ### Chomsky Algorithm:
 
+## Greibach Normal Form
+>[!Tip] Definition
+>![[Pasted image 20250609113503.png]]
+
+Slightly difference from s-grammar ![[Pasted image 20250609113748.png]]
+Greibach does not have that *red line*
