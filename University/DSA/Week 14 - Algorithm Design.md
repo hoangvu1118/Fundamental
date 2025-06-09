@@ -28,6 +28,8 @@ The second requires only an approximately optimal solution
 In the second case, it would be **desirable**, but **not necessary**, to find the exact optimal solution.
 
 # Greedy Algorithm
+*Intuition*: Start with the most obvious (largest / smallest order, direction, etc.)
+
 A greedy algorithm is an algorithm which has: 
 • A set of partial solutions from which a solution is built 
 • An objective function which assigns a value to any partial solution
@@ -35,15 +37,12 @@ A greedy algorithm is an algorithm which has:
 Then given a partial solution, we 
 • Consider possible extensions of the partial solution
 • Discard any extensions which are not feasible
-• Choose that extension which minimizes the object function
+	• Choose that extension which minimizes the object function
 
 >[!Tip] Note:
 >Some algorithm-design technique, 
 >+ Some problems, appropriately designed greedy may find either *optimial* or *near-optimal* solutions
 >+ Other, greedy may perform poor or even no result at all
-
-
-
 # Divide and Conquer Algorithm
 We have seen 4 divide and conquer algorithms:
 + Merge Sort
