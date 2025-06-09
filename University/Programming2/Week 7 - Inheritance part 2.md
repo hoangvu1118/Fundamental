@@ -89,7 +89,8 @@ Destructors are called implicitly starting with the last derived class and movin
 ➢A public or protected base class member that is hidden from the derived class can be accessed using the scope resolution operator “::”
 ➢**For example: base-class::member** 
 ➢On the contrary, the base class *cannot access* the members of its derived classes
-
+![[Pasted image 20250609220125.png]]
+Dog is derived from Mammal and Speak is virtual function
 ### Implicit Conversion of Derived Pointers to Base Pointers
 ➢A base type pointer can point to either a base object or a derived **object**
 
