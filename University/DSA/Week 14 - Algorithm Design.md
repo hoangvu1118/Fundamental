@@ -37,6 +37,13 @@ Then given a partial solution, we
 • Discard any extensions which are not feasible
 • Choose that extension which minimizes the object function
 
+>[!Tip] Note:
+>Some algorithm-design technique, 
+>+ Some problems, appropriately designed greedy may find either *optimial* or *near-optimal* solutions
+>+ Other, greedy may perform poor or even no result at all
+
+
+
 # Divide and Conquer Algorithm
 We have seen 4 divide and conquer algorithms:
 + Merge Sort
@@ -46,6 +53,10 @@ We have seen 4 divide and conquer algorithms:
 + A larger problem is broken up into smaller problems
 + The smaller problems are recursively
 + The results are combined together again into a solution
+Thus, just using a divide-and-conquer algorithm does not solely determine the run time 
+**We must also consider** 
+• The effort required to **divide** the problem into **two sub-problems** 
+• The effort required to **combine** the two solutions to the sub-problem
 
 >[!important] 
 >More formally, we consider those algorithms which: 
@@ -53,4 +64,12 @@ We have seen 4 divide and conquer algorithms:
 >	+ In merge sort, b = 2
 >	+ In 3$^n$, b = 2
 
-   
+# Summary
+Brute Force 
+• We consider all possible solutions, and find that solution which is optimal 
+
+ Greedy algorithms 
+ • We extend a partial solution to a feasible solution 
+
+Divide-and-conquer algorithms 
+• We divide a problem to many sub-problem
