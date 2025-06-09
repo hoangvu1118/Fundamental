@@ -30,7 +30,11 @@ int main() {
 }
 ```
 Some compiler return error however, if it runs the float function will be called -> since it will typecasting 1 to 1.0
-
+Coercion usually **converts the "lesser" type to the "greater" type** to prevent loss of information. This often means:
+- **Integer → Float**
+- **Char → Integer**
+- **Smaller type → Larger type**
+- **Non-string → String (in concatenation)**
 #### Parametric Polymorphism
 ➢Provides means to execute the same code for any type 
 ➢In C++ parametric polymorphism is implemented via templates.
