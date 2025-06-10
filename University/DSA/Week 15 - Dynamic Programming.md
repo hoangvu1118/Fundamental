@@ -70,4 +70,11 @@ For each row,  compare to the previous one, either include or exclude the curren
 For the inclusion, check if there is available weight to put the items before it 
 like for sleepingB --> put at weight = 3 --> then extra 1 kilogram is left --> go to check `dp[1][3-2]` --> 0 so we keep the 100 since we cannot put anything else
 v = money at that position
+
+The exclusion is this formular (when the weight exceed the remaining weight)
+![[Pasted image 20250610111256.png | 300]]
 ## Unbounded Knapsack problem
+Similar to above approach but this time, we can pick one item multiple time
+So the formular is slightly difference:
+![[Pasted image 20250610110637.png | 450]]
+
