@@ -57,3 +57,17 @@ int Fibonacci( int N ){
 ![[Pasted image 20250610094054.png | 400]]
 ## **Dynamic refers to the fact that it’s multi-stage**
 
+### Knapsack problem 
+![[Pasted image 20250610101720.png]]
+the formular if else is to either 
++ **include the item previous to that**
++ **exclude the previous item**
+
+![[Pasted image 20250610102824.png]]
+
+We gonna go from bottom up (from 0 item to 4)
+For each row,  compare to the previous one, either include or exclude the current item. 
+For the inclusion, check if there is available weight to put the items before it 
+like for sleepingB --> put at weight = 3 --> then extra 1 kilogram is left --> go to check `dp[1][3-2]` --> 0 so we keep the 100 since we cannot put anything else
+v = money at that position
+## Unbounded Knapsack problem
