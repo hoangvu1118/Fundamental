@@ -1,6 +1,6 @@
 ## 1. Algorithm Analysis
 ### 1.1 Abstract:
-- T(N) : time complexity --> it a function with N is the input
+- T(N) : time complexity --> it's a function with N is the input
 - Count number of *abstract simple steps*
 	- Not physical runtime in seconds
 	- not every machine *instruction*
@@ -113,7 +113,7 @@ for (i = 1; i <= N; i++) { // (2) i initialization → 1 op
 
 - **Small  o(f(n))**:
     - T(n) grows **strictly slower** than f(n).
-    - Example: T(n)=n is o(n$^2$), but T(n)=3n$^2$ is **not** o(n$^2$).
+    - Example: T(n)=n is o(n$^2$), but T(n)=3n$^3$ is **not** o(n$^2$). --> $\frac{n^2}{n^3}$ = $\frac{1}{n}$ = 0 
 To find small o --> find the limit and make sure it equals to 0:  $\lim_{ n \to \infty }$ $\frac{T(N)}{f(n)}$ = 0 
 --> Otherwise it is not small o =>  T(n)≠o(f(n))
 
