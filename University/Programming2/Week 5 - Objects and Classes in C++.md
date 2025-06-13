@@ -120,7 +120,15 @@ Point() and Point(int, int) are *overloaded constructors*
 for creating each of elements -> *default constructor*
 *Alternate constructor*
 ![[Pasted image 20250408062125.png | 350]]
-
+>[!Warning]
+>For private member that use "has a relationship" 
+>+ Normal object 
+>	+ Course course 
+>	+ Then in the constructor we can call the constructor of *course* like this 
+>	+ course(ID, classname)
+>+ Pointer : since pointer will make constructor of `Course` will **not** be called automatically
+>	+ So we have to do like this
+>	+ course = new Course(courseCode, courseName);
 ### Pointers to Class Objects
 ```Cpp
 Student *p; 
