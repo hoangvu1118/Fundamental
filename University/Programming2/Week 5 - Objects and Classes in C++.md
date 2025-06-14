@@ -93,6 +93,9 @@ class B {
 --> only works when we include "friend" class inside class A
 --> otherwise, it will trigger errors, since outsiders cannot access private data other others
 
+**Advantages of Objects** 
+➢Same as Abstract Data Types • Information hiding • Data abstraction • Procedural abstraction 
+➢Inheritance provides further data abstraction • Easier and less error-prone product development • Easier maintenance
 ## Inline - Outline functions
 *In-line* : functions are defined within the body of the class definition
 *Out-of-line* : functions are *declared* within the body of the class definition and *defined* outside --> similar to *Friend class example*
@@ -105,7 +108,8 @@ Guarantees that the state of the current class object is not modified by the fun
 ![[Pasted image 20250404101534.png | 200]]
 So the getX() will not allowed to change value of x
 
-## Constructors - it is a method
+## Constructors - **special member function** of a class.
+**Doesn’t have a return type**, not even `void`.
 + Called to create and object
 + Declared with the name : classname(...);
 + **Default constructors**: no parameters
@@ -146,11 +150,12 @@ OR it is to be deleted
 	cout << “Destructor called.”;
 }
 ```
-
+**If a copy constructor is not defined in a class, the compiler itself defines one**
 ## Deep Copy Operation
 #Deepcopy
 Look above 
-
+For string that is creates using *char* keyword, have to use strcpy() 
+![[Pasted image 20250614091637.png]]
 
 ![[Pasted image 20250408065014.png]]
 This constructure in student y -> deep copy element from x to y 

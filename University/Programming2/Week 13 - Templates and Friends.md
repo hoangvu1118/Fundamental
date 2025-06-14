@@ -15,6 +15,7 @@
 A function can be defined in terms of an unspecified type
 The **compiler** generates **separate** versions of the function based on the type of the **arguments passed** in the function calls
 
+A **class or function in C++ can use as many templates as you need** — there's no strict limit imposed by the language itself.
 ## Function template
 ```cpp
 template <class T>
@@ -175,3 +176,18 @@ Then we have a function in main like void printSalary()
 
 ➢Friends diminish encapsulation and information hiding
 ➢Limit the use of “friends"
+
+## Array class template
+![[Pasted image 20250614094138.png | 200]] ![[Pasted image 20250614094154.png | 250]]![[Pasted image 20250614094231.png | 200]]
+
+
+**A template is not a class**
+• A template is not inherited ➢ A class based on a template is an ordinary class
+
+**Remember** 
+• Template is not class 
+➢**Static** members defined in a template are **static members of the classes** associated with a template
+
+
+
+

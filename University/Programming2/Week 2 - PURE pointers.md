@@ -181,4 +181,8 @@ Poly : many
 Morph: form 
 --> Polymorphism --> coexist in more than one form
 Meaning: the ability to response differently to the same message or function/method call
-C++ supports **function overloading** and **operator overloading** to implement polymorphism
+C++ supports **function overloading** and **operator overloading** to implement *polymorphism*
+
+Overriding is **a kind of polymorphism**, but it relies on **inheritance** to work
+- **Inheritance** enables overriding.
+- **Overriding** is an example of **(runtime) polymorphism**.

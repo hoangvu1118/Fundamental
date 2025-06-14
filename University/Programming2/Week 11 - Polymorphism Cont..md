@@ -37,6 +37,13 @@ Operators like `*` and `+` have fixed rules for **what order they’re evaluated
 >[!Warning] 
 >If we use *operator overloading* we can not assign default value for the parameter
 >Wrong --> int operator +(int a = 0);
+
+## Note for Increment Postfix and Prefix
+Compiler sees ++a, it generates a call to 
+	Time::operator++(); 
+When it sees b++ it calls 
+	Time::operator++(int);
+The compiler passes a dummy constant value for the **int** argument to generate the **different signature** for the postfix version
 ### The arity of the operator cannot be changed
 "Arity" means the **number of inputs** an operator takes.
 ![[Pasted image 20250513142147.png | 660]]
@@ -45,7 +52,6 @@ Point operator+(Point); // ✅ fine (2 operands)
 Point operator+();      // ❌ invalid (wrong number of operands)
 ```
 ❌ Only existing operators may be overloaded
-
 
 ```cpp
 class Compute{
@@ -69,6 +75,13 @@ int main(){
     return 0;
 }
 ```
+
+
+## Copy Constructor
+![[Pasted image 20250614093841.png | 400]]
+
+## Assignment Operator
+![[Pasted image 20250614093926.png | 400]]
 
 >[!Tip]
 >A derived class knows about its base, but a base class knows nothing about who might derive from it.

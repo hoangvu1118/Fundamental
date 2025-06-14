@@ -176,3 +176,29 @@ myShapePtr = new Circle(10.0); // Pointing to a Circle object
 - Each derived class (`Circle`, `Rectangle`) provides its specific implementation of that interface.
 - By using a pointer or reference to the base class type (`Shape*` or `Shape&`), you can hold objects of _any_ derived type.
 
+➢ The purpose of an abstract class is to provide an appropriate base class from which other classes can inherit. Abstract classes often represent concepts for which objects cannot exist 
+➢ Abstract classes cannot be used to instantiate objects and serves only as an interface. Attempting to instantiate an object of an abstract class causes a compilation error 
+➢ In contrast, classes that can be used to **instantiate objects** are called **concrete classes**
+## Summary
+Four types of Polymorphism
+• Runtime polymorphism 
+• Parametric polymorphism (compile time polymer.)=>Templates 
+• Ad-hoc polymorphism (Overloading) 
+• Coercion polymorphism (Casting)
+
+Inclusion Polymorphism (via Overriding)
+It’s when a **base class pointer or reference** can point to objects of **derived classes**, and the correct method is chosen at **runtime** — this is done using **overriding**.
+
+Why is it important?
+**Flexibility & Extensibility:** You can write code that works on base class types but behaves differently for each derived class.
+**Key to OOP Principles:** Supports the **Open/Closed Principle** — code open for extension but closed for modification.
+![[Pasted image 20250614093142.png | 400]]
+
+## Vtable
+C++ (and Java) use the virtual table (vtable) mechanism to **implement dynamic binding**
+• A class with **virtual member** functions has a virtual table which contains the **address** of its virtual functions 
+• An object of such a class has a pointer (**vptr**) to point to the virtual table of the class 
+• Dynamic binding is done by 
+1. Following the vptr to reach the virtual table of the class 
+2. Looking up the virtual table for the entry point of the appropriate function at run-time
+3. ![[Pasted image 20250614093318.png | 200]]
