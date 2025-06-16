@@ -34,4 +34,13 @@ Use **Transition Graphs** to represent npda's by l*abelling the edges* of the gr
 ![[Pasted image 20250616102352.png | 300]]
 
 ![[Pasted image 20250616102430.png | 400]]
-]
+
+The flow of NPDA is from bottom up
+![[Pasted image 20250616104008.png | 400]]
+![[Pasted image 20250616104316.png | 400]]
+Another Example 
+--> Assume that between 2 string *w* there is a lambda 
+![[Pasted image 20250616111853.png | 400]]
+![[Pasted image 20250616111908.png | 400]]
+
+## Pushdown Automata and Context-Free Languages
