@@ -12,10 +12,9 @@ For the fibonnacci problem, we take the result store it in array and use it for 
 	+ Fibonacci : F(i) for i $\leq$ n
 + The solution to a problem can be expressed in terms of solutions to smaller sub-problems
 	+ Fibonacci: F(i+1) = F(i) + F(i-1)
-xx
 ### 2. Overlapping sub-problem:
 + The sub-problems overlap a lot. (*This make this algorithm difference from Divide and Conquer*)
-	+ If problem is not overlap then do not use Dynamic Programming (like in Fibonacci)
+	+ If problem is not overlap then do not use Dynamic Programming (overlap like in Fibonacci)
 	+ So by using DP --> we save time, by solving a subproblem *once* and *save* them
 + Optimal substructure. 
 	+  Optimal solutions to sub-problems are sub-solutions to the optimal solution of the original problem. 

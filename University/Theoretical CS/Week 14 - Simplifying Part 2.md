@@ -1,5 +1,6 @@
 >[!Important]
 >![[Pasted image 20250606113517.png | 450]]
+
 # Two important normal forms:
 A normal form is one that, although restricted, is broad enough so that any grammar has an equivalent normal-form version:
 **2 popular normal form:**
