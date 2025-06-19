@@ -48,9 +48,8 @@ Add a pointer to this child in the link list of its parents
 One of the children becomes the new root
 Other children of old root become the children of the new root
 
-![[Pasted image 20250415093713.png | 300]] ![[Pasted image 20250415093719.png | 300]]
+ ![[Pasted image 20250415093719.png | 300]]![[Pasted image 20250415093713.png | 300]]
 
-Look from right --> left
 
 ## Tree Traversal (Tree search)
 Many algorithms involve walking through a tree, and performing some computation at each node
@@ -104,7 +103,7 @@ The largest DEPTH of a binary tree of N nodes : **N - 1** | Worst Case
 ![[Pasted image 20250415101819.png | 400]]
 
 ## Binary Search Tree (BST)
-Time complexity of searching in binary tree is O(N)
+Time complexity of searching in binary tree is O(logN) --> worst case -> O(N) for unbalance tree
 For BST -> Reduce time to O(logN) in average case
 
 >[!Definition] Binary Search Tree
