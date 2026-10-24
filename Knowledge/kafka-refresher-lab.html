@@ -1,0 +1,954 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Kafka Refresher Lab</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky block rail on top; each block = reading column (topics) beside a hands-on lab bench. Messages are drawn as log cells with offsets. */
+:root {
+  --bg: #eef2f4;
+  --surface: #fbfcfd;
+  --sunk: #e3e9ed;
+  --ink: #13232e;
+  --muted: #566673;
+  --line: #cdd7de;
+  --accent: #0b7a70;
+  --accent-soft: #d3eeea;
+  --warm: #b4601a;
+  --warm-soft: #f6e3d0;
+  --plum: #7a4c9e;
+  --plum-soft: #ebe0f4;
+  --ok: #1d7a3a;
+  --ok-soft: #dbf0e1;
+  --bad: #b3261e;
+  --bad-soft: #f8dcd9;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171d; --surface: #16222a; --sunk: #0c1419; --ink: #e3ebf0; --muted: #93a4b1; --line: #2a3a45;
+    --accent: #3cc2b3; --accent-soft: #123b38; --warm: #e79a52; --warm-soft: #3b2816; --plum: #b98ee0; --plum-soft: #2d2140;
+    --ok: #5fcf80; --ok-soft: #14301f; --bad: #f07b72; --bad-soft: #3b1917; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171d; --surface: #16222a; --sunk: #0c1419; --ink: #e3ebf0; --muted: #93a4b1; --line: #2a3a45;
+  --accent: #3cc2b3; --accent-soft: #123b38; --warm: #e79a52; --warm-soft: #3b2816; --plum: #b98ee0; --plum-soft: #2d2140;
+  --ok: #5fcf80; --ok-soft: #14301f; --bad: #f07b72; --bad-soft: #3b1917; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+.gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 1240px; margin: 0 auto; }
+h1, h2, h3, h4 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.2; }
+code, .mono { font-family: var(--font-mono); font-size: 0.9em; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* header */
+header { background: var(--surface); border-bottom: 1px solid var(--line); }
+header .inner { padding-block: 22px 16px; display: flex; flex-wrap: wrap; gap: 12px 32px; align-items: end; justify-content: space-between; }
+.brand h1 { font-size: clamp(26px, 4vw, 36px); letter-spacing: -0.01em; }
+.brand h1 span { color: var(--accent); }
+.brand p { margin: 6px 0 0; color: var(--muted); max-width: 62ch; }
+.progress { display: flex; flex-direction: column; gap: 6px; min-width: 200px; }
+.progress .lbl { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.progress .bar { height: 8px; border-radius: 4px; background: var(--sunk); overflow: hidden; }
+.progress .bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+
+/* rail */
+nav.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
+nav.rail .inner { display: flex; gap: 6px; overflow-x: auto; padding-block: 10px; scrollbar-width: thin; }
+.rail button {
+  flex: 0 0 auto; border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 6px 12px; font-size: 13.5px;
+  display: inline-flex; gap: 8px; align-items: center; white-space: nowrap;
+}
+.rail button b { font-family: var(--font-mono); font-weight: 500; color: var(--muted); }
+.rail button.done b { color: var(--ok); }
+.rail button[aria-current="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.rail button[aria-current="true"] b { color: var(--bg); }
+
+main .inner { padding-block: 28px 64px; }
+.block-head { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; justify-content: space-between; margin-bottom: 20px; }
+.block-head .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+.block-head h2 { font-size: clamp(24px, 3.4vw, 32px); }
+.block-head p { margin: 4px 0 0; color: var(--muted); max-width: 70ch; }
+
+.grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 28px; align-items: start; }
+@media (max-width: 920px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* topics */
+.topics { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+.topic { min-width: 0; }
+.topic h3 { font-size: 19px; display: flex; gap: 10px; align-items: baseline; }
+.topic h3 .n { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--muted); min-width: 1.6em; }
+.topic p, .topic ul { margin: 6px 0 0; max-width: 65ch; }
+.topic ul { padding-left: 1.2em; }
+.topic li { margin: 2px 0; }
+.repo { margin-top: 10px; background: var(--sunk); border-radius: 8px; padding: 10px 12px; overflow-x: auto; }
+.repo .tag { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 4px; }
+.repo pre { margin: 0; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.5; white-space: pre; }
+.note { margin-top: 18px; border-top: 1px solid var(--line); padding-top: 16px; display: flex; flex-direction: column; gap: 14px; }
+.note h4 { font-size: 15px; font-family: var(--font-body); font-weight: 600; }
+.note p { margin: 4px 0 0; max-width: 65ch; }
+details.recall { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; }
+details.recall summary { cursor: pointer; font-weight: 600; }
+details.recall .q { margin: 8px 0 0; }
+details.recall .a { margin: 8px 0 0; padding: 8px 10px; border-radius: 6px; background: var(--accent-soft); }
+.skip { font-size: 13.5px; color: var(--muted); }
+.foot { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); }
+.foot .pn { display: flex; gap: 8px; }
+
+/* lab */
+.lab { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+.lab > h3 { font-size: 13px; font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+.try { background: var(--warm-soft); border-radius: 10px; padding: 10px 14px 10px 14px; }
+.try b { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--warm); }
+.try ol { margin: 4px 0 0; padding-left: 1.3em; font-size: 14px; }
+.part { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.part + .part { border-top: 1px dashed var(--line); padding-top: 16px; }
+.part h4 { font-size: 16px; }
+.ctrl { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.ctrl .lbl { font-size: 13px; color: var(--muted); min-width: 120px; }
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); }
+.seg button { border: 0; background: transparent; padding: 5px 10px; font-size: 13.5px; border-right: 1px solid var(--line); }
+.seg button:last-child { border-right: 0; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--surface); }
+.btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.btn { border: 1px solid var(--line); background: var(--bg); border-radius: 8px; padding: 6px 11px; font-size: 13.5px; }
+.btn:hover:not(:disabled) { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--surface); font-weight: 600; }
+.btn.danger { color: var(--bad); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.result { border-radius: 8px; padding: 9px 12px; font-size: 14px; background: var(--sunk); }
+.result.ok { background: var(--ok-soft); }
+.result.ok strong { color: var(--ok); }
+.result.bad { background: var(--bad-soft); }
+.result.bad strong { color: var(--bad); }
+.log { list-style: none; margin: 0; padding: 8px 10px; background: var(--sunk); border-radius: 8px; font-family: var(--font-mono); font-size: 12.5px; max-height: 190px; overflow-y: auto; display: flex; flex-direction: column; gap: 2px; min-height: 40px; }
+.log li.bad { color: var(--bad); }
+.log li.ok { color: var(--ok); }
+.log li.dim { color: var(--muted); }
+
+/* boxes */
+.box { border: 1.5px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.box > .cap { font-size: 11.5px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.box.net { border-style: dashed; border-color: var(--accent); }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+.node { border: 1px solid var(--line); background: var(--bg); border-radius: 8px; padding: 6px 10px; font-size: 13px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.node b { font-family: var(--font-mono); font-weight: 500; }
+.node small { color: var(--muted); font-size: 11.5px; }
+.node.hl { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.node.down { opacity: .45; border-style: dashed; }
+.node.app { background: var(--warm-soft); border-color: var(--warm); }
+.chip { display: inline-block; font-family: var(--font-mono); font-size: 11.5px; border-radius: 999px; padding: 1px 8px; background: var(--sunk); color: var(--muted); }
+.chip.ok { background: var(--ok-soft); color: var(--ok); }
+.chip.bad { background: var(--bad-soft); color: var(--bad); }
+.chip.acc { background: var(--accent-soft); color: var(--accent); }
+
+/* partition lanes */
+.lanes { display: flex; flex-direction: column; gap: 6px; overflow-x: auto; }
+.lane { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 8px; align-items: center; }
+.lane > .lname { font-family: var(--font-mono); font-size: 12px; color: var(--muted); line-height: 1.25; }
+.lane > .lname b { color: var(--ink); font-weight: 500; display: block; }
+.cells { display: flex; flex-wrap: wrap; gap: 4px; min-height: 40px; padding: 4px; border-radius: 8px; background: var(--sunk); align-items: center; }
+.cell { min-width: 44px; border-radius: 6px; padding: 3px 6px; font-size: 11.5px; line-height: 1.25; background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; position: relative; }
+.cell .o { font-family: var(--font-mono); color: var(--muted); font-size: 10.5px; }
+.cell.k1 { background: var(--warm-soft); border-color: var(--warm); }
+.cell.k2 { background: var(--plum-soft); border-color: var(--plum); }
+.cell.k3 { background: var(--accent-soft); border-color: var(--accent); }
+.cell.done { opacity: .55; }
+.cell.cur { box-shadow: 0 0 0 2px var(--accent); }
+.cell.fail { border-color: var(--bad); }
+.cell .badge { position: absolute; top: -7px; right: -6px; background: var(--bad); color: var(--surface); border-radius: 999px; font-size: 10px; padding: 0 5px; font-family: var(--font-mono); }
+.cell.new { animation: pop .35s ease-out; }
+@keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
+.cells .empty { font-size: 12px; color: var(--muted); padding: 0 6px; }
+
+.flow { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; font-size: 12.5px; }
+.flow span.st { border: 1px solid var(--line); border-radius: 6px; padding: 3px 8px; background: var(--bg); font-family: var(--font-mono); transition: background .15s, color .15s; }
+.flow span.st.on { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+.flow span.ar { color: var(--muted); }
+
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+td code { word-break: break-word; }
+tr.hl td { background: var(--accent-soft); }
+
+.steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.steps li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px; align-items: start; font-size: 14px; padding: 6px 8px; border-radius: 8px; background: var(--sunk); color: var(--muted); }
+.steps li .ic { font-family: var(--font-mono); font-weight: 600; text-align: center; }
+.steps li.on { color: var(--ink); background: var(--bg); border: 1px solid var(--line); }
+.steps li.good .ic { color: var(--ok); }
+.steps li.fail .ic { color: var(--bad); }
+
+.consumers { display: flex; flex-wrap: wrap; gap: 8px; }
+.consumer { border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; min-width: 104px; background: var(--bg); font-size: 13px; }
+.consumer b { font-family: var(--font-mono); font-weight: 500; display: block; }
+.consumer.idle { opacity: .55; border-style: dashed; }
+.rebal { font-family: var(--font-mono); font-size: 12.5px; color: var(--warm); }
+input[type=range] { accent-color: var(--accent); width: 160px; max-width: 100%; }
+.bars { display: flex; gap: 2px; flex-wrap: wrap; }
+.bars i { width: 8px; height: 14px; border-radius: 2px; background: var(--accent); display: block; }
+.timeline { display: flex; flex-direction: column; gap: 6px; }
+.tl-row { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 8px; align-items: center; font-size: 13px; }
+.tl-row b { font-family: var(--font-mono); font-weight: 500; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cell.new { animation: none; }
+  .progress .bar i, .flow span.st { transition: none; }
+}
+</style>
+
+<header class="gutter">
+  <div class="inner">
+    <div class="brand">
+      <h1>Kafka <span>Refresher</span> Lab</h1>
+      <p>Thirty topics in ten blocks, built from your old KafkaKnowledge repo. Pick a block, read the three short cards, then play with the lab beside them. Every lab has a "Try this" list.</p>
+    </div>
+    <div class="progress" aria-live="polite">
+      <span class="lbl" id="progLbl">0 of 10 blocks reviewed</span>
+      <div class="bar"><i id="progBar"></i></div>
+    </div>
+  </div>
+</header>
+<nav class="rail gutter" aria-label="Blocks"><div class="inner" id="rail"></div></nav>
+<main class="gutter"><div class="inner" id="view"></div></main>
+
+<script>
+(function () {
+  "use strict";
+  var RM = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, RM ? 0 : ms); }); }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function $(root, sel) { return root.querySelector(sel); }
+  function $$(root, sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); }
+  function repo(code, tag) { return '<div class="repo"><span class="tag">' + (tag || "From your KafkaKnowledge repo") + '</span><pre>' + esc(code) + '</pre></div>'; }
+  function seg(key, options, value) {
+    var h = '<div class="seg" role="group" data-k="' + key + '">';
+    options.forEach(function (o) { h += '<button type="button" data-v="' + o[0] + '" aria-pressed="' + (o[0] === String(value)) + '">' + o[1] + '</button>'; });
+    return h + '</div>';
+  }
+  function bindSeg(root, onChange) {
+    $$(root, ".seg").forEach(function (s) {
+      s.addEventListener("click", function (e) {
+        var b = e.target.closest("button"); if (!b) return;
+        $$(s, "button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+        onChange(s.getAttribute("data-k"), b.getAttribute("data-v"));
+      });
+    });
+  }
+  function addLog(ul, text, cls) {
+    var li = document.createElement("li"); li.textContent = text; if (cls) li.className = cls;
+    ul.appendChild(li); ul.scrollTop = ul.scrollHeight;
+  }
+
+  /* ---------------- LAB 1: Docker ---------------- */
+  function lab1(root) {
+    var st = { where: "host", addr: "localhost:9092" };
+    var vol = { container: true, volume: true, msgs: 42 };
+    root.innerHTML =
+      '<div class="part"><h4>Who can reach Kafka, and at which address?</h4>' +
+      '<div class="ctrl"><span class="lbl">Spring app runs in</span>' + seg("where", [["host", "IntelliJ on your laptop"], ["docker", "A container in compose"]], st.where) + '</div>' +
+      '<div class="ctrl"><span class="lbl">bootstrap-servers</span>' + seg("addr", [["localhost:9092", "localhost:9092"], ["kafka1:29092", "kafka1:29092"]], st.addr) + '</div>' +
+      '<div id="map"></div><div class="result" id="res"></div></div>' +
+      '<div class="part"><h4>Does the data survive?</h4>' +
+      '<div class="btns"><button class="btn" data-a="produce">Produce 5 messages</button><button class="btn" data-a="down">docker compose down</button><button class="btn" data-a="up">docker compose up -d</button><button class="btn danger" data-a="downv">docker compose down -v</button></div>' +
+      '<div class="row" id="vol"></div><ul class="log" id="vlog"></ul></div>';
+    var map = $(root, "#map"), res = $(root, "#res"), volEl = $(root, "#vol"), vlog = $(root, "#vlog");
+    function draw() {
+      var app = '<div class="node app"><b>spring-app</b><small>bootstrap = ' + st.addr + '</small></div>';
+      map.innerHTML =
+        '<div class="box"><span class="cap">Your laptop (the host)</span>' +
+        '<div class="row">' + (st.where === "host" ? app : "") + '<div class="node"><b>port 9092</b><small>mapped "9092:9092" to kafka1</small></div></div>' +
+        '<div class="box net"><span class="cap">Docker network: jora_default</span><div class="row">' +
+        '<div class="node' + (st.addr.indexOf("kafka1") === 0 || st.where === "host" ? " hl" : "") + '"><b>kafka1</b><small>listens :29092 (inside) and :9092 (outside)</small></div>' +
+        '<div class="node"><b>kafka-ui</b><small>talks to kafka1:29092</small></div>' +
+        (st.where === "docker" ? app : "") + '</div></div></div>';
+      var ok, why;
+      if (st.where === "host" && st.addr === "localhost:9092") { ok = true; why = 'Your laptop\'s port 9092 is forwarded into the kafka1 container because of <code>"9092:9092"</code> (HOST:CONTAINER).'; }
+      if (st.where === "host" && st.addr === "kafka1:29092") { ok = false; why = 'Your laptop has never heard of the name <code>kafka1</code>. Service names only work inside the Docker network. Port 29092 is also not published to the host.'; }
+      if (st.where === "docker" && st.addr === "localhost:9092") { ok = false; why = 'Inside the app container, <code>localhost</code> is the app container itself. Nothing listens on 9092 there.'; }
+      if (st.where === "docker" && st.addr === "kafka1:29092") { ok = true; why = 'Docker\'s built-in DNS turns <code>kafka1</code> into the broker container\'s IP. Same network, so no port mapping is needed.'; }
+      res.className = "result " + (ok ? "ok" : "bad");
+      res.innerHTML = '<strong>' + (ok ? "Connects. " : "Fails. ") + '</strong>' + why;
+    }
+    function drawVol() {
+      volEl.innerHTML =
+        '<div class="node"><b>image</b><small>apache/kafka (always on disk)</small></div>' +
+        '<div class="node' + (vol.container ? "" : " down") + '"><b>container kafka1</b><small>' + (vol.container ? "running" : "removed") + '</small></div>' +
+        '<div class="node' + (vol.volume ? " hl" : " down") + '"><b>volume kafka1-data</b><small>' + (vol.volume ? vol.msgs + " messages stored" : "deleted") + '</small></div>';
+    }
+    bindSeg(root, function (k, v) { st[k] = v; draw(); });
+    $$(root, "[data-a]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var a = b.getAttribute("data-a");
+        if (a === "produce") {
+          if (!vol.container) { addLog(vlog, "No broker is running. Run up first.", "bad"); }
+          else { vol.msgs += 5; addLog(vlog, "Produced 5 messages. Stored in the volume: " + vol.msgs); }
+        }
+        if (a === "down") {
+          if (!vol.container) { addLog(vlog, "Nothing to stop.", "dim"); }
+          else { vol.container = false; addLog(vlog, "Container removed. Volume kept with " + vol.msgs + " messages."); }
+        }
+        if (a === "up") {
+          if (vol.container) { addLog(vlog, "Already running.", "dim"); }
+          else {
+            vol.container = true;
+            if (!vol.volume) { vol.volume = true; vol.msgs = 0; addLog(vlog, "New container, new EMPTY volume. 0 messages.", "bad"); }
+            else { addLog(vlog, "New container mounts kafka1-data. " + vol.msgs + " messages are back.", "ok"); }
+          }
+        }
+        if (a === "downv") {
+          vol.container = false; vol.volume = false; vol.msgs = 0;
+          addLog(vlog, "Container removed AND volume deleted. Topics and offsets are gone.", "bad");
+        }
+        drawVol();
+      });
+    });
+    draw(); drawVol();
+  }
+
+  /* ---------------- LAB 2: listeners ---------------- */
+  function lab2(root) {
+    var CFG = {
+      good: { label: "Your config", rows: [["INTERNAL", ":29092", "kafka1:29092"], ["EXTERNAL", ":9092", "localhost:9092"]] },
+      local: { label: "Only localhost advertised", rows: [["PLAINTEXT", ":9092", "localhost:9092"]] },
+      internal: { label: "Only kafka1 advertised", rows: [["PLAINTEXT", ":9092", "kafka1:9092"]] }
+    };
+    var st = { client: "host", cfg: "good", step: 0 };
+    root.innerHTML =
+      '<div class="part"><h4>Bootstrap, metadata, reconnect</h4>' +
+      '<div class="ctrl"><span class="lbl">Client</span>' + seg("client", [["host", "Spring in IntelliJ (laptop)"], ["ui", "kafka-ui (container)"]], st.client) + '</div>' +
+      '<div class="ctrl"><span class="lbl">Broker config</span>' + seg("cfg", [["good", CFG.good.label], ["local", CFG.local.label], ["internal", CFG.internal.label]], st.cfg) + '</div>' +
+      '<div class="table-wrap"><table id="tbl"></table></div>' +
+      '<ol class="steps" id="steps"></ol>' +
+      '<div class="btns"><button class="btn primary" id="next">Next step</button><button class="btn" id="reset">Start again</button></div></div>';
+    var tbl = $(root, "#tbl"), steps = $(root, "#steps");
+    function bootstrap() {
+      if (st.client === "host") return "localhost:9092";
+      return st.cfg === "good" ? "kafka1:29092" : "kafka1:9092";
+    }
+    function hitRow() {
+      var rows = CFG[st.cfg].rows;
+      if (st.cfg !== "good") return 0;
+      return st.client === "host" ? 1 : 0;
+    }
+    function reachable(addr) {
+      if (st.client === "host") return addr === "localhost:9092";
+      return addr.indexOf("kafka1:") === 0;
+    }
+    function draw() {
+      var rows = CFG[st.cfg].rows, hr = hitRow();
+      var h = '<tr><th>Listener name</th><th>listeners (where it binds)</th><th>advertised.listeners (what it tells clients)</th></tr>';
+      rows.forEach(function (r, i) { h += '<tr class="' + (st.step >= 1 && i === hr ? "hl" : "") + '"><td><code>' + r[0] + '</code></td><td><code>' + r[1] + '</code></td><td><code>' + r[2] + '</code></td></tr>'; });
+      tbl.innerHTML = h;
+      var adv = rows[hr][2];
+      var ok3 = reachable(adv);
+      var s = [
+        ["1", "Client connects to its bootstrap address <code>" + bootstrap() + "</code>. This first call always works here.", "good"],
+        ["2", "Broker replies with metadata: \"partition leader = broker 1 at <code>" + adv + "</code>\". It answers with the advertised address of the listener you came in on (highlighted row).", "good"],
+        [ok3 ? "✓" : "✗", ok3 ? "Client reconnects to <code>" + adv + "</code> and can produce and consume. Done."
+          : "Client tries <code>" + adv + "</code> and fails. " + (st.client === "host" ? "Your laptop cannot resolve <code>kafka1</code>." : "Inside kafka-ui, <code>localhost</code> means kafka-ui itself."), ok3 ? "good" : "fail"]
+      ];
+      var h2 = "";
+      s.forEach(function (x, i) {
+        var cls = i < st.step ? "on " + x[2] : "";
+        h2 += '<li class="' + cls + '"><span class="ic">' + (i < st.step ? x[0] : "·") + '</span><span>' + (i < st.step ? x[1] : "Step " + (i + 1) + " (press Next step)") + '</span></li>';
+      });
+      steps.innerHTML = h2;
+      $(root, "#next").disabled = st.step >= 3;
+    }
+    bindSeg(root, function (k, v) { st[k] = v; st.step = 0; draw(); });
+    $(root, "#next").addEventListener("click", function () { st.step = Math.min(3, st.step + 1); draw(); });
+    $(root, "#reset").addEventListener("click", function () { st.step = 0; draw(); });
+    draw();
+  }
+
+  /* ---------------- LAB 3: storage ---------------- */
+  function lab3(root) {
+    var leaders = ["kafka1", "kafka2", "kafka3"];
+    var P = [{ start: 0, next: 0, items: [] }, { start: 0, next: 0, items: [] }, { start: 0, next: 0, items: [] }];
+    var n = 100;
+    function write(p) { P[p].items.push({ off: P[p].next, id: "cv-" + (n++) }); P[p].next++; P[p].fresh = P[p].next - 1; }
+    [0, 0, 0, 1, 1, 2].forEach(write);
+    root.innerHTML =
+      '<div class="part"><h4>Topic <code>resume.tailoring.requested</code> with 3 partitions</h4>' +
+      '<div class="btns"><button class="btn" data-w="0">Write to P0</button><button class="btn" data-w="1">Write to P1</button><button class="btn" data-w="2">Write to P2</button><button class="btn" data-w="r">Write 5 anywhere</button><button class="btn danger" id="ret">Retention: delete P0\'s oldest segment</button></div>' +
+      '<div class="lanes" id="lanes"></div><div class="result" id="msg">Each partition counts its own offsets from 0. Reading does not delete anything.</div></div>';
+    var lanes = $(root, "#lanes"), msg = $(root, "#msg");
+    function draw() {
+      var h = "";
+      P.forEach(function (p, i) {
+        var cells = p.items.map(function (m) { return '<div class="cell k3' + (m.off === p.fresh ? " new" : "") + '"><span class="o">offset ' + m.off + '</span>' + m.id + '</div>'; }).join("");
+        if (!cells) cells = '<span class="empty">empty (log start ' + p.start + ')</span>';
+        h += '<div class="lane"><div class="lname"><b>P' + i + '</b>leader ' + leaders[i] + '<br>next ' + p.next + '</div><div class="cells">' + cells + '</div></div>';
+      });
+      lanes.innerHTML = h;
+      P.forEach(function (p) { p.fresh = -1; });
+    }
+    $$(root, "[data-w]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var w = b.getAttribute("data-w");
+        if (w === "r") { for (var i = 0; i < 5; i++) write(Math.floor(Math.random() * 3)); msg.className = "result"; msg.textContent = "5 messages spread over the partitions. Compare the offsets: P0 offset 2 and P1 offset 2 are different messages."; }
+        else { write(+w); msg.className = "result"; msg.textContent = "Appended to the end of P" + w + " at offset " + (P[+w].next - 1) + ". A partition is append-only: no inserts in the middle, no updates."; }
+        draw();
+      });
+    });
+    $(root, "#ret").addEventListener("click", function () {
+      var p = P[0];
+      if (p.items.length <= 2) { msg.className = "result bad"; msg.innerHTML = "<strong>Not enough data.</strong> Write a few more messages to P0 first."; return; }
+      var cut = Math.min(3, p.items.length - 1);
+      p.items.splice(0, cut); p.start = p.items[0].off;
+      msg.className = "result ok";
+      msg.innerHTML = "<strong>Old segment deleted.</strong> P0 now starts at offset " + p.start + ". Offsets are never renumbered, so the next write still gets offset " + p.next + ".";
+      draw();
+    });
+    draw();
+  }
+
+  /* ---------------- LAB 4: producer ---------------- */
+  function lab4(root) {
+    var HASH = { "user-42": 7, "user-7": 9, "user-99": 11 };
+    var KC = { "user-42": "k1", "user-7": "k2", "user-99": "k3", "": "" };
+    var EV = ["Created", "Paid", "Shipped"];
+    var st = { parts: 3, lanes: [[], [], []], evIdx: {}, sticky: 0, stickyCount: 0, busy: false, offs: [0, 0, 0] };
+    root.innerHTML =
+      '<div class="part"><h4>Send a record and watch where it lands</h4>' +
+      '<div class="flow" id="flow"><span class="st">send()</span><span class="ar">→</span><span class="st">serialize</span><span class="ar">→</span><span class="st">partitioner</span><span class="ar">→</span><span class="st">batch (linger.ms)</span><span class="ar">→</span><span class="st">leader broker</span><span class="ar">→</span><span class="st">ack → whenComplete</span></div>' +
+      '<div class="ctrl"><span class="lbl">Send with key</span><div class="btns"><button class="btn" data-k="user-42">user-42</button><button class="btn" data-k="user-7">user-7</button><button class="btn" data-k="user-99">user-99</button><button class="btn" data-k="">no key</button></div></div>' +
+      '<div class="ctrl"><span class="lbl">Partitions</span>' + seg("parts", [["3", "3"], ["4", "4 (added later)"]], "3") + '<button class="btn" id="clr">Clear</button></div>' +
+      '<div class="result" id="calc">Pick a key. The partition is hash(key) % number of partitions.</div>' +
+      '<div class="lanes" id="lanes"></div><div id="warn"></div></div>';
+    var lanes = $(root, "#lanes"), calc = $(root, "#calc"), warn = $(root, "#warn"), flowSt = $$(root, "#flow .st");
+    function draw(fresh) {
+      var h = "";
+      for (var i = 0; i < st.parts; i++) {
+        var cells = st.lanes[i].map(function (m, j) {
+          return '<div class="cell ' + KC[m.key] + (fresh && fresh[0] === i && fresh[1] === j ? " new" : "") + '"><span class="o">off ' + m.off + ' · ' + (m.key || "null") + '</span>' + m.val + '</div>';
+        }).join("") || '<span class="empty">empty</span>';
+        h += '<div class="lane"><div class="lname"><b>P' + i + '</b></div><div class="cells">' + cells + '</div></div>';
+      }
+      lanes.innerHTML = h;
+      var spread = [];
+      Object.keys(HASH).forEach(function (k) {
+        var where = [];
+        for (var i = 0; i < st.parts; i++) if (st.lanes[i].some(function (m) { return m.key === k; })) where.push("P" + i);
+        if (where.length > 1) spread.push("<code>" + k + "</code> now lives in " + where.join(" and "));
+      });
+      warn.innerHTML = spread.length ? '<div class="result bad"><strong>Ordering broken.</strong> ' + spread.join("; ") + '. A consumer can read a newer event of the same key before an older one.</div>' : "";
+    }
+    async function send(key) {
+      if (st.busy) return; st.busy = true;
+      var i = st.evIdx[key] || 0; st.evIdx[key] = i + 1;
+      var val = key ? EV[i % 3] : "event-" + (i + 1);
+      var p, text;
+      if (key) { p = HASH[key] % st.parts; text = 'hash("' + key + '") = ' + HASH[key] + ' (pretend number; real Kafka uses murmur2). ' + HASH[key] + ' % ' + st.parts + ' = <strong>P' + p + '</strong>.'; }
+      else {
+        if (st.stickyCount >= 3) { st.sticky = (st.sticky + 1) % st.parts; st.stickyCount = 0; }
+        p = st.sticky; st.stickyCount++;
+        text = 'No key: the sticky partitioner fills a batch on one partition (<strong>P' + p + '</strong>), then moves to another. No ordering promise.';
+      }
+      for (var s = 0; s < flowSt.length; s++) { flowSt.forEach(function (x, j) { x.classList.toggle("on", j === s); }); await wait(170); }
+      flowSt.forEach(function (x) { x.classList.remove("on"); });
+      st.lanes[p].push({ key: key, val: val, off: st.offs[p]++ });
+      calc.className = "result"; calc.innerHTML = text;
+      draw([p, st.lanes[p].length - 1]);
+      st.busy = false;
+    }
+    $$(root, "[data-k]").forEach(function (b) { b.addEventListener("click", function () { send(b.getAttribute("data-k")); }); });
+    bindSeg(root, function (k, v) {
+      st.parts = +v;
+      while (st.lanes.length < st.parts) { st.lanes.push([]); st.offs.push(0); }
+      if (st.parts === 3 && st.lanes.length > 3) { st.lanes.length = 3; st.offs.length = 3; }
+      st.sticky = 0; st.stickyCount = 0;
+      calc.className = "result"; calc.textContent = st.parts === 4 ? "You added a partition. Old messages stay where they are. Now send user-42 again." : "Back to 3 partitions.";
+      draw();
+    });
+    $(root, "#clr").addEventListener("click", function () {
+      st.lanes = []; st.offs = []; for (var i = 0; i < st.parts; i++) { st.lanes.push([]); st.offs.push(0); }
+      st.evIdx = {}; st.sticky = 0; st.stickyCount = 0; calc.className = "result"; calc.textContent = "Cleared."; draw();
+    });
+    draw();
+  }
+
+  /* ---------------- LAB 5: consumer poll ---------------- */
+  function lab5(root) {
+    var st = { msgs: [], committed: 0, max: 3, busy: false, cur: -1 };
+    for (var i = 0; i < 10; i++) st.msgs.push({ off: i, id: "cv-" + (200 + i), done: false });
+    root.innerHTML =
+      '<div class="part"><h4>One consumer, one partition, the poll loop</h4>' +
+      '<div class="flow" id="loop"><span class="st">poll()</span><span class="ar">→</span><span class="st">your @KafkaListener method, once per record</span><span class="ar">→</span><span class="st">commit offset</span><span class="ar">→</span><span class="st">poll() again</span></div>' +
+      '<div class="ctrl"><span class="lbl">max.poll.records</span>' + seg("max", [["1", "1"], ["3", "3"], ["5", "5"]], "3") + '</div>' +
+      '<div class="btns"><button class="btn primary" id="poll">Run one poll()</button><button class="btn" id="add">Producer adds 3 messages</button></div>' +
+      '<div class="lanes" id="lane"></div><div class="result" id="info"></div><ul class="log" id="log"></ul></div>';
+    var lane = $(root, "#lane"), info = $(root, "#info"), log = $(root, "#log"), loop = $$(root, "#loop .st");
+    function hl(i) { loop.forEach(function (x, j) { x.classList.toggle("on", j === i); }); }
+    function draw() {
+      var cells = st.msgs.map(function (m) { return '<div class="cell k3' + (m.done ? " done" : "") + (m.off === st.cur ? " cur" : "") + '"><span class="o">offset ' + m.off + '</span>' + m.id + '</div>'; }).join("");
+      lane.innerHTML = '<div class="lane"><div class="lname"><b>P0</b>group<br>tailoring</div><div class="cells">' + cells + '</div></div>';
+      var lag = st.msgs.length - st.committed;
+      info.innerHTML = 'Committed offset for group <code>tailoring-worker</code>: <strong>' + st.committed + '</strong> (the NEXT offset to read). Lag: <strong>' + lag + '</strong> message' + (lag === 1 ? "" : "s") + '.';
+    }
+    $(root, "#poll").addEventListener("click", async function () {
+      if (st.busy) return; st.busy = true; this.disabled = true;
+      hl(0); await wait(350);
+      var batch = st.msgs.slice(st.committed, st.committed + st.max);
+      if (!batch.length) { addLog(log, "poll() returned 0 records (waited, nothing new)", "dim"); hl(-1); st.busy = false; this.disabled = false; return; }
+      addLog(log, "poll() returned " + batch.length + " record(s): offsets " + batch[0].off + "–" + batch[batch.length - 1].off);
+      hl(1);
+      for (var i = 0; i < batch.length; i++) { st.cur = batch[i].off; draw(); await wait(380); batch[i].done = true; addLog(log, "  handled offset " + batch[i].off + " (" + batch[i].id + ")"); }
+      st.cur = -1; hl(2); await wait(300);
+      st.committed = batch[batch.length - 1].off + 1;
+      addLog(log, "commit → next offset = " + st.committed, "ok"); draw();
+      hl(3); await wait(300); hl(-1);
+      st.busy = false; this.disabled = false;
+    });
+    $(root, "#add").addEventListener("click", function () {
+      for (var i = 0; i < 3; i++) { var o = st.msgs.length; st.msgs.push({ off: o, id: "cv-" + (200 + o), done: false }); }
+      addLog(log, "3 new messages appended. Lag grew."); draw();
+    });
+    bindSeg(root, function (k, v) { st.max = +v; });
+    draw();
+  }
+
+  /* ---------------- LAB 6: scaling ---------------- */
+  function lab6(root) {
+    var st = { n: 2, p: 3, second: false, rebal: false };
+    root.innerHTML =
+      '<div class="part"><h4>Group <code>tailoring-worker</code></h4>' +
+      '<div class="ctrl"><span class="lbl">Consumers in group</span><input type="range" id="n" min="1" max="6" value="2" aria-label="Consumers in group"><b class="mono" id="nv">2</b></div>' +
+      '<div class="ctrl"><span class="lbl">Partitions</span>' + seg("p", [["3", "3"], ["6", "6"]], "3") + '</div>' +
+      '<div class="ctrl"><span class="lbl">Another group</span>' + seg("second", [["off", "Off"], ["on", "Add email-service group"]], "off") + '</div>' +
+      '<div class="btns"><button class="btn danger" id="crash">Crash one consumer</button><button class="btn" id="join">Start one more consumer</button></div>' +
+      '<div id="groups"></div><div class="result" id="msg"></div></div>';
+    var groups = $(root, "#groups"), msg = $(root, "#msg"), nIn = $(root, "#n"), nv = $(root, "#nv");
+    function assign(n, p) { var a = []; for (var c = 0; c < n; c++) a.push([]); for (var i = 0; i < p; i++) a[i % n].push("P" + i); return a; }
+    function groupHtml(name, n, p, rebal) {
+      var a = assign(n, p), h = '<div class="box" style="margin-top:8px"><span class="cap">group: ' + name + (rebal ? ' · <span class="rebal">rebalancing, everyone paused…</span>' : "") + '</span><div class="consumers">';
+      a.forEach(function (ps, i) { h += '<div class="consumer' + (ps.length ? "" : " idle") + '"' + (rebal ? ' style="opacity:.4"' : "") + '><b>consumer-' + (i + 1) + '</b>' + (ps.length ? ps.join(", ") : "idle, nothing to read") + '</div>'; });
+      return h + '</div></div>';
+    }
+    function draw() {
+      nIn.value = st.n; nv.textContent = st.n;
+      groups.innerHTML = groupHtml("tailoring-worker", st.n, st.p, st.rebal) + (st.second ? groupHtml("email-service", 1, st.p, false) : "");
+      var idle = Math.max(0, st.n - st.p);
+      var t = idle ? "<strong>" + idle + " consumer" + (idle > 1 ? "s are" : " is") + " idle.</strong> One partition goes to at most one consumer in a group, so max parallelism = number of partitions." :
+        "Every consumer has work. Each partition belongs to exactly one consumer in the group.";
+      if (st.second) t += " The email-service group gets <strong>every</strong> message too, with its own offsets. Groups do not share work with each other.";
+      msg.className = "result" + (idle ? " bad" : ""); msg.innerHTML = t;
+    }
+    async function change(n) {
+      st.rebal = true; draw(); await wait(900);
+      st.n = n; st.rebal = false; draw();
+    }
+    nIn.addEventListener("input", function () { change(+nIn.value); });
+    $(root, "#crash").addEventListener("click", function () { if (st.n > 1) change(st.n - 1); });
+    $(root, "#join").addEventListener("click", function () { if (st.n < 6) change(st.n + 1); });
+    bindSeg(root, function (k, v) {
+      if (k === "p") { st.p = +v; change(st.n); }
+      else { st.second = v === "on"; draw(); }
+    });
+    draw();
+  }
+
+  /* ---------------- LAB 7: offsets and failure ---------------- */
+  function lab7(root) {
+    var st = { committed: 0, crashed: false, idem: false, processed: {}, emails: {}, dlt: [], busy: false };
+    var msgs = ["cv-1", "cv-2", "cv-3", "cv-4", "cv-5", "FAIL", "cv-7", "cv-8"];
+    root.innerHTML =
+      '<div class="part"><h4>Listener: "send an email for each message"</h4>' +
+      '<div class="ctrl"><span class="lbl">Idempotent consumer</span>' + seg("idem", [["off", "Off"], ["on", "On (check processed_events)"]], "off") + '</div>' +
+      '<div class="btns"><button class="btn primary" id="ok">Process next and commit</button><button class="btn danger" id="crash">Process next, crash before commit</button><button class="btn" id="restart">Restart consumer</button></div>' +
+      '<div class="lanes" id="lanes"></div><ul class="log" id="log"></ul></div>' +
+      '<div class="part"><h4>New group, no committed offset yet</h4>' +
+      '<div class="ctrl"><span class="lbl">auto.offset.reset</span>' + seg("reset", [["earliest", "earliest"], ["latest", "latest"]], "earliest") + '</div>' +
+      '<div class="result" id="reset"></div></div>';
+    var lanes = $(root, "#lanes"), log = $(root, "#log"), rs = $(root, "#reset");
+    function draw() {
+      var cells = msgs.map(function (m, i) {
+        var e = st.emails[i] || 0;
+        return '<div class="cell ' + (m === "FAIL" ? "fail" : "k1") + (i < st.committed ? " done" : "") + (i === st.committed ? " cur" : "") + '"><span class="o">offset ' + i + '</span>' + m + (e > 1 ? '<span class="badge">×' + e + '</span>' : "") + '</div>';
+      }).join("");
+      var dlt = st.dlt.map(function (d) { return '<div class="cell fail new"><span class="o">from offset ' + d + '</span>FAIL</div>'; }).join("") || '<span class="empty">empty</span>';
+      lanes.innerHTML = '<div class="lane"><div class="lname"><b>emails</b>P0<br>committed ' + st.committed + '</div><div class="cells">' + cells + '</div></div>' +
+        '<div class="lane"><div class="lname"><b>emails.DLT</b>dead letters</div><div class="cells">' + dlt + '</div></div>';
+      $(root, "#ok").disabled = st.crashed || st.busy || st.committed >= msgs.length;
+      $(root, "#crash").disabled = st.crashed || st.busy || st.committed >= msgs.length;
+      $(root, "#restart").disabled = !st.crashed || st.busy;
+    }
+    function handle(i) {
+      if (st.idem && st.processed[i]) { addLog(log, "offset " + i + ": already in processed_events, skipped", "ok"); return; }
+      st.emails[i] = (st.emails[i] || 0) + 1;
+      if (st.idem) st.processed[i] = true;
+      addLog(log, "offset " + i + ": email sent" + (st.emails[i] > 1 ? " AGAIN (user got it " + st.emails[i] + " times)" : ""), st.emails[i] > 1 ? "bad" : "");
+    }
+    async function failFlow(i) {
+      st.busy = true; draw();
+      addLog(log, "offset " + i + ": first try threw RuntimeException", "bad");
+      for (var r = 1; r <= 3; r++) { await wait(450); addLog(log, "  wait 1s (FixedBackOff), retry " + r + " failed", "bad"); }
+      await wait(350);
+      st.dlt.push(i); addLog(log, "  retries used up → DeadLetterPublishingRecoverer sends it to emails.DLT, then commits", "ok");
+      st.committed = i + 1; st.busy = false; draw();
+    }
+    $(root, "#ok").addEventListener("click", function () {
+      var i = st.committed;
+      if (msgs[i] === "FAIL") { failFlow(i); return; }
+      handle(i); st.committed = i + 1; addLog(log, "commit → " + st.committed, "dim"); draw();
+    });
+    $(root, "#crash").addEventListener("click", function () {
+      var i = st.committed;
+      if (msgs[i] === "FAIL") { addLog(log, "This one fails anyway. Use the other button to see retries.", "dim"); return; }
+      handle(i); st.crashed = true; addLog(log, "💥 crashed before commit. Committed offset is still " + st.committed, "bad"); draw();
+    });
+    $(root, "#restart").addEventListener("click", function () {
+      st.crashed = false; addLog(log, "restarted. Reads committed offset " + st.committed + " and starts there.", "ok"); draw();
+    });
+    bindSeg(root, function (k, v) {
+      if (k === "idem") { st.idem = v === "on"; if (st.idem) { for (var i = 0; i < msgs.length; i++) if (st.emails[i]) st.processed[i] = true; } addLog(log, "idempotency " + (st.idem ? "ON" : "OFF"), "dim"); }
+      if (k === "reset") drawReset(v);
+    });
+    function drawReset(v) {
+      rs.innerHTML = v === "earliest" ? "Starts at <strong>offset 0</strong>: the new group reads all " + msgs.length + " old messages." :
+        "Starts at <strong>offset " + msgs.length + "</strong> (the end): only messages written from now on. The old ones are skipped for this group.";
+    }
+    drawReset("earliest"); draw();
+  }
+
+  /* ---------------- LAB 8: replication ---------------- */
+  function lab8(root) {
+    var st = { up: [true, true, true], isr: [true, true, true], leader: 0, logs: [3, 3, 3], acks: "all", min: 2 };
+    root.innerHTML =
+      '<div class="part"><h4>Partition P0, replication factor 3</h4>' +
+      '<div class="ctrl"><span class="lbl">Producer acks</span>' + seg("acks", [["0", "0"], ["1", "1"], ["all", "all"]], "all") + '</div>' +
+      '<div class="ctrl"><span class="lbl">min.insync.replicas</span>' + seg("min", [["1", "1"], ["2", "2"], ["3", "3"]], "2") + '</div>' +
+      '<div class="row" id="brokers"></div>' +
+      '<div class="ctrl"><span class="lbl">ISR</span><span id="isr"></span></div>' +
+      '<div class="btns"><button class="btn primary" id="send">Produce one message</button></div>' +
+      '<div class="result" id="res">Stop a broker, then produce.</div><ul class="log" id="log"></ul></div>';
+    var br = $(root, "#brokers"), res = $(root, "#res"), log = $(root, "#log");
+    function isrCount() { return st.isr.filter(Boolean).length; }
+    function draw() {
+      var h = "";
+      for (var i = 0; i < 3; i++) {
+        var role = !st.up[i] ? "down" : (i === st.leader ? "LEADER" : "follower");
+        var bars = ""; for (var b = 0; b < Math.min(st.logs[i], 24); b++) bars += "<i></i>";
+        h += '<div class="node' + (st.up[i] ? (i === st.leader ? " hl" : "") : " down") + '" style="flex:1 1 140px">' +
+          '<b>kafka' + (i + 1) + '</b><small>' + role + ' · ' + st.logs[i] + ' msgs</small><div class="bars">' + bars + '</div>' +
+          '<button class="btn" data-b="' + i + '" style="margin-top:6px">' + (st.up[i] ? "Stop" : "Start") + '</button></div>';
+      }
+      br.innerHTML = h;
+      var chips = "";
+      for (var j = 0; j < 3; j++) if (st.isr[j]) chips += '<span class="chip acc">kafka' + (j + 1) + '</span> ';
+      $(root, "#isr").innerHTML = (chips || '<span class="chip bad">empty</span>') + ' <span class="chip">' + isrCount() + ' in sync, need ' + st.min + ' for acks=all</span>';
+      $$(br, "[data-b]").forEach(function (b) { b.addEventListener("click", function () { toggle(+b.getAttribute("data-b")); }); });
+    }
+    function toggle(i) {
+      if (st.up[i]) {
+        st.up[i] = false; st.isr[i] = false;
+        addLog(log, "kafka" + (i + 1) + " stopped → removed from ISR", "bad");
+        if (st.leader === i) {
+          var nl = -1; for (var j = 0; j < 3; j++) if (st.isr[j]) { nl = j; break; }
+          st.leader = nl;
+          if (nl >= 0) addLog(log, "controller elects kafka" + (nl + 1) + " as new leader (it was in the ISR)", "ok");
+          else addLog(log, "no replica left in ISR → partition OFFLINE", "bad");
+        }
+      } else {
+        st.up[i] = true;
+        if (st.leader < 0) { st.leader = i; st.isr[i] = true; addLog(log, "kafka" + (i + 1) + " back → becomes leader", "ok"); }
+        else { st.logs[i] = st.logs[st.leader]; st.isr[i] = true; addLog(log, "kafka" + (i + 1) + " back → fetches missing messages from leader → rejoins ISR", "ok"); }
+      }
+      draw();
+    }
+    $(root, "#send").addEventListener("click", function () {
+      if (st.leader < 0) { res.className = "result bad"; res.innerHTML = "<strong>No leader.</strong> Nobody can accept the write. Start a broker."; addLog(log, "produce failed: no leader", "bad"); return; }
+      if (st.acks === "all" && isrCount() < st.min) {
+        res.className = "result bad"; res.innerHTML = "<strong>NotEnoughReplicasException.</strong> ISR has " + isrCount() + ", min.insync.replicas is " + st.min + ". Kafka refuses rather than keep a single copy. The producer retries until delivery.timeout.ms runs out.";
+        addLog(log, "acks=all refused: ISR " + isrCount() + " < " + st.min, "bad"); draw(); return;
+      }
+      for (var i = 0; i < 3; i++) if (st.isr[i]) st.logs[i]++;
+      if (st.acks === "0") { res.className = "result"; res.innerHTML = "<strong>Fire and forget.</strong> The producer did not wait for any answer, so it would never hear about a failure."; }
+      if (st.acks === "1") { res.className = "result"; res.innerHTML = "<strong>Leader wrote it and replied.</strong> Followers copy a moment later. If the leader dies before that, this message is lost even though you got an OK."; }
+      if (st.acks === "all") { res.className = "result ok"; res.innerHTML = "<strong>Written to all " + isrCount() + " in-sync replicas</strong> before the OK. Safe even if the leader dies now."; }
+      addLog(log, "produced with acks=" + st.acks + " → ok", "ok"); draw();
+    });
+    bindSeg(root, function (k, v) { if (k === "acks") st.acks = v; else st.min = +v; draw(); });
+    draw();
+  }
+
+  /* ---------------- LAB 9: KRaft ---------------- */
+  function lab9(root) {
+    var st = { up: [true, true, true], volume: true, data: 120 };
+    root.innerHTML =
+      '<div class="part"><h4>KRaft quorum: 3 nodes, each broker + controller</h4>' +
+      '<div class="row" id="nodes"></div><div class="result" id="q"></div></div>' +
+      '<div class="part"><h4>Persistent storage for log.dirs</h4>' +
+      '<div class="ctrl"><span class="lbl">Volume on /tmp/kraft-combined-logs</span>' + seg("vol", [["on", "Mounted"], ["off", "No volume"]], "on") + '</div>' +
+      '<div class="btns"><button class="btn" id="recreate">Remove and recreate kafka1 container</button></div>' +
+      '<div class="result" id="v">kafka1 holds ' + 120 + ' messages worth of partition data.</div></div>';
+    var nodes = $(root, "#nodes"), q = $(root, "#q"), v = $(root, "#v");
+    function draw() {
+      var alive = st.up.filter(Boolean).length, quorum = alive >= 2;
+      var active = -1; if (quorum) for (var i = 0; i < 3; i++) if (st.up[i]) { active = i; break; }
+      var h = "";
+      for (var j = 0; j < 3; j++) {
+        h += '<div class="node' + (st.up[j] ? (j === active ? " hl" : "") : " down") + '" style="flex:1 1 140px"><b>node ' + (j + 1) + ' · kafka' + (j + 1) + '</b><small>' +
+          (!st.up[j] ? "down" : (j === active ? "ACTIVE controller (won the vote)" : "voter, follows the metadata log")) + '</small>' +
+          '<button class="btn" data-n="' + j + '" style="margin-top:6px">' + (st.up[j] ? "Stop" : "Start") + '</button></div>';
+      }
+      nodes.innerHTML = h;
+      $$(nodes, "[data-n]").forEach(function (b) { b.addEventListener("click", function () { var i = +b.getAttribute("data-n"); st.up[i] = !st.up[i]; draw(); }); });
+      q.className = "result " + (quorum ? "ok" : "bad");
+      q.innerHTML = quorum ? "<strong>Quorum: " + alive + " of 3 alive (need 2).</strong> The cluster can elect partition leaders, create topics and accept new brokers." :
+        "<strong>No quorum: " + alive + " of 3 alive (need 2).</strong> Metadata is frozen. No new leaders, no topic changes. Leaders already elected may keep serving for a while, but a failure now cannot be repaired.";
+    }
+    bindSeg(root, function (k, val) { st.volume = val === "on"; v.className = "result"; v.textContent = st.volume ? "Volume mounted. Try recreating the container." : "No volume: data lives in the container's own writable layer. Try recreating the container."; });
+    $(root, "#recreate").addEventListener("click", function () {
+      if (st.volume) { v.className = "result ok"; v.innerHTML = "<strong>Data is back.</strong> The new container mounts the same volume and finds its " + st.data + " messages and its cluster metadata."; }
+      else { v.className = "result bad"; v.innerHTML = "<strong>Empty disk.</strong> All partition data on kafka1 is gone. With RF 3 it can copy it back from the other brokers; with a single broker the whole topic is lost."; }
+    });
+    draw();
+  }
+
+  /* ---------------- LAB 10: production ---------------- */
+  function lab10(root) {
+    var ENV = {
+      local: ["<code>localhost:9092</code>", "PLAINTEXT", "1 (one broker) or 3 in your lab", "1", "auto-create is fine for experiments", "none", "<code>latest</code> is OK for playing"],
+      compose: ["<code>kafka1:29092,kafka2:29092,kafka3:29092</code>", "PLAINTEXT", "3", "2", "declare topics as <code>NewTopic</code> beans", "env vars in compose, <code>.env</code> not in git", "pin a version, e.g. <code>apache/kafka:4.1.0</code>"],
+      prod: ["the provider's bootstrap URL, or EC2 private IPs", "SASL_SSL (TLS + username/password)", "3", "2", "<code>auto.create.topics.enable=false</code>, create topics on purpose", "secrets store or host env, never in git", "pinned version, upgrade on purpose"]
+    };
+    var ROWS = ["bootstrap-servers", "security.protocol", "replication factor", "min.insync.replicas", "topics", "credentials", "image tag"];
+    var st = { wait: true, env: "compose", running: false };
+    root.innerHTML =
+      '<div class="part"><h4>docker compose up: who starts when?</h4>' +
+      '<div class="ctrl"><span class="lbl">spring-app depends_on</span>' + seg("wait", [["yes", "condition: service_healthy"], ["no", "plain depends_on (start order only)"]], "yes") + '</div>' +
+      '<div class="btns"><button class="btn primary" id="up">docker compose up</button></div>' +
+      '<div class="timeline" id="tl"></div><ul class="log" id="log"></ul></div>' +
+      '<div class="part"><h4>Same image, different environment</h4>' +
+      '<div class="ctrl">' + seg("env", [["local", "IntelliJ + local Kafka"], ["compose", "Docker compose"], ["prod", "Production"]], "compose") + '</div>' +
+      '<div class="table-wrap"><table id="env"></table></div></div>';
+    var tl = $(root, "#tl"), log = $(root, "#log");
+    var S = { kafka1: "not started", kafka2: "not started", kafka3: "not started", "spring-app": "not started" };
+    function drawTl() {
+      tl.innerHTML = Object.keys(S).map(function (k) {
+        var s = S[k], c = s.indexOf("healthy") === 0 || s.indexOf("ready") === 0 ? "ok" : (s.indexOf("retry") >= 0 ? "bad" : "");
+        return '<div class="tl-row"><b>' + k + '</b><span><span class="chip ' + c + '">' + s + '</span></span></div>';
+      }).join("");
+    }
+    function drawEnv() {
+      var h = "<tr><th>Setting</th><th>Value</th></tr>";
+      ROWS.forEach(function (r, i) { h += "<tr><td><code>" + r + "</code></td><td>" + ENV[st.env][i] + "</td></tr>"; });
+      $(root, "#env").innerHTML = h;
+    }
+    $(root, "#up").addEventListener("click", async function () {
+      if (st.running) return; st.running = true; this.disabled = true; log.innerHTML = "";
+      Object.keys(S).forEach(function (k) { S[k] = "not started"; });
+      S.kafka1 = S.kafka2 = S.kafka3 = "starting"; drawTl(); addLog(log, "kafka1-3 containers started");
+      if (!st.wait) {
+        await wait(300); S["spring-app"] = "starting"; drawTl(); addLog(log, "spring-app started right away (only start order was guaranteed)");
+        for (var r = 0; r < 3; r++) { await wait(500); S["spring-app"] = "retrying connection"; drawTl(); addLog(log, "WARN Connection to node -1 (kafka1:29092) could not be established. Broker may not be available.", "bad"); }
+      } else { await wait(800); }
+      var ks = ["kafka1", "kafka2", "kafka3"];
+      for (var i = 0; i < 3; i++) { await wait(400); S[ks[i]] = "healthy"; drawTl(); addLog(log, ks[i] + ": healthcheck kafka-broker-api-versions.sh passed", "ok"); }
+      if (st.wait) { await wait(300); S["spring-app"] = "starting"; drawTl(); addLog(log, "all 3 healthy → compose starts spring-app"); }
+      await wait(600); S["spring-app"] = "ready (/actuator/health/readiness UP)"; drawTl(); addLog(log, "spring-app connected and ready for traffic", "ok");
+      st.running = false; this.disabled = false;
+    });
+    bindSeg(root, function (k, v) { if (k === "wait") st.wait = v === "yes"; else { st.env = v; drawEnv(); } });
+    drawTl(); drawEnv();
+  }
+
+  /* ---------------- CONTENT ---------------- */
+  var BLOCKS = [
+    {
+      name: "Docker foundation", sub: "The box everything runs in. Get this right and Kafka networking makes sense.",
+      topics: [
+        { n: 1, t: "Container, image, volume, network", body: '<ul><li><b>Image</b>: a read-only recipe, like <code>apache/kafka</code> or <code>eclipse-temurin:21-jre</code>.</li><li><b>Container</b>: one running copy of an image. Throw it away any time.</li><li><b>Volume</b>: disk that lives outside the container, so data survives when the container is removed.</li><li><b>Network</b>: a private LAN where containers find each other by name.</li></ul>', code: "volumes:\n  - kafka1-data:/tmp/kraft-combined-logs\n...\nvolumes:\n  kafka1-data:" },
+        { n: 2, t: "Docker Compose", body: '<p>One YAML file describes every service. <code>docker compose up -d</code> starts them. <code>down</code> removes containers but keeps volumes. <code>down -v</code> also deletes volumes. <code>depends_on</code> only sets start order; add <code>condition: service_healthy</code> to wait until a service really works.</p>' },
+        { n: 3, t: "Docker networking", body: '<p>Compose makes one network, and the service name is the hostname (<code>kafka1</code>). Inside a container, <code>localhost</code> means that container only. <code>"9092:9092"</code> is HOST:CONTAINER and only matters for callers outside Docker, like IntelliJ.</p>', code: 'ports:\n  - "9092:9092"   # host port : container port' }
+      ],
+      jora: "Jora's compose will hold Postgres, Redis, Kafka and later the Spring app. From IntelliJ you use localhost plus the mapped port. From a container you use the service name.",
+      skip: "Skip for now: custom networks, bind mounts, Swarm, image layers.",
+      recall: ["A teammate runs docker compose down -v to \"clean up\". What happens to Kafka's messages?", "They are gone. -v deletes the named volumes (kafka1-data and friends), so every topic, message and committed offset is wiped."],
+      tries: ["Choose \"A container in compose\" + localhost:9092. Read why it fails.", "Produce 5 messages, run down, then up. The count stays.", "Now run down -v, then up."],
+      lab: lab1
+    },
+    {
+      name: "Kafka networking", sub: "Why Kafka needs two addresses, and why most \"cannot connect\" bugs live here.",
+      topics: [
+        { n: 4, t: "Kafka in Docker", body: '<p>The <code>apache/kafka</code> image runs in KRaft mode, with no ZooKeeper. Every setting comes from <code>KAFKA_*</code> env vars (<code>KAFKA_LISTENERS</code> becomes <code>listeners</code>). Starting it is easy. The hard part is letting clients inside <em>and</em> outside Docker reach it.</p>' },
+        { n: 5, t: "listeners", body: '<p>Where the broker <b>opens doors</b> (binds). Each door has a name and a port. An empty host means "all network cards". <code>LISTENER_SECURITY_PROTOCOL_MAP</code> says which security each door uses.</p>', code: "KAFKA_LISTENERS: INTERNAL://:29092,EXTERNAL://:9092,CONTROLLER://:29093\nKAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT" },
+        { n: 6, t: "advertised.listeners", body: '<p>What the broker <b>tells clients</b> to use after the first call. A client connects to bootstrap, receives metadata ("the leader is at X"), then reconnects to X. So X must be reachable from that client. Kafka answers with the advertised address of the same listener you came in on.</p>', code: "KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka1:29092,EXTERNAL://localhost:9092" }
+      ],
+      jora: "Jora in IntelliJ: bootstrap-servers = localhost:9092 (EXTERNAL). Jora in a container: kafka:29092 (INTERNAL). Same broker, two doors.",
+      skip: "Skip for now: SSL/SASL listeners (they come back in Block 10).",
+      recall: ["Your containerized Spring app connects to bootstrap fine, then logs \"Connection to node 1 (localhost/127.0.0.1:9092) could not be established\". What is wrong?", "It came in through a listener that advertises localhost. Inside a container localhost is the app itself. Point it at the INTERNAL listener (kafka1:29092)."],
+      tries: ["Keep \"Your config\" and walk both clients through all 3 steps.", "Switch to \"Only localhost advertised\" and run kafka-ui.", "Switch to \"Only kafka1 advertised\" and run the laptop app."],
+      lab: lab2
+    },
+    {
+      name: "Kafka core storage model", sub: "What Kafka actually stores, and how it numbers it.",
+      topics: [
+        { n: 7, t: "Broker and cluster", body: '<p>A <b>broker</b> is one Kafka server process. It stores partitions and serves reads and writes. A <b>cluster</b> is several brokers working together. Any broker can be your bootstrap server and tell you about all the others.</p>', code: "# This is a list of broker address that i can step in and interact with\n# the boostrap node to discover the whole Cluster\nspring.kafka.bootstrap-servers=${SPRING_KAFKA_BOOTSTRAP_SERVERS}" },
+        { n: 8, t: "Topic", body: '<p>A named stream of events, like <code>resume.tailoring.requested</code>. Reading does <b>not</b> delete messages. Kafka keeps them until retention runs out (7 days by default), so many readers can read the same topic.</p>' },
+        { n: 9, t: "Partition and offset", body: '<p>A topic is split into <b>partitions</b>. Each one is an append-only log. An <b>offset</b> is a position inside one partition (0, 1, 2…). Offsets are per partition, so "offset 5" means nothing without the partition. Order is guaranteed only inside a partition. On disk a partition is cut into segments (<code>.log</code>, <code>.index</code>) so old ones can be deleted.</p>' }
+      ],
+      jora: "Topics for Sprint 2: resume.tailoring.requested and resume.tailored, plus the crawl pipeline (crawl.requested → job.discovered → job.created).",
+      skip: "Skip for now: log compaction, tiered storage.",
+      recall: ["P0 has offsets 0–9. Retention deletes the oldest segment (0–4). What offset does the next message get?", "Offset 10. Offsets are never renumbered. Only the log start moves to 5."],
+      tries: ["Write a few messages to each partition and compare their offsets.", "Delete P0's oldest segment, then write to P0 again. Check the new offset."],
+      lab: lab3
+    },
+    {
+      name: "Producer", sub: "How one send() turns into a stored record, and what the key decides.",
+      topics: [
+        { n: 10, t: "Producer flow", body: '<p><code>send()</code> → serialize key and value to bytes → partitioner picks a partition → record waits in a batch (<code>linger.ms</code>, <code>batch.size</code>) → sent to that partition\'s leader → broker acks → your callback runs. <code>send()</code> is async: returning from it does not mean the message is stored.</p>', code: "kafkaTemplate.send(\"order_replicated\", accountId, message)\n    .whenComplete((result, ex) -> {\n        if (ex != null) { /* delivery FAILED */ return; }\n        var metadata = result.getRecordMetadata(); // partition + offset\n    });" },
+        { n: 11, t: "Message key", body: '<p>Optional. It picks the partition and gives ordering per entity. Choose the thing whose events must stay in order: orderId, accountId, resumeId. With no key, records are spread out (the sticky partitioner fills a batch on one partition, then moves on).</p>' },
+        { n: 12, t: "Partitioning and ordering", body: '<p><code>partition = hash(key) % numPartitions</code>. Same key → same partition → same order. Different keys have no ordering promise between them. Adding partitions later changes the <code>%</code>, so a key can move and its old and new events end up in different partitions.</p>', code: "// Created -> Paid -> Shipped\n// Therefore, we want it to have the same key\n// -> so it can all go to the same partition" }
+      ],
+      jora: "Good keys for Jora: resumeId for tailoring events, job board (or jobId) for crawl events. Pick the partition count up front so keys never move.",
+      skip: "Skip for now: custom partitioners, compression, transactions.",
+      recall: ["3 partitions, key user-42 always goes to P1. You change the topic to 6 partitions. Is user-42 still in P1?", "Not guaranteed. hash % 6 can give a different number, so new events may land in another partition and ordering with older events breaks."],
+      tries: ["Send user-42 three times: Created → Paid → Shipped, all in one partition.", "Send \"no key\" several times and watch it move.", "Switch to 4 partitions and send user-42 again."],
+      lab: lab4
+    },
+    {
+      name: "Consumer", sub: "Consumers pull. Spring hides the loop, but the loop still rules.",
+      topics: [
+        { n: 13, t: "Consumer poll model", body: '<p>The consumer <b>pulls</b>; the broker never pushes. The loop is: <code>poll()</code> → get a batch (up to <code>max.poll.records</code>, default 500) → process → commit → poll again. If you take longer than <code>max.poll.interval.ms</code> (5 minutes) between polls, the group thinks you are dead and kicks you out.</p>', code: "// create KafkaConsumer\n// subscribe(\"order-created\")\n// while app running:\n//     poll() -> get records -> call consume(...)" },
+        { n: 14, t: "@KafkaListener", body: '<p>Spring creates the KafkaConsumer, runs the poll loop on its own thread, deserializes and commits for you. You only write the method that handles one record. <code>concurrency = "3"</code> starts 3 consumers in the same group.</p>', code: "@KafkaListener(topics = \"order_replicated\", groupId = \"notification-service-2\")\npublic void consume(String message,\n        @Header(KafkaHeaders.RECEIVED_PARTITION) int partition,\n        @Header(KafkaHeaders.OFFSET) long offset) { ... }" },
+        { n: 15, t: "Consumer groups", body: '<p><code>group.id</code> is a team sharing the work. Each partition goes to exactly one consumer in the group. Offsets are stored per group (in the <code>__consumer_offsets</code> topic), so each group has its own bookmark.</p>' }
+      ],
+      jora: "Jora's tailoring worker: a @KafkaListener on resume.tailoring.requested in group tailoring-worker, calling Gemini, then producing resume.tailored.",
+      skip: "Skip for now: manual KafkaConsumer code, pause/resume, batch listeners.",
+      recall: ["Your listener calls Gemini, which sometimes takes 40 seconds, and max.poll.records is 500. What can go wrong?", "500 × 40 s is far over the 5-minute max.poll.interval.ms. The consumer gets kicked out, a rebalance happens, and the batch is delivered again. Lower max.poll.records (1–5) for slow work."],
+      tries: ["Run poll() a few times with max 3 and watch the committed offset follow.", "Add 3 messages and watch the lag grow.", "Set max.poll.records to 1 and compare."],
+      lab: lab5
+    },
+    {
+      name: "Consumer scaling", sub: "How work is split across consumers, and what happens when that changes.",
+      topics: [
+        { n: 16, t: "Partition assignment", body: '<p>A broker acts as <b>group coordinator</b>. One consumer is picked as <b>group leader</b> and computes who gets which partition (range, round-robin, cooperative-sticky). The most consumers that can work at once = number of partitions. The rest sit idle.</p>', code: "// Regarding the consumer rebalance --> The group coordinator will communicate\n// with Group Leader (A consumer) to decide how to distribute Partition equally\n// to Consumers inside a Consumer Group" },
+        { n: 17, t: "Multiple consumer groups", body: '<p>Same group = share the messages (like a queue). Different groups = each gets every message (like pub/sub). That is how one <code>job.created</code> event can feed recommendations and email separately.</p>' },
+        { n: 18, t: "Rebalancing", body: '<p>Happens when a consumer joins, leaves, crashes (missed heartbeats, <code>session.timeout.ms</code>), is too slow (<code>max.poll.interval.ms</code>), or partitions change. An eager rebalance pauses everyone. Cooperative-sticky only moves the partitions that must move. Uncommitted work is redone by the new owner.</p>' }
+      ],
+      jora: "job.created → group recommendation-service and (later) group email-service: two groups, each sees every job.",
+      skip: "Skip for now: static membership, writing a custom assignor.",
+      recall: ["Topic has 3 partitions. You scale the tailoring worker to 5 pods with the same group. How much faster is it?", "Only 3 pods get partitions; 2 sit idle. To go wider you need more partitions."],
+      tries: ["Slide to 5 consumers: 2 go idle.", "Switch to 6 partitions.", "Crash a consumer and watch the rebalance.", "Turn on the email-service group."],
+      lab: lab6
+    },
+    {
+      name: "Offset and failure", sub: "Where a consumer resumes, and why duplicates are normal.",
+      topics: [
+        { n: 19, t: "Consumer offset", body: '<p>The committed offset is the <b>next</b> offset to read for one group on one partition. It lives in <code>__consumer_offsets</code>. After a restart or rebalance, reading starts there. If the group has no committed offset yet, <code>auto.offset.reset</code> decides: <code>earliest</code> (from the start) or <code>latest</code> (only new).</p>', code: "spring.kafka.consumer.auto-offset-reset=${KAFKA_OFFSET_RESET:earliest}" },
+        { n: 20, t: "Commit semantics", body: '<p>Commit <b>after</b> processing = at-least-once: a crash in between means it runs again (duplicates). Commit <b>before</b> = at-most-once: a crash means the message is lost. Spring commits after your listener returns. With a database or email you get "exactly once" by making the consumer <b>idempotent</b>.</p>', code: "// It send email then crash before commit offset --> later rebalance\n// --> user will receive the same email twice\n// Solution : consumer idempotent." },
+        { n: 21, t: "Retry and DLT", body: '<p><code>DefaultErrorHandler</code> retries in place with a back-off. When retries run out, <code>DeadLetterPublishingRecoverer</code> sends the record to <code>&lt;topic&gt;.DLT</code> and commits, so one bad message does not block the partition. Errors that can never succeed (bad JSON) should skip retries.</p>', code: "new FixedBackOff(1000L, 3L)   // wait 1s, retry 3 times\nnew TopicPartition(record.topic() + \".DLT\", record.partition())" }
+      ],
+      jora: "Good news: your V13 unique index (resume_id, job_id) already makes tailoring idempotent. A redelivered request finds the existing version. Gemini 429 → retry with back-off; broken input → straight to DLT.",
+      skip: "Skip for now: Kafka transactions and exactly-once streams, manual AckMode.",
+      recall: ["The tailoring listener saves the TAILORED version, then crashes before commit. What happens in Jora after restart?", "The message is delivered again. The duplicate check and V13 unique index find the existing version, so no second row is made. That is business idempotency doing its job."],
+      tries: ["Process 2 messages normally.", "\"Crash before commit\", then restart: the email goes out twice.", "Turn idempotency on and repeat.", "Keep going to offset 5 (FAIL) and watch retries → DLT."],
+      lab: lab7
+    },
+    {
+      name: "Reliability", sub: "Copies, leaders and the rule that decides if a write is safe.",
+      topics: [
+        { n: 22, t: "Replication", body: '<p><code>replication.factor = 3</code> means every partition has 3 copies on 3 different brokers, so you survive losing a broker. RF can\'t be bigger than the number of brokers (why your single-broker setup used 1).</p>', code: "KAFKA_DEFAULT_REPLICATION_FACTOR: 3\nKAFKA_MIN_INSYNC_REPLICAS: 2" },
+        { n: 23, t: "Leader and follower", body: '<p>One replica is the <b>leader</b>: all produce and consume go to it. <b>Followers</b> fetch from the leader (long polling) to copy. If the leader\'s broker dies, the controller picks a new leader from the ISR.</p>' },
+        { n: 24, t: "ISR and min.insync.replicas", body: '<p><b>ISR</b> = replicas that are caught up. <code>acks=all</code> waits for every ISR member. <code>min.insync.replicas=2</code> means "with acks=all, refuse the write if fewer than 2 are in sync". The usual combo, RF 3 + min ISR 2 + acks=all, keeps writing safely with one broker down. Since Kafka 3.0, producers default to <code>acks=all</code> and idempotence on.</p>', code: "// acks = 0 --> no need confirm\n// acks = 1 --> Only leader save\n// acks = all --> all of the followers need to save the message" }
+      ],
+      jora: "Production target for Jora's topics: RF 3, min.insync.replicas 2, acks=all. On a cheap single-broker setup you must drop to RF 1 and accept the risk.",
+      skip: "Skip for now: unclean leader election, rack awareness.",
+      recall: ["RF 3, min.insync.replicas 2, acks=all. Two brokers die. Can producers still write?", "No. The ISR has 1 replica, under the minimum of 2, so writes fail with NotEnoughReplicas. Consumers can still read what was already committed."],
+      tries: ["acks=all, min ISR 2: stop kafka3 and produce. It works.", "Stop kafka2 too and produce. Refused.", "Switch acks to 1 and produce again.", "Stop the leader and watch the election."],
+      lab: lab8
+    },
+    {
+      name: "Kafka cluster infrastructure", sub: "Who runs the cluster's brain, and where the data sits on disk.",
+      topics: [
+        { n: 25, t: "KRaft", body: '<p>Kafka\'s own metadata system (ZooKeeper is gone in Kafka 4). <b>Controllers</b> keep the metadata log: topics, partitions, leaders, brokers. They use Raft, so a <b>majority</b> must agree. Your setup runs broker and controller in the same process on every node.</p>', code: "KAFKA_PROCESS_ROLES: broker,controller\nKAFKA_CONTROLLER_QUORUM_VOTERS: \"1@kafka1:29093,2@kafka2:29093,3@kafka3:29093\"" },
+        { n: 26, t: "Multi-broker cluster", body: '<p>Each node needs its own <code>node.id</code>, its own advertised addresses and host ports, and the same voters list. Internal topics like <code>__consumer_offsets</code> need an RF no bigger than the broker count.</p>', code: "KAFKA_NODE_ID: 2\nKAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka2:29092,EXTERNAL://localhost:9094" },
+        { n: 27, t: "Persistent storage", body: '<p><code>log.dirs</code> is where partitions and metadata live. Mount a volume there, or recreating the container wipes the node.</p>', code: "KAFKA_LOG_DIRS: /tmp/kraft-combined-logs\nvolumes:\n  - kafka1-data:/tmp/kraft-combined-logs" }
+      ],
+      jora: "For launch you may run one combined node (cheap) or use a managed Kafka. Either way the data dir must be on persistent storage (EBS volume on EC2).",
+      skip: "Skip for now: separate controller nodes, adding voters to a running cluster.",
+      recall: ["3 KRaft controllers. How many can die before the cluster can't elect leaders or create topics?", "One. You need a majority, 2 of 3. Lose 2 and there is no quorum. (4 controllers still only tolerate 1, which is why odd numbers are used.)"],
+      tries: ["Stop one node: still a quorum.", "Stop a second: no quorum.", "Set \"No volume\" and recreate the container. Then try with the volume."],
+      lab: lab9
+    },
+    {
+      name: "Production integration", sub: "From \"works on my laptop\" to \"works on AWS\".",
+      topics: [
+        { n: 28, t: "Healthcheck and readiness", body: '<p>A Docker <b>healthcheck</b> runs a command until it succeeds. <code>depends_on: condition: service_healthy</code> waits for it. On the Spring side, <code>/actuator/health/readiness</code> tells a load balancer "send me traffic now". The app should still survive Kafka being briefly down, because clients retry.</p>', code: "healthcheck:\n  test: [\"CMD-SHELL\", \"/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 > /dev/null 2>&1\"]\n  interval: 10s\n  retries: 10" },
+        { n: 29, t: "Dockerized Spring Boot", body: '<p>A JRE base image, copy the jar, run it. Config comes from env vars: <code>SPRING_KAFKA_BOOTSTRAP_SERVERS</code> overrides <code>spring.kafka.bootstrap-servers</code>. One image, different env per environment. Your Dockerfile copies <code>target/*.jar</code>, so <code>mvn package</code> must run first (or use a multi-stage build).</p>', code: "FROM eclipse-temurin:21-jre\nWORKDIR /app\nCOPY target/*.jar app.jar\nENTRYPOINT [\"java\", \"-jar\", \"app.jar\"]" },
+        { n: 30, t: "Local to production Kafka", body: '<p>What changes: the bootstrap address, security (SASL_SSL with credentials from secrets, never git), RF 3 and min ISR 2, topics created on purpose (auto-create off), a pinned image version, and watching consumer lag and the DLT.</p>' }
+      ],
+      jora: "Where Jora's Kafka runs on launch (managed Kafka or self-hosted on EC2) is still open and gets decided in Sprint 3. The code should not care: only env vars change.",
+      skip: "Skip for now: Kubernetes, Schema Registry, Kafka Connect.",
+      recall: ["Your repo uses apache/kafka:latest. Why is that risky in production?", "The next pull can bring a new major version with breaking changes, and two brokers can end up on different versions. Pin an exact version and upgrade on purpose."],
+      tries: ["Run compose up with the health wait on, then off. Compare the logs.", "Switch the environment tabs and see what changes for production."],
+      lab: lab10
+    }
+  ];
+
+  /* ---------------- shell ---------------- */
+  var done = {};
+  try { done = JSON.parse(localStorage.getItem("kafkaLabDone") || "{}") || {}; } catch (e) { done = {}; }
+  function saveDone() { try { localStorage.setItem("kafkaLabDone", JSON.stringify(done)); } catch (e) {} }
+  var rail = document.getElementById("rail"), view = document.getElementById("view");
+  var current = 0;
+
+  function drawRail() {
+    rail.innerHTML = BLOCKS.map(function (b, i) {
+      return '<button type="button" data-i="' + i + '" class="' + (done[i] ? "done" : "") + '" aria-current="' + (i === current) + '"><b>' + (done[i] ? "✓" : (i + 1)) + '</b>' + b.name + '</button>';
+    }).join("");
+    $$(rail, "button").forEach(function (b) { b.addEventListener("click", function () { go(+b.getAttribute("data-i"), true); }); });
+    var c = Object.keys(done).filter(function (k) { return done[k]; }).length;
+    document.getElementById("progLbl").textContent = c + " of 10 blocks reviewed";
+    document.getElementById("progBar").style.width = (c * 10) + "%";
+    var cur = $(rail, '[aria-current="true"]'); if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }
+
+  function go(i, scroll) {
+    current = i;
+    var b = BLOCKS[i];
+    var topics = b.topics.map(function (t) {
+      return '<section class="topic"><h3><span class="n">' + t.n + '</span>' + t.t + '</h3>' + t.body + (t.code ? repo(t.code) : "") + '</section>';
+    }).join("");
+    view.innerHTML =
+      '<div class="block-head"><div><div class="eyebrow">Block ' + (i + 1) + ' of 10 · topics ' + b.topics[0].n + '–' + b.topics[2].n + '</div><h2>' + b.name + '</h2><p>' + b.sub + '</p></div></div>' +
+      '<div class="grid"><div class="topics">' + topics +
+      '<div class="note"><div><h4>In Jora</h4><p>' + b.jora + '</p></div>' +
+      '<details class="recall"><summary>Quick recall</summary><p class="q">' + b.recall[0] + '</p><p class="a">' + b.recall[1] + '</p></details>' +
+      '<p class="skip">' + b.skip + '</p></div></div>' +
+      '<aside class="lab" aria-label="Lab"><h3>Lab</h3><div class="try"><b>Try this</b><ol>' + b.tries.map(function (t) { return "<li>" + t + "</li>"; }).join("") + '</ol></div><div id="labroot" class="part"></div></aside></div>' +
+      '<div class="foot"><button class="btn' + (done[i] ? "" : " primary") + '" id="mark">' + (done[i] ? "Reviewed ✓ (click to undo)" : "Mark this block as reviewed") + '</button>' +
+      '<div class="pn"><button class="btn" id="prev"' + (i === 0 ? " disabled" : "") + '>← Previous</button><button class="btn" id="nextb"' + (i === 9 ? " disabled" : "") + '>Next block →</button></div></div>';
+    b.lab(document.getElementById("labroot"));
+    document.getElementById("mark").addEventListener("click", function () { done[i] = !done[i]; saveDone(); go(i, false); });
+    document.getElementById("prev").addEventListener("click", function () { if (i > 0) go(i - 1, true); });
+    document.getElementById("nextb").addEventListener("click", function () { if (i < 9) go(i + 1, true); });
+    drawRail();
+    try { history.replaceState(null, "", "#block" + (i + 1)); } catch (e) {}
+    try { localStorage.setItem("kafkaLabLast", String(i)); } catch (e) {}
+    if (scroll) window.scrollTo({ top: 0, behavior: RM ? "auto" : "smooth" });
+  }
+
+  var start = 0;
+  var m = /^#block(\d+)$/.exec(location.hash || "");
+  if (m && +m[1] >= 1 && +m[1] <= 10) start = +m[1] - 1;
+  else { try { var l = localStorage.getItem("kafkaLabLast"); if (l !== null && +l >= 0 && +l <= 9) start = +l; } catch (e) {} }
+  go(start, false);
+})();
+</script>
+
+</body></html>
